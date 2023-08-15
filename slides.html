@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Intro to Neural Nets</title>
+  <style type="text/css">
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Intro to Neural Nets</h1>
+</div>
+<div id="neural-nets" class="slide section level1">
+<h1>Neural Nets</h1>
+<div class="figure">
+<img src="neural_net.svg" alt="" />
+<p class="caption">neural net diagram</p>
+</div>
+<ul class="incremental">
+<li>Loosely inspired by neurons in the brain</li>
+<li>Small, simple individual structures</li>
+<li>Pieced together to form complex structures</li>
+<li>The fundamental part of almost any modern ML/AI structure</li>
+</ul>
+</div>
+<div id="a-single-neuron-also-called-node" class="slide section level1">
+<h1>A single neuron (also called node)</h1>
+<p><img src="neural_net_neuron.avif" alt="single neuron" width="300"/></p>
+<ul class="incremental">
+<li>Weight
+<ul class="incremental">
+<li>One weight for each input</li>
+<li>Lets us capture linear relationships</li>
+</ul></li>
+<li>Bias
+<ul class="incremental">
+<li>Single bias for whole neuron</li>
+<li>Lets us capture relationships that don’t have a “center point” of
+exactly 0</li>
+</ul></li>
+<li>Activation function
+<ul class="incremental">
+<li>Single activation function for <em>all</em> neurons</li>
+<li>Lets us inject non-linearity</li>
+</ul></li>
+</ul>
+</div>
+<div id="worked-example" class="slide section level1">
+<h1>Worked example</h1>
+<p><img src="single_neuron_worked.svg" alt="single neuron" width="300"/></p>
+<p>Imagine inputs are 1 and 2 respectively.</p>
+<ol class="incremental" style="list-style-type: decimal">
+<li>Multiply by weights then add:
+<code>1 * 0.5 + 2 * -0.1 = 0.3</code></li>
+<li>Add bias: <code>0.3 + 1.3 = 1.6</code></li>
+<li>Apply non-linear activation function (RELU = simplest possible
+non-linear function, keep the same if above zero, otherwise clamp to 0):
+<code>RELU(1.6) = 1.6</code></li>
+<li>Final output: <code>1.6</code></li>
+</ol>
+</div>
+<div id="layers" class="slide section level1">
+<h1>Layers</h1>
+<ul class="incremental">
+<li>Individual neurons (also called nodes) form different layers</li>
+<li>All neurons in one layer connect to every neuron in the next</li>
+<li>Input layer (only layer without other neurons feeding in)</li>
+<li>Output layer (only layer that doesn’t feed into other neurons)</li>
+<li>Every layer in the middle is a “hidden layer”</li>
+<li>“Deep learning” refers to “deep neural nets,” i.e. neural nets with
+more than one hidden layer. Nowadays almost every net is deep.</li>
+<li>Layers only connect to immediately previous and subsequent layers
+<ul class="incremental">
+<li>Can’t “skip a layer”</li>
+<li>Prevents exponential blow up of connections</li>
+</ul></li>
+</ul>
+</div>
+<div id="look-again-at-neural-net-structure"
+class="slide section level1">
+<h1>Look again at neural net structure</h1>
+<div class="figure">
+<img src="neural_net.svg" alt="" />
+<p class="caption">neural net diagram</p>
+</div>
+</div>
+<div id="notes-on-structure-of-a-neural-net"
+class="slide section level1">
+<h1>Notes on structure of a neural net</h1>
+<ul class="incremental">
+<li>All the “learning” happens in the weights and biases</li>
+<li>Overall structure of neural net (num of neurons, num of layers,
+choice of activation function, etc.) is fixed</li>
+</ul>
+</div>
+<div id="why-are-neural-nets-so-fundamental"
+class="slide section level1">
+<h1>Why are neural nets so fundamental</h1>
+<ul class="incremental">
+<li>Neural nets are universal learners
+<ul class="incremental">
+<li>Given enough neurons for any function there is an arrangement of
+weights and biases that can approximate it to whatever degree of
+precision you desire</li>
+</ul></li>
+<li>Key to universality is the non-linear activation function
+<ul class="incremental">
+<li>Everything else in a neural net is linear (since it’s all just
+multiplication and addition)</li>
+<li>If you want to learn non-linear functions you need a source of
+non-linearity!</li>
+</ul></li>
+</ul>
+</div>
+<div id="paradigm-for-producing-outputs-from-a-neural-network"
+class="slide section level1">
+<h1>Paradigm for producing outputs from a neural network</h1>
+<ul class="incremental">
+<li>Calculate an output layer-by-layer
+<ul class="incremental">
+<li>Iteratively calculate one layer’s values and then feed it into the
+next</li>
+<li>Going “forward” through the network</li>
+</ul></li>
+<li>Known as forward propagation</li>
+</ul>
+</div>
+<div id="paradigm-for-learning" class="slide section level1">
+<h1>Paradigm for learning</h1>
+<ul class="incremental">
+<li>Have some way of defining the degree of correctness an answer has
+(loss/error function)</li>
+<li>Run the network over an example input (forward propagate)</li>
+<li>Compute the loss/error of the network’s answer</li>
+<li>Change weights and biases to reduce the loss/error (known as
+backpropagation)</li>
+</ul>
+</div>
+<div id="review-neural-net-diagram" class="slide section level1">
+<h1>Review neural net diagram</h1>
+<div class="figure">
+<img src="neural_net.svg" alt="" />
+<p class="caption">neural net diagram</p>
+</div>
+<p>Pause for questions</p>
+</div>
+<div id="creating-a-neural-net" class="slide section level1">
+<h1>Creating a neural net</h1>
+<ul class="incremental">
+<li>Big piles of floating point numbers</li>
+<li>It’s up to human designers to design and interpret what the input
+and output “means”</li>
+</ul>
+</div>
+<div id="example-digit-recognition-mnist" class="slide section level1">
+<h1>Example: Digit recognition (MNIST)</h1>
+<p><img src="mnist_digits.webp" alt="single neuron" width="300"/></p>
+<ul class="incremental">
+<li>(Modified) National Institute of Standards and Technology DB</li>
+<li>Set of handwritten digits, 0-9</li>
+<li>Want to train a neural net to classify the digits correctly</li>
+</ul>
+</div>
+<div id="setting-up-the-network-input" class="slide section level1">
+<h1>Setting up the network: input</h1>
+<ul class="incremental">
+<li>What should each input node be?
+<ul class="incremental">
+<li>Maybe one node for contrast?</li>
+<li>Another for overall brightness?</li>
+</ul></li>
+<li>Let’s do the simplest thing possible
+<ul class="incremental">
+<li>Every pixel is an input</li>
+<li>Recurring theme: often the simplest thing works, even if it’s
+big</li>
+</ul></li>
+<li>Reminder: this part is designed by the human upfront and not learned
+by the network!</li>
+</ul>
+</div>
+<div id="setting-up-the-network-output" class="slide section level1">
+<h1>Setting up the network: output</h1>
+<ul class="incremental">
+<li>What should each output node be?
+<ul class="incremental">
+<li>One output node, with a single number?</li>
+<li>One output node for each binary digit (so four output nodes)?</li>
+<li>One output node for every possible category (so ten output
+nodes)?</li>
+</ul></li>
+<li>Reminder: this part is designed by the human upfront and not learned
+by the network!</li>
+</ul>
+</div>
+<div id="factors-for-consideration" class="slide section level1">
+<h1>Factors for consideration</h1>
+<ul class="incremental">
+<li>How does this affect our calculation of error?
+<ul class="incremental">
+<li>If on one given image that was supposed to be “1” is the answer “7”
+a “worse” answer than “2”? (implied by a single node)</li>
+<li>Note that this also affects training and learning!</li>
+</ul></li>
+<li>How do we interpret the output
+<ul class="incremental">
+<li>Single node: The neural net gives us an answer of 3.7. Does that
+mean the neural net “thought” the answer was between a “3” and a “4”? Or
+between a “1” and a “7”?</li>
+</ul></li>
+</ul>
+</div>
+<div id="simplicity-is-again-the-usual-answer"
+class="slide section level1">
+<h1>Simplicity is again the usual answer</h1>
+<ul class="incremental">
+<li>We treat every possible category as its own node</li>
+<li>Total of ten output nodes (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)</li>
+<li>Nice interpretation where number in each node is “how confident” the
+neural net is in that classification (note that this is a human
+interpretation! It’s all just floating point numbers from the neural net
+point of view)</li>
+</ul>
+</div>
+<div id="reminder-these-are-all-fixed-attributes-of-the-network"
+class="slide section level1">
+<h1>Reminder: these are all fixed attributes of the network</h1>
+<ul class="incremental">
+<li>How many input nodes</li>
+<li>How many output nodes</li>
+<li>How many layers</li>
+<li>Only thing that is learned is the value of weights and biases</li>
+</ul>
+</div>
+<div id="lot-of-experimentation" class="slide section level1">
+<h1>Lot of experimentation</h1>
+<ul class="incremental">
+<li>How many neurons should we have? How many layers?
+<ul class="incremental">
+<li>Some rules of thumb</li>
+<li>But often answer is “play around and develop intuition”</li>
+</ul></li>
+</ul>
+</div>
+<div id="backpropagation" class="slide section level1">
+<h1>Backpropagation</h1>
+<ul class="incremental">
+<li>We’ve talked about how to calculate a network output once we know
+it’s weights and biases</li>
+<li>But how do we actually get the weights and biases to be right</li>
+<li>Again, learning is entirely about “getting the weights and biases
+right,” since that’s the only thing that changes so backpropagation is
+essentially synonymous with learning</li>
+</ul>
+</div>
+<div id="general-paradigm" class="slide section level1">
+<h1>General paradigm</h1>
+<ul class="incremental">
+<li>Have some way of defining the degree of correctness an answer has
+(loss/error function)</li>
+<li>Run the network over an example input (forward propagate)</li>
+<li>Compute the loss/error of the network’s answer</li>
+<li><em>Change weights and biases to reduce the loss/error</em></li>
+</ul>
+</div>
+<div
+id="changing-the-weights-and-biases-to-reduce-losserror-gradient-descent"
+class="slide section level1">
+<h1>Changing the weights and biases to reduce loss/error: Gradient
+descent</h1>
+<ul class="incremental">
+<li>So far we’ve been thinking of neural nets as functions from input to
+output with our weights as constants</li>
+<li>Let’s reframe our thinking:
+<ul class="incremental">
+<li>Fix the input and output as constants</li>
+<li>Make our weights a variable</li>
+<li>Now have a function from weights/biases to error</li>
+<li>Let’s minimize that function</li>
+</ul></li>
+</ul>
+</div>
+<div id="how-to-perform-minimization" class="slide section level1">
+<h1>How to perform minimization</h1>
+<p>Many candidates</p>
+<ul class="incremental">
+<li>Random search (keep sampling different points and keep track of the
+lowest so far)
+<ul class="incremental">
+<li>Slow and expensive</li>
+</ul></li>
+<li>Find closed-form solution
+<ul class="incremental">
+<li>Infeasible for complex, deep networks</li>
+</ul></li>
+<li><em>Use derivatives to find a negative slope and follow it</em>
+<ul class="incremental">
+<li>More directed than random search</li>
+<li>Works more broadly than closed-form solutions</li>
+</ul></li>
+</ul>
+</div>
+<div id="using-derivatives-gradient-descent"
+class="slide section level1">
+<h1>Using derivatives: gradient descent</h1>
+<ul class="incremental">
+<li>Gradient: n-dimensional derivative</li>
+<li>Follow the gradient along
+<ul class="incremental">
+<li>If it’s negative, follow it “forward”</li>
+<li>If it’s positive, follow it “backwards”</li>
+</ul></li>
+</ul>
+</div>
+<div id="dimensional-case" class="slide section level1">
+<h1>1-dimensional case</h1>
+<p><img src="gradient_descent_1_d.png" alt="drawing" width="300"/></p>
+</div>
+<div id="multiple-dimensions" class="slide section level1">
+<h1>Multiple dimensions</h1>
+<p><img src="gradient_multiple_d.webp" alt="drawing" width="300"/></p>
+</div>
+<div id="limitations" class="slide section level1">
+<h1>Limitations</h1>
+<ul class="incremental">
+<li>Your loss function must be differentiable (generally not too much of
+a restriction)</li>
+<li>May only find local minimum</li>
+</ul>
+</div>
+<div id="batching" class="slide section level1">
+<h1>Batching</h1>
+<ul class="incremental">
+<li>So far we’ve been going on an individual example-by-example
+basis.</li>
+<li>Potentially a lot of wasted work
+<ul class="incremental">
+<li>We find a minimum for one input-output pair</li>
+<li>Next input-output pair maybe has different minimum, so we throw away
+all the weights from the last time</li>
+<li>And so on</li>
+</ul></li>
+<li>Instead let’s combine all our training examples into a single
+function from weights/biases to error
+<ul class="incremental">
+<li>Could e.g. calculate error per input-output pair and sum them all
+together</li>
+<li>Can also take average (the usual solution)</li>
+</ul></li>
+</ul>
+</div>
+<div id="if-its-universal-why-do-we-have-different-architectures"
+class="slide section level1">
+<h1>If it’s universal why do we have different architectures?</h1>
+<ul class="incremental">
+<li>So many fancy names
+<ul class="incremental">
+<li>CNN/RNN/Transformer etc.</li>
+</ul></li>
+<li>Why do we need architectures to make neural nets <em>more</em>
+capable?
+<ul class="incremental">
+<li>Why do you hear “oh we added X to make it <em>able</em> to learn
+something?”</li>
+</ul></li>
+<li>Neural nets by default are <em>too</em> flexible
+<ul class="incremental">
+<li>Can learn all sorts of spurious relationships</li>
+<li>Goal misgeneralization</li>
+</ul></li>
+</ul>
+</div>
+<div id="neural-net-architectures-represent-subtraction-not-addition"
+class="slide section level1">
+<h1>Neural net architectures represent subtraction, not addition</h1>
+<ul class="incremental">
+<li>Different architectures represent <em>constraints</em> on the
+default neural net</li>
+<li>Hopefully:
+<ul class="incremental">
+<li>Reduce chance of learning spurious relationships</li>
+<li>Promote learning “useful” relationships</li>
+</ul></li>
+</ul>
+</div>
+<div id="bottom-line" class="slide section level1">
+<h1>Bottom line</h1>
+<ul class="incremental">
+<li>Any complex stack of neural nets with gizmos and gadgets between
+them is in theory replicable using a single neural net with a particular
+configuration of weights</li>
+<li>In practice getting the neural net to learn that exact configuration
+of weights is nigh-impossible</li>
+<li>Hence we revert to a complex stack of neural nets with gizmos and
+gadgets</li>
+<li>Can think of this as “freezing” large parts of a global neural net
+and not letting learning change those parts</li>
+</ul>
+</div>
+<div id="learning-vs-fine-tuninig" class="slide section level1">
+<h1>Learning vs fine-tuninig</h1>
+<ul class="incremental">
+<li>Matter of degree</li>
+<li>During learning we’ll have potentially large changes to the neural
+net
+<ul class="incremental">
+<li>Want it to be way different</li>
+<li>Really unique new examples can cause a neural net to “forget”
+previous training</li>
+</ul></li>
+<li>During fine-tuning we want to limit the scope of our changes
+<ul class="incremental">
+<li>Don’t want the net to forget everything it’s already learned!</li>
+<li>Sometimes accomplished by freezing certain parts of the network and
+exempting them from backpropagation</li>
+<li>Sometimes accomplished by decreasing size of backpropagation
+step</li>
+</ul></li>
+</ul>
+</div>
+<div id="gofai-and-neural-nets-sutters-bitter-lesson"
+class="slide section level1">
+<h1>GOFAI and neural nets: Sutter’s bitter lesson</h1>
+<ul class="incremental">
+<li>GOFAI: Good Old-Fashioned AI
+<ul class="incremental">
+<li>Expert systems</li>
+<li>Symbolic reasoning systems</li>
+<li>Close relationship with Subject Matter Experts (SMEs)</li>
+</ul></li>
+<li>Maybe to solve problem of constraints use a human to provide them
+<ul class="incremental">
+<li>Feature engineering</li>
+</ul></li>
+<li>Bitter lesson (one version): (comparatively) simple architectures
+dominate aid from human expertise
+<ul class="incremental">
+<li>Feature engineering is basically dead (controversial!)
+<ul class="incremental">
+<li>We don’t have human expert</li>
+</ul></li>
+<li>Symbolic reasoning systems (e.g. Cyc) are basically dead
+(controversial!)
+<ul class="incremental">
+<li>~40 years of work completely outclassed by latest GPT models</li>
+</ul></li>
+<li>Increasingly rare to consult SMEs
+<ul class="incremental">
+<li>Don’t consult translators for tips and tricks on translation to
+teach GPT how to do translation</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</body>
+</html>
