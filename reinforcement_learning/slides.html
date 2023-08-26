@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Reinforcement Learning</title>
+  <style type="text/css">
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+  <script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Reinforcement Learning</h1>
+</div>
+<div id="reinforcement-learning" class="slide section level1">
+<h1>Reinforcement Learning</h1>
+<ul class="incremental">
+<li>Last time with image classification (handwritten digits) that was
+<em>supervised learning</em>
+<ul class="incremental">
+<li>Give the machine examples of answers</li>
+<li>Use those answers to train the machine</li>
+<li>Assumes high confidence in the correctness of your training
+examples</li>
+</ul></li>
+<li>Reinforcement learning is another paradigm
+<ul class="incremental">
+<li>What happens if you aren’t sure of the correctness of your training
+examples?</li>
+</ul></li>
+</ul>
+</div>
+<div id="problem-statement-of-reinforcment-learning"
+class="slide section level1">
+<h1>Problem Statement of Reinforcment Learning</h1>
+<ul class="incremental">
+<li>I have an agent that can be modeled as a state machine</li>
+<li>That state machine has to perform actions with some form of
+feedback</li>
+<li>Some actions do well in the short-term, but are catastrophic in the
+long-term</li>
+<li>I want the agent to find the optimal long-term strategy
+<ul class="incremental">
+<li>At least some examples of immediate feedback are very clear</li>
+<li>But <em>I don’t know the optimal long-term strategy</em></li>
+</ul></li>
+<li>This is very general! Almost every form of planning can be recast as
+a reinforcement learning problem</li>
+</ul>
+</div>
+<div id="examples" class="slide section level1">
+<h1>Examples</h1>
+<ul class="incremental">
+<li>Solving a maze
+<ul class="incremental">
+<li>Clear immediate feedback
+<ul class="incremental">
+<li>You made it to the exit!</li>
+</ul></li>
+<li>Unclear longer-term strategy
+<ul class="incremental">
+<li>This is a bit of a toy example, humans know how to solve mazes</li>
+</ul></li>
+</ul></li>
+<li>Playing chess
+<ul class="incremental">
+<li>Clear immediate feedback
+<ul class="incremental">
+<li>Next move is checkmate!</li>
+</ul></li>
+<li>Unclear longer-term strategy
+<ul class="incremental">
+<li>Humans don’t know the optimal strategy for e.g. guaranteeing
+checkmate from the starting position (or if one exists)</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="more-general-examples" class="slide section level1">
+<h1>More General Examples</h1>
+<ul class="incremental">
+<li>Self-driving car
+<ul class="incremental">
+<li>Clear immediate feedback
+<ul class="incremental">
+<li>Crash is bad</li>
+<li>Hit a pedestrian is bad</li>
+<li>Arrive at destination is good</li>
+</ul></li>
+<li>Unclear longer-term strategy
+<ul class="incremental">
+<li>Does changing a lane now result in a crash 10 seconds from now?</li>
+</ul></li>
+</ul></li>
+<li>AI policymaker
+<ul class="incremental">
+<li>Clear immediate feedback
+<ul class="incremental">
+<li>Resulting in millions of deaths is bad</li>
+</ul></li>
+<li>Unclear longer-term strategy
+<ul class="incremental">
+<li>What policies will cause ~10 years from now widespread famine
+causing millions of deaths?</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="reinforcment-learning-can-train-superhuman-agents"
+class="slide section level1">
+<h1>Reinforcment Learning Can Train Superhuman Agents</h1>
+<ul class="incremental">
+<li>Supervised learning seems unlikely to produce agents that are
+“smarter” than their training examples</li>
+<li>Reinforcement learning can lead to superhuman performance since it
+learns a long-term optimal strategy “from scratch”</li>
+</ul>
+</div>
+<div id="reinforcement-learning-and-neural-nets"
+class="slide section level1">
+<h1>Reinforcement Learning and Neural Nets</h1>
+<ul class="incremental">
+<li>A more abstract concept (namely a paradigm) than neural nets</li>
+<li>Neural nets can be used to implement reinforcement learning
+<ul class="incremental">
+<li>In practice we almost always use neural nets to implement RL</li>
+<li>In theory though you could use another type of machine learning
+algorithm</li>
+</ul></li>
+</ul>
+</div>
+<div id="state-machines" class="slide section level1">
+<h1>State Machines</h1>
+<p>RL deals with creating a state machine, so we need:</p>
+<ul class="incremental">
+<li>Different states (usually denoted by the variable <span
+class="math inline">\(s\)</span>)</li>
+<li>Different actions associated with each state (usually denoted by the
+variable <span class="math inline">\(a\)</span>)
+<ul class="incremental">
+<li>Action to take depends on what state you’re in</li>
+</ul></li>
+</ul>
+</div>
+<div id="vocab-of-the-rl-agent" class="slide section level1">
+<h1>Vocab of the RL Agent</h1>
+<ul class="incremental">
+<li>Policy: the state machine strategy that is learned. That is the
+choice of what actions given a certain state the machine should do.
+Usually denoted by the <span class="math inline">\(\pi\)</span>
+symbol.</li>
+<li>Reward function (<span class="math inline">\(R(s, a)\)</span>): the
+immediate feedback given to the agent after performing an action. Is
+some positive or negative number.</li>
+<li><span class="math inline">\(Q(s, a)\)</span>: the maximum reward we
+can accumulate from state <span class="math inline">\(s\)</span> after
+taking action <span class="math inline">\(a\)</span>. <em>We usually
+don’t know this function.</em></li>
+<li>Value function (<span class="math inline">\(V(s)\)</span>): a
+variation of <span class="math inline">\(Q\)</span> where <span
+class="math inline">\(V(s)\)</span> is the highest value of <span
+class="math inline">\(Q(s, a)\)</span> across all <span
+class="math inline">\(a\)</span> for that <span
+class="math inline">\(s\)</span>.
+<ul class="incremental">
+<li>Sometimes used to refer to the entire class of functions that score
+long-term implications of actions. E.g. <span
+class="math inline">\(V\)</span> and <span
+class="math inline">\(Q\)</span> are both “value functions.”</li>
+<li>Don’t know this function</li>
+</ul></li>
+</ul>
+</div>
+<div id="simplifications-im-going-to-make" class="slide section level1">
+<h1>Simplifications I’m Going to Make</h1>
+<ul class="incremental">
+<li>Assume discrete time steps</li>
+<li>Assume deterministic policy</li>
+<li>None of these are fundamental limitations, RL has ways of relaxing
+all of these
+<ul class="incremental">
+<li>Just easier to present without diving into the full generality of
+RL</li>
+<li>They don’t affect the core of what RL is</li>
+</ul></li>
+</ul>
+</div>
+<div id="general-setting-of-rl" class="slide section level1">
+<h1>General Setting of RL</h1>
+<ul class="incremental">
+<li>At design time we specify:
+<ul class="incremental">
+<li>Possible states</li>
+<li>Possible actions</li>
+<li>Reward function</li>
+</ul></li>
+<li>What the agent learns:
+<ul class="incremental">
+<li>Policy/value function</li>
+</ul></li>
+</ul>
+</div>
+<div id="difference-between-r-and-q" class="slide section level1">
+<h1>Difference Between <span class="math inline">\(R\)</span> and <span
+class="math inline">\(Q\)</span></h1>
+<p>Let’s take chess as an example.</p>
+<ul class="incremental">
+<li>Move that causes checkmate has an extremely high <span
+class="math inline">\(R\)</span>-value and also has extremely high <span
+class="math inline">\(Q\)</span>-value.</li>
+<li>Move that forces checkmate in 5 moves might have a low <span
+class="math inline">\(R\)</span>-value or even a negative <span
+class="math inline">\(R\)</span>-value (e.g. you have to sacrifice a
+piece on the next move), but still has an extremely high <span
+class="math inline">\(Q\)</span>-value.</li>
+</ul>
+</div>
+<div id="how-rl-training-works" class="slide section level1">
+<h1>How RL Training Works</h1>
+<ul class="incremental">
+<li>We want to learn either <span class="math inline">\(\pi\)</span> or
+<span class="math inline">\(Q\)</span> (we can get <span
+class="math inline">\(\pi\)</span> from <span
+class="math inline">\(Q\)</span> by just choosing the highest value of
+<span class="math inline">\(Q\)</span>)</li>
+<li>How do we create an error/loss function to learn against if we don’t
+have any training examples?
+<ul class="incremental">
+<li>Humans don’t necessarily know the optimal <span
+class="math inline">\(\pi\)</span> or the true value of <span
+class="math inline">\(Q\)</span></li>
+</ul></li>
+<li>Can learn <span class="math inline">\(Q\)</span> directly</li>
+<li>Can learn via trying out the policy</li>
+</ul>
+</div>
+<div id="learning-q-directly" class="slide section level1">
+<h1>Learning <span class="math inline">\(Q\)</span> Directly</h1>
+<ul class="incremental">
+<li>Bellman’s Equation:
+<ul class="incremental">
+<li>Think back to <span class="math inline">\(Q\)</span>: the best,
+long-term reward we can get by performing <span
+class="math inline">\(a\)</span> and <span
+class="math inline">\(s\)</span></li>
+<li>Let’s say that we’re currently at state <span
+class="math inline">\(s\)</span> and we have two possible actions:
+<ul class="incremental">
+<li><span class="math inline">\(a_0\)</span> gets us to <span
+class="math inline">\(s_{a_0}\)</span></li>
+<li><span class="math inline">\(a_1\)</span> gets us to <span
+class="math inline">\(s_{a_1}\)</span></li>
+</ul></li>
+<li>If we know what <span class="math inline">\(Q(s_{a_0}, a)\)</span>
+is for all <span class="math inline">\(a\)</span> and we know what <span
+class="math inline">\(Q(s_{s_{a_1}})\)</span> is, then we can just
+choose the larger and add <span class="math inline">\(R(s,
+a)\)</span></li>
+</ul></li>
+<li><span class="math inline">\(Q(s, a) = R(s, a) + max_{i} Q(s_{a},
+a_i)\)</span></li>
+</ul>
+</div>
+<div id="using-bellmans-equation-to-generate-training-examples"
+class="slide section level1">
+<h1>Using Bellman’s Equation to Generate Training Examples</h1>
+<ul class="incremental">
+<li>Bellman’s Equation gives us a loss function</li>
+<li>Use your agent (usually a neural net) to calculate <span
+class="math inline">\(Q(s, a)\)</span></li>
+<li>Then use it to calculate <span class="math inline">\(max_{i}
+Q(s_{a}, a_i)\)</span></li>
+<li>We know <span class="math inline">\(R(s, a)\)</span></li>
+<li>Difference between <span class="math inline">\(Q(s, a)\)</span> and
+<span class="math inline">\(R(s, a) + max_{i} Q(s_{a}, a_i)\)</span> is
+our loss function</li>
+<li>We therefore end up with a bunch of training examples analogous to
+image classification
+<ul class="incremental">
+<li>Image classification: actual answer and correct answer, loss is
+diff</li>
+<li>Bellman’s equation: <span class="math inline">\(Q(s, a)\)</span> and
+<span class="math inline">\(R(s, a) + max_{i} Q(s_{a}, a_i)\)</span>,
+loss is diff</li>
+</ul></li>
+<li>Backpropagate with that loss function on a bunch of <span
+class="math inline">\(s\)</span> and <span
+class="math inline">\(a\)</span>s (can be more or less random)</li>
+</ul>
+</div>
+<div id="learning-via-direct-policy-learning"
+class="slide section level1">
+<h1>Learning via Direct Policy Learning</h1>
+<ul class="incremental">
+<li>Start with a random policy <span
+class="math inline">\(\pi\)</span></li>
+<li>Use the policy to generate a long chain of states and actions</li>
+<li>Randomly explore a bunch of alternative actions along that
+chain</li>
+<li>Use the exploration to get an idea of how “good” your policy was
+compared to possible alternatives and then re-update your policy</li>
+</ul>
+</div>
+<div id="questions-about-training" class="slide section level1">
+<h1>Questions About Training?</h1>
+<ul class="incremental">
+<li>That was a bit much so don’t worry if you didn’t get everything</li>
+<li>Only one really important point: reinforcement learning can generate
+its own training examples and doesn’t need human input</li>
+</ul>
+</div>
+<div id="we-can-still-learn-spurious-q" class="slide section level1">
+<h1>We Can Still Learn “Spurious” <span
+class="math inline">\(Q\)</span></h1>
+<ul class="incremental">
+<li>Bellman’s Equation gives us a globally optimal <span
+class="math inline">\(Q\)</span>, but we almost never get Bellman’s
+Equation exactly right
+<ul class="incremental">
+<li>Even small deviations from Bellman’s Equation can mean large
+practical differences in policy <span
+class="math inline">\(\pi\)</span></li>
+</ul></li>
+<li>Policy-based training only gives us local maxima
+<ul class="incremental">
+<li>Very dependent on our explorations</li>
+</ul></li>
+</ul>
+</div>
+<div id="the-reward-is-not-necessarily-what-the-agent-optimizes-for"
+class="slide section level1">
+<h1>The Reward Is Not Necessarily What the Agent Optimizes For</h1>
+<ul class="incremental">
+<li>The reward function is used to optimize the underlying neural net,
+but the resulting agent does not necessarily optimize for the reward
+function!</li>
+<li>The agent is not learning <span class="math inline">\(R\)</span>!
+<ul class="incremental">
+<li><span class="math inline">\(R\)</span> is used to learn <span
+class="math inline">\(Q\)</span>, but the model may not learn the <span
+class="math inline">\(Q\)</span> you want it to learn</li>
+</ul></li>
+</ul>
+</div>
+<div id="the-learned-q-can-disagree-strongly-with-the-specified-r"
+class="slide section level1">
+<h1>The learned <span class="math inline">\(Q\)</span> can disagree
+strongly with the specified <span class="math inline">\(R\)</span></h1>
+<ul class="incremental">
+<li>Just like image classification, <span
+class="math inline">\(Q\)</span> might be completely spurious</li>
+</ul>
+</div>
+<div id="we-have-two-optimizers" class="slide section level1">
+<h1>We have two optimizers</h1>
+<ul class="incremental">
+<li>The training process is an optimization process</li>
+<li>The agent itself performs optimization while running
+<ul class="incremental">
+<li><span class="math inline">\(Q\)</span> is how the agent decides the
+most optimal action to perform next</li>
+</ul></li>
+</ul>
+</div>
+<div id="inner-vs-outer-optimization" class="slide section level1">
+<h1>Inner vs outer optimization</h1>
+<ul class="incremental">
+<li>The outer optimizer: this is guided by our choice of <span
+class="math inline">\(R\)</span> and is therefore directly influenceable
+<ul class="incremental">
+<li>The optimization process</li>
+</ul></li>
+<li>The inner optimizer: this is guided by the agent’s learned <span
+class="math inline">\(Q\)</span> and is therefore only indirectly
+influenceable
+<ul class="incremental">
+<li>Actually running the model</li>
+</ul></li>
+</ul>
+</div>
+<div id="outer-alignment-vs-inner-alignment"
+class="slide section level1">
+<h1>Outer Alignment vs Inner Alignment</h1>
+<ul class="incremental">
+<li>Aligning the outer optimizer
+<ul class="incremental">
+<li>We got <span class="math inline">\(R\)</span> correct</li>
+<li>Outer alignment failure looks like the monkey’s paw problem
+<ul class="incremental">
+<li>I give specify high positive reward for giving me money</li>
+<li>I forget to specify high negative reward for killing a loved one and
+the agent kills a loved one using their life insurance money to give me
+money</li>
+</ul></li>
+</ul></li>
+<li>Aligning the inner optimizer
+<ul class="incremental">
+<li><span class="math inline">\(Q\)</span> was learned incorrectly</li>
+<li>But maybe I specify <span class="math inline">\(R\)</span>
+perfectly</li>
+</ul></li>
+</ul>
+</div>
+<div id="inner-alignment-failure-can-look-a-lot-like-deception"
+class="slide section level1">
+<h1>Inner Alignment Failure Can Look a Lot Like Deception</h1>
+<ul class="incremental">
+<li>Learning spurious relationships/overfitting/goal misgeneralization
+can look a lot like deception in the context of RL!
+<ul class="incremental">
+<li>The model “plays nice” in training and then goes off the rails in
+production</li>
+</ul></li>
+<li>More generally known as the “treacherous left turn”
+<ul class="incremental">
+<li>The model looks very good and aligned for a while and then makes a
+“sudden left turn” and starts wreaking havoc</li>
+<li>Could happen because of bad training</li>
+<li>Could happen suddenly in production if we encounter an environment
+that taps into a pathological part of <span
+class="math inline">\(Q\)</span></li>
+</ul></li>
+</ul>
+</div>
+<div id="compounded-by-rl-agents-being-agentic"
+class="slide section level1">
+<h1>Compounded by RL Agents Being Agentic</h1>
+<ul class="incremental">
+<li>RL produces “agentic” AI
+<ul class="incremental">
+<li>AI that can perform actions that change its surrounding
+environment</li>
+<li>Importantly RL also “trains itself”</li>
+</ul></li>
+<li>Bad <span class="math inline">\(Q\)</span>s can become
+self-reinforcing</li>
+</ul>
+</div>
+<div id="very-very-bad-scenario" class="slide section level1">
+<h1>Very Very Bad Scenario</h1>
+<ul class="incremental">
+<li>We end up with a <span class="math inline">\(Q\)</span> that looks
+something like “look nice whenever we can detect human supervision and
+then go off the rails whenever that stops”</li>
+</ul>
+</div>
+<div id="how-do-we-fix-it" class="slide section level1">
+<h1>How Do We Fix It?</h1>
+<ul class="incremental">
+<li>No silver bullets</li>
+<li>One of the main concerns of AI alignment in AI safety!</li>
+<li>Come to Friday sessions!</li>
+</ul>
+</div>
+</body>
+</html>
