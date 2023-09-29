@@ -128,7 +128,7 @@ Let's take chess as an example.
 + Can learn $Q$ directly
 + Can learn via trying out the policy
 
-# Learning $Q$ Directly
+# Learning $Q$ Directly ($Q$ Learning)
 
 + Bellman's Equation:
     * Think back to $Q$: the best, long-term reward we can get by performing $a$ and $s$
@@ -154,6 +154,15 @@ Let's take chess as an example.
       is diff
 + Backpropagate with that loss function on a bunch of $s$ and $a$s (can be
   more or less random)
+
+# Q-Learning doesn't really mean the agent is trying to "win"
+
++ The central question that the neural net asks itself at every step: "are my
+  beliefs self-consistent (according to Bellman's Equation)"
++ E.g. for Q-learning in chess, a net doesn't necessarily actually have to ever
+  play a full game of chess
+    * Can just keep learning by looking at various board positions and keep
+      using Bellman's Equation
 
 # Learning via Direct Policy Learning
 
@@ -186,7 +195,7 @@ Let's take chess as an example.
     * $R$ is used to learn $Q$, but the model may not learn the $Q$ you want it
       to learn
 
-# The learned $Q$ can disagree strongly with the specified $R$
+# The learned $Q$ or your learned policy can disagree strongly with the specified $R$
 
 + Just like image classification, $Q$ might be completely spurious
 
@@ -247,4 +256,3 @@ Let's take chess as an example.
 
 + No silver bullets
 + One of the main concerns of AI alignment in AI safety!
-+ Come to Friday sessions!
