@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Contrast Consistent Search</title>
+  <style type="text/css">
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Contrast Consistent Search</h1>
+</div>
+<div id="eliciting-latent-knowledge-elk" class="slide section level1">
+<h1>Eliciting Latent Knowledge (ELK)</h1>
+<ul class="incremental">
+<li>AI Alignment
+<ul class="incremental">
+<li>Mechanistic Interpretability
+<ul class="incremental">
+<li>ELK
+<ul class="incremental">
+<li>Contrast Consistent Search (CCS)</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="what-is-latent-knowledge" class="slide section level1">
+<h1>What is Latent Knowledge</h1>
+<ul class="incremental">
+<li>Knowledge that a model knows but “won’t tell us”</li>
+<li>Notice that LLMs are very sensitive to how questions are phrased
+<ul class="incremental">
+<li>False ceiling: If you tell the LLM to be dumb it will be a dumb even
+though it “knows better”</li>
+<li>True ceiling: But there are still things that no matter how you
+phrase it the LLM still can’t grasp/do</li>
+</ul></li>
+<li>Can we get to the true ceiling?</li>
+</ul>
+</div>
+<div id="why-is-latent-knowledge-important-for-ai-safety"
+class="slide section level1">
+<h1>Why is Latent Knowledge Important for AI Safety?</h1>
+<ul class="incremental">
+<li>Latent Knowledge seems like one step towards trying to understand
+what an AI is “truly” trying to do, vs what it appears to be doing
+externally</li>
+<li>Latent knowledge uncovers what an AI “hides”</li>
+</ul>
+</div>
+<div id="can-we-uncover-that-latent-knowledge-ccs"
+class="slide section level1">
+<h1>Can We Uncover that Latent Knowledge?: CCS</h1>
+<ul class="incremental">
+<li>Contrast Consistent Search (CCS) is one proposed method to recover
+that information</li>
+<li>Focuses only on binary questions: yes/no, true/false,
+positive/negative, etc.
+<ul class="incremental">
+<li>Just like last week with ROME only a certain class of questions
+(ROME was focused on subject, relation, object triples)</li>
+</ul></li>
+<li>Central intuition: a model shouldn’t answer both true and false,
+even though it could be prompted to do so, so let’s try to use that
+distinguish what answers a model “truly” believes</li>
+</ul>
+</div>
+<div id="what-is-ccs-trying-to-solve" class="slide section level1">
+<h1>What is CCS trying to solve</h1>
+<ul class="incremental">
+<li><strong>Without any supervision (i.e. no one to come around and tell
+you whether a given yes/no answer is correct or not), can we come up
+with a way of using the model to answer our questions with better
+accuracy than just asking the model dierctly?</strong></li>
+<li>Pause for questions</li>
+</ul>
+</div>
+<div id="diving-deeper" class="slide section level1">
+<h1>Diving deeper</h1>
+<ul class="incremental">
+<li>CCS is an example of using a much simpler AI to evaluate a more
+complex AI</li>
+<li>Let’s use some hidden layer of the neural net and examine what it
+looks like
+<ul class="incremental">
+<li>These will be some crazy vector of floats</li>
+</ul></li>
+<li>Can we reasonably split these vectors into two groups</li>
+</ul>
+</div>
+<div id="ccs-implementation" class="slide section level1">
+<h1>CCS Implementation</h1>
+<ul class="incremental">
+<li>Then let’s train a very simple model (not even necessarily a neural
+net! But the paper uses one) to look at the data
+<ul class="incremental">
+<li>Function maps a representation of the input to a probability from 0
+to 1</li>
+<li>Loss function for training our function:
+<ul class="incremental">
+<li>Probability of yes version and probability of no version should sum
+to 1</li>
+<li>Try to maximally differentiate yes and no (try to avoid the
+degenerate solution of just map everything to 0.5)</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="how-do-we-identify-true-and-false-without-ground-truth"
+class="slide section level1">
+<h1>How Do We Identify True and False without Ground Truth</h1>
+<ul class="incremental">
+<li>If all goes well we have two groups, we have a function that tends
+to say that a statement has a probability 1 or 0 of being X (maximal
+differentiation)</li>
+<li>But is X “true” or “false?”</li>
+<li>We can use conjunctions and disjunctions of statements! (e.g. if “A
+and B” gets put in the “A” bucket then A is “true” otherwise it’s
+“false”)</li>
+</ul>
+</div>
+<div id="does-this-work" class="slide section level1">
+<h1>Does this work?</h1>
+<ul class="incremental">
+<li>Yes!</li>
+<li>Surprising this works at all
+<ul class="incremental">
+<li>We are basically just blindly trying to cluster</li>
+</ul></li>
+<li>We even get better performance than zero-shot (!)
+<ul class="incremental">
+<li>Asking the model to directly</li>
+</ul></li>
+<li>Performance holds up even when we try to make the model lie by first
+including a bunch of examples of incorrect answers as a prefix to every
+prompt
+<ul class="incremental">
+<li>Although surprisingly this doesn’t always drop performance on
+baseline zero-shot as much as expected</li>
+</ul></li>
+</ul>
+</div>
+<div id="do-we-even-need-the-simple-neural-net"
+class="slide section level1">
+<h1>Do we even need the simple neural net?</h1>
+<ul class="incremental">
+<li>We can do something as simple as k-means (where k = 2) clustering
+and this works quite well as the paper demonstrates</li>
+</ul>
+</div>
+<div id="why-not-just-add-it-to-the-training-regimen"
+class="slide section level1">
+<h1>Why Not Just Add it to the Training Regimen?</h1>
+<ul class="incremental">
+<li>If CCS is ends up better than just asking the model, why not just
+make it part of the training loss function?</li>
+<li>Goodhart’s Law!
+<ul class="incremental">
+<li>When a measure becomes a target, it ceases to be a good measure</li>
+<li>In ML same intuition: separating training/validation sets from test
+sets</li>
+</ul></li>
+</ul>
+</div>
+<div id="goodharts-law-as-applied-to-ai-safety"
+class="slide section level1">
+<h1>Goodhart’s Law as applied to AI Safety</h1>
+<ul class="incremental">
+<li>If we had a loss function that perfectly captured truth that’d be
+great! We should use that.
+<ul class="incremental">
+<li>But we don’t!</li>
+<li>CCS is closer, but still far far away</li>
+</ul></li>
+<li>Imagine trying to detect fraud if your anti-fraud measures were all
+entirely public</li>
+<li>Unless we are certain we have a <em>perfect</em> loss function we
+should keep a set of tools independent from training</li>
+</ul>
+</div>
+</body>
+</html>
