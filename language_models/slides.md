@@ -236,12 +236,13 @@ So final encoding process from text to numbers is:
 
 + What comes out of the transformer blocks is still vectors of floats
 + Now we need to transform those back to text
-+ For LLMs generally the overall structure is
++ Remember that for LLMs generally the overall structure is
     + Input: A bunch of text
         - Covered by embedding + positional encoding then passing through
           transformer blocks
     + Output: Probability distribution over all known words of what the next
       word should be.
+        - What we're trying to generate now
     + Glom the word with highest probability back to the input and then ask for
       the next word. Loop.
 

@@ -363,7 +363,7 @@ class="slide section level1">
 <li>What comes out of the transformer blocks is still vectors of
 floats</li>
 <li>Now we need to transform those back to text</li>
-<li>For LLMs generally the overall structure is
+<li>Remember that for LLMs generally the overall structure is
 <ul class="incremental">
 <li>Input: A bunch of text
 <ul class="incremental">
@@ -371,7 +371,10 @@ floats</li>
 transformer blocks</li>
 </ul></li>
 <li>Output: Probability distribution over all known words of what the
-next word should be.</li>
+next word should be.
+<ul class="incremental">
+<li>What we’re trying to generate now</li>
+</ul></li>
 <li>Glom the word with highest probability back to the input and then
 ask for the next word. Loop.</li>
 </ul></li>
