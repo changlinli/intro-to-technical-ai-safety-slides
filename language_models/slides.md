@@ -173,16 +173,6 @@ Let's generalize what I just did with Google.
   blocks
     * Won't cover those for now
 
-# Do Transformers Have to be Used for NLP?
-
-+ No!
-+ Many things can be solved with transformers
-    * Image classification (Vision Transformer)
-    * Image generation (Diffusion Transformer)
-    * Speech Recognition (Speech-Transformer)
-    * Etc.
-+ But maybe in the end everything is just NLP...
-
 # Hooking Up a Transformer to Real Words
 
 + Transformer blocks take in vectors of floats and return vectors of floats
@@ -341,3 +331,14 @@ We've heard of context windows for things like ChatGPT.
     - Can compare all `n` outputs at once against `n` expected outputs, instead
       of laboriously and sequentially generating one token at a time
     - But there's something missing here...
+
+# Do Transformers Have to be Used for NLP?
+
++ No!
++ Many things can be solved with transformers
+    * Image classification (Vision Transformer)
+    * Image generation (Diffusion Transformer)
+    * Speech Recognition (Speech-Transformer)
+    * Etc.
++ But maybe in the end everything is just NLP...
+
