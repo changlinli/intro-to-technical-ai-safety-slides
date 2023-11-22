@@ -453,9 +453,13 @@ number of possible distinct tokens)</li>
 <code>d_vocabulary</code> vector(s)</li>
 <li>Choose index of vector with highest scalar value: output is
 <code>1</code> scalar</li>
-<li>Lookup that scalar value using vocabulary dictionary back to a text
-token: output is a single new token</li>
+<li>Lookup that index using vocabulary dictionary back to a text token:
+output is a single new token</li>
 </ol>
+</div>
+<div id="as-a-diagram" class="slide section level1">
+<h1>As a Diagram</h1>
+<p><img style="height: 800px;" src="./decode-only-transformer.svg"/></p>
 </div>
 <div id="context-window" class="slide section level1">
 <h1>Context Window</h1>
@@ -483,7 +487,22 @@ class="slide section level1">
 <h1>Why Does Performance Drop Off a Cliff?</h1>
 <ul class="incremental">
 <li>Look at the attention-specific slides!</li>
-<li>High-level intuition, training</li>
+<li>High-level intuition, the attention mechanism is tuned during
+training to only be able to “look back” as far as the longest sequences
+it’s seen before
+<ul class="incremental">
+<li>Remember although having an attention mechanism is how we encourage
+the model to use context, the exact weights that the model uses for
+attention change during training</li>
+</ul></li>
+<li>This means that increasing context window size in practice
+<em>require re-training</em>
+<ul class="incremental">
+<li>Need to re-tune attention and then re-tune all the cascading
+downstream effects of that</li>
+<li>This is why it is a big deal when a model comes out with a new
+context size</li>
+</ul></li>
 </ul>
 </div>
 <div

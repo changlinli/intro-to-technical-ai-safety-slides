@@ -293,7 +293,11 @@ So final encoding process from text to numbers is:
    vectors (`d_vocabulary` is the number of possible distinct tokens)
 10. Choose the last vector: output is `1` x `d_vocabulary` vector(s)
 11. Choose index of vector with highest scalar value: output is `1` scalar
-12. Lookup that scalar value using vocabulary dictionary back to a text token: output is a single new token
+12. Lookup that index using vocabulary dictionary back to a text token: output is a single new token
+
+# As a Diagram
+
+<img style="height: 800px;" src="./decode-only-transformer.svg"/>
 
 # Context Window
 
@@ -314,7 +318,17 @@ We've heard of context windows for things like ChatGPT.
 # Why Does Performance Drop Off a Cliff?
 
 + Look at the attention-specific slides!
-+ High-level intuition, training
++ High-level intuition, the attention mechanism is tuned during training to only
+  be able to "look back" as far as the longest sequences it's seen before
+    * Remember although having an attention mechanism is how we encourage the
+      model to use context, the exact weights that the model uses for attention
+      change during training
++ This means that increasing context window size in practice *require
+  re-training*
+    * Need to re-tune attention and then re-tune all the cascading downstream
+      effects of that
+    * This is why it is a big deal when a model comes out with a new context
+      size
 
 # Why is Throwing Away Everything Except the Last Value Not Wasteful?
 
