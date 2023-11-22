@@ -483,7 +483,28 @@ class="slide section level1">
 <h1>Why Does Performance Drop Off a Cliff?</h1>
 <ul class="incremental">
 <li>Look at the attention-specific slides!</li>
-<li>Given this performance drop</li>
+<li>High-level intuition, training</li>
+</ul>
+</div>
+<div
+id="why-is-throwing-away-everything-except-the-last-value-not-wasteful"
+class="slide section level1">
+<h1>Why is Throwing Away Everything Except the Last Value Not
+Wasteful?</h1>
+<ul class="incremental">
+<li>Remember that we throw away all vectors except the last one as one
+of our last steps in a transformer, at least during inference</li>
+<li>When training, we don’t. Instead we use all <code>n</code> outputs
+to drive loss and backpropagation, which we can do in parallel, because
+almost everything is done element-wise (and even the merge operation in
+attention is done once per every input token), greatly boosting
+efficiency
+<ul class="incremental">
+<li>Can compare all <code>n</code> outputs at once against
+<code>n</code> expected outputs, instead of laboriously and sequentially
+generating one token at a time</li>
+<li>But there’s something missing here…</li>
+</ul></li>
 </ul>
 </div>
 </body>
