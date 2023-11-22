@@ -81,7 +81,7 @@ Remember MLP is just a vanilla neural net.
     * Keeping parameters of attention mechanism learnable by the model gives
       flexibility on _how_ to consider the context.
 + Feed the (normalized) sum of attention and input to the MLP
-+ Then normalize sum 
++ Then normalize sum of MLP output and input
 
 # Attention
 
