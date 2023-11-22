@@ -332,6 +332,9 @@ We've heard of context windows for things like ChatGPT.
     - Can compare all `n` outputs at once against `n` expected outputs, instead
       of laboriously and sequentially generating one token at a time
     - But there's something missing here...
+    - Can you see a problem with attention that might show up during training
+      (but not during inference)?
+    - I'll explain more in the attention-specific presentation
 
 # Do Transformers Have to be Used for NLP?
 
