@@ -281,7 +281,7 @@ So final encoding process from text to numbers is:
    new set of `n` x `d_model` vectors
 9. Pass into final linear layer: output is new set of `n` x `d_vocabulary`
    vectors (`d_vocabulary` is the number of possible distinct tokens)
-10. Choose the last vector: output is `1` x `d_vocabulary` vector(s)
+10. Choose the last vector: output is `1` x `d_vocabulary` vector
 11. Choose index of vector with highest scalar value: output is `1` scalar
 12. Lookup that index using vocabulary dictionary back to a text token: output is a single new token
 
