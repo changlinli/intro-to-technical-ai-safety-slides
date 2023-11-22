@@ -101,7 +101,7 @@ But what is "attention?"
       single result page, using the weights to decide how to display the page
 + Note technically a transformer uses "multi-head attention," which really is
   just `n` copies of a single attention mechanism. We'll talk about it more in
-the attention-specific slides.
+the attention-specific presentation.
 
 # Abstract Sequence of Attention Operations
 
@@ -317,7 +317,7 @@ We've heard of context windows for things like ChatGPT.
 
 # Why Does Performance Drop Off a Cliff?
 
-+ Look at the attention-specific slides!
++ Look at the attention-specific presentation!
 + High-level intuition, the attention mechanism is tuned during training to only
   be able to "look back" as far as the longest sequences it's seen before
     * Remember although having an attention mechanism is how we encourage the
