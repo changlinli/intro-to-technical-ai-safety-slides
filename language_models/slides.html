@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>LLMs and the Transformer Architecture</title>
+  <style type="text/css">
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">LLMs and the Transformer Architecture</h1>
+</div>
+<div id="the-problem-with-vanilla-neural-nets-for-language-models"
+class="slide section level1">
+<h1>The Problem with Vanilla Neural Nets for Language Models</h1>
+<ul class="incremental">
+<li>Theoretically universal</li>
+<li>But they tend to learn spurious relationships
+<ul class="incremental">
+<li>Very difficult to coax a vanilla neural net into learning to take
+context into account properly with a sequence of words</li>
+<li>Unclear what the best way to even encode a sequence is for a vanilla
+neural net</li>
+</ul></li>
+</ul>
+</div>
+<div id="strategically-setting-restrictions"
+class="slide section level1">
+<h1>Strategically Setting Restrictions</h1>
+<ul class="incremental">
+<li>So the problem (as always with neural nets) is of
+<em>over-</em>generality.</li>
+<li>Can we find a set of restrictions that
+<ul class="incremental">
+<li>Restrictive enough to “force” a model to consider context?</li>
+<li>Permissive enough to allow the model flexibility in deciding
+<em>how</em> to consider context?</li>
+</ul></li>
+<li>Enter the Transformer Architecture (i.e. “Attention is all you
+need”)</li>
+</ul>
+</div>
+<div id="our-final-goal" class="slide section level1">
+<h1>Our Final Goal</h1>
+<p>At the end of this we want to be able to explain at a high-level how
+we end up with a model that takes in a bunch of text, and spits back
+what it thinks the next word is. Note that we allow for the model to
+just keep generating text by concatenating the word generated back into
+our input and then ask it to generate the next word after that.</p>
+<p>Three high-level steps:</p>
+<ul class="incremental">
+<li>Transform text into blobs of floats</li>
+<li>Do a bunch of analysis on those blobs of floats. Gives us another
+set of blobs of float (We’ll focus first on this because it affects the
+other two steps intimately)</li>
+<li>Translate the output of that analysis to a probability distribution
+over all possible words of what the next word is. Choose the word with
+the highest probability.</li>
+</ul>
+</div>
+<div id="transformer-architecture" class="slide section level1">
+<h1>Transformer Architecture</h1>
+<ul class="incremental">
+<li>Vanilla neural nets (MLPs) are made up of layers</li>
+<li>Transformers are made of transformer blocks
+<ul class="incremental">
+<li>In the simplest case they might just be stacked like neural net
+layers (this is the case with the GPT family of models)</li>
+<li>Can be rearranged in somewhat more complicated ways</li>
+<li>The original transformers paper showed just one particular way of
+stacking them</li>
+</ul></li>
+<li>So we’re going to focus mainly on understanding a single transformer
+block</li>
+</ul>
+</div>
+<div id="transformer-block" class="slide section level1">
+<h1>Transformer Block</h1>
+<p>Remember MLP is just a vanilla neural net.</p>
+<pre><code>----------------------------
+|      Output              |
+|        ^                 |
+|        |                 |
+|   Normalization &lt;-----|  |
+|        ^              |  |
+|        |              |  |
+|       MLP             |  |
+|        ^              |  |
+|        | -------------|  |
+|        |                 |
+|   Normalization &lt;-----|  |
+|        ^              |  |
+|        |              |  |
+| Multi-Head Attention  |  |
+|        ^              |  |
+|        |              |  |
+|      Input -----------|  |
+|                          |
+----------------------------</code></pre>
+</div>
+<div id="idea-at-a-high-level" class="slide section level1">
+<h1>Idea At a High-Level</h1>
+<ul class="incremental">
+<li>Use “attention” to encourage the model to take context into account
+<ul class="incremental">
+<li>Attention mechanism promotes considering context</li>
+<li>Keeping parameters of attention mechanism learnable by the model
+gives flexibility on <em>how</em> to consider the context.</li>
+</ul></li>
+<li>Feed the (normalized) sum of attention and input to the MLP</li>
+<li>Then normalize sum</li>
+</ul>
+</div>
+<div id="attention" class="slide section level1">
+<h1>Attention</h1>
+<p>But what is “attention?”</p>
+<ul class="incremental">
+<li>Brief high-level intuition here: I want to “look up” the “context”
+that a word appears in.</li>
+<li>E.g. when I search on Google to understand an unfamiliar word, I
+have the following mental model:
+<ul class="incremental">
+<li>My word gets encoded into some sort of query</li>
+<li>Every webpage has some lookup key associated with it</li>
+<li>Google compares my query against every webpage’s lookup key, the
+better the match the more importance/the higher weight it gets</li>
+<li>Every webpage also some lookup value associated with it, and that
+lookup value is extracted and weighted it by how well the query matches
+the lookup key</li>
+<li>Finally I merge all the lookup values with their associated weights
+into a single result page, using the weights to decide how to display
+the page</li>
+</ul></li>
+<li>Note technically a transformer uses “multi-head attention,” which
+really is just <code>n</code> copies of a single attention mechanism.
+We’ll talk about it more in the attention-specific slides.</li>
+</ul>
+</div>
+<div id="abstract-sequence-of-attention-operations"
+class="slide section level1">
+<h1>Abstract Sequence of Attention Operations</h1>
+<p>Let’s generalize what I just did with Google.</p>
+<ul class="incremental">
+<li>Have some element</li>
+<li>Encode the element as a query</li>
+<li>Generate lookup keys and lookup values</li>
+<li>Compare query against every key to generate “lookup weights”</li>
+<li>Use lookup weights to proportionally extract lookup values</li>
+<li>Combine all lookup values using some sort of merge function to
+generate a single “context” for my element</li>
+</ul>
+</div>
+<div id="turning-back-to-attention-proper" class="slide section level1">
+<h1>Turning Back to Attention Proper</h1>
+<ul class="incremental">
+<li>Attention is the same basic idea</li>
+<li>For every word in our sequence, assign it a “key,” a “value,” and a
+“query”
+<ul class="incremental">
+<li>Note that we generate a query for every word in addition to a lookup
+key and lookup value because ultimately we want to generate context for
+every word in our sequence. If we only cared about the context of a
+single word we’d still need keys and values for every word, but only one
+query</li>
+</ul></li>
+<li>For any given word, I want to be able to create a context vector for
+it</li>
+<li>So I encode that word into its associated query</li>
+<li>I compare my query against every word’s key</li>
+<li>I “extract” some proportional amount of every word’s value based on
+how well my query compares against the key</li>
+<li>Then I merge that all together into a single context vector</li>
+</ul>
+</div>
+<div
+id="tracing-input-to-output-through-a-architecture-consisting-of-a-single-transformer-block"
+class="slide section level1">
+<h1>Tracing Input to Output through a Architecture consisting of a
+Single Transformer Block</h1>
+<ol class="incremental" style="list-style-type: decimal">
+<li>Start with list of <code>n</code> words</li>
+<li>(Input to transformer block) Convert list of words to a
+<code>n</code> floating point vectors each of size
+<code>d_model</code></li>
+<li>(Finally enter the transformer block) Using Multi-Head Attention,
+create <code>n</code> floating point vectors each of size
+<code>d_model</code> again.</li>
+<li>Normalize and sum attention output with input on a per vector basis,
+still have <code>n</code> vectors of size <code>d_model</code></li>
+<li>Pass normalized sum to MLP and get back another set of n vectors
+each of size <code>d_model</code></li>
+<li>Normalize and sum output of MLP with input to MLP to get back
+another set of n vectors of size <code>d_model</code></li>
+<li>Output final set of n vectors of size <code>d_model</code></li>
+<li>(Exit transformer block) Convert set of n vectors of size
+<code>d_model</code> to a <code>n</code> vectors of size
+<code>d_vocabulary</code>, i.e. the number of all possible words, this
+represents <code>n</code> probability distributions.</li>
+<li>Take the last probability distribution, choose the word out of the
+<code>d_vocabulary</code> words that has the highest probability as the
+next word.</li>
+</ol>
+</div>
+<div id="note-about-element-wise-operations"
+class="slide section level1">
+<h1>Note About Element-Wise Operations</h1>
+<ul class="incremental">
+<li>Attention is the only non-element-wise operation in a transformer
+block
+<ul class="incremental">
+<li>And the only part about attention that is non-element-wise is the
+final merge operation to generate a single context value
+<ul class="incremental">
+<li>N.B. an interesting experiment for people familiar with transformers
+to run: in theory if your merge operation is order-sensitive then you
+don’t need positional encoding in your input! Can you replace positional
+encoding with a good merge operation?</li>
+</ul></li>
+</ul></li>
+<li>Everything else operates on a per-element (i.e. per-word) basis
+<ul class="incremental">
+<li>Attention Outputs are fed element-wise to the MLP (i.e. vanilla
+neural net) after attention</li>
+<li>Normalization is performed element-wise (i.e. per-word)</li>
+</ul></li>
+</ul>
+</div>
+<div
+id="so-how-are-transformer-blocks-composed-together-into-a-single-transformer"
+class="slide section level1">
+<h1>So How are Transformer Blocks Composed Together into a single
+Transformer?</h1>
+<ul class="incremental">
+<li>Some popular models just stack them consecutively one after the
+other
+<ul class="incremental">
+<li>The output of one transformer block is piped into another
+transformer block</li>
+<li>These include the GPT family of models</li>
+</ul></li>
+<li>Other models try to have slightly more complex ways of connecting
+transformer blocks
+<ul class="incremental">
+<li>Won’t cover those for now</li>
+</ul></li>
+</ul>
+</div>
+<div id="do-transformers-have-to-be-used-for-nlp"
+class="slide section level1">
+<h1>Do Transformers Have to be Used for NLP?</h1>
+<ul class="incremental">
+<li>No!</li>
+<li>Many things can be solved with transformers
+<ul class="incremental">
+<li>Image classification (Vision Transformer)</li>
+<li>Image generation (Diffusion Transformer)</li>
+<li>Speech Recognition (Speech-Transformer)</li>
+<li>Etc.</li>
+</ul></li>
+<li>But maybe in the end everything is just NLP…</li>
+</ul>
+</div>
+<div id="hooking-up-a-transformer-to-real-words"
+class="slide section level1">
+<h1>Hooking Up a Transformer to Real Words</h1>
+<ul class="incremental">
+<li>Transformer blocks take in vectors of floats and return vectors of
+floats
+<ul class="incremental">
+<li>This lets us stack blocks since they take in the same things and
+spit out the same things</li>
+</ul></li>
+<li>But we want something that takes in text and spits out text
+<ul class="incremental">
+<li>So once we’re done stacking transformers, we want to wrap the whole
+thing in some sort of encoding-decoding layer to go from text to floats
+and back</li>
+</ul></li>
+<li>How do we do that?</li>
+</ul>
+</div>
+<div id="encoding-text-to-vectors-of-floats"
+class="slide section level1">
+<h1>Encoding Text to Vectors of Floats</h1>
+<ul class="incremental">
+<li>Split text into “tokens” (roughly equal to words)</li>
+<li>Assign numbers to tokens
+<ul class="incremental">
+<li>Use a dictionary that maps every possible token to a number</li>
+</ul></li>
+<li>We now have a number associated with each token, but this can cause
+trouble for a model when learning
+<ul class="incremental">
+<li>“Dog” and “canine” are pretty much synonyms</li>
+<li>But we probably encode “dog” and “canine” using completely different
+numbers</li>
+<li>This can make it difficult for the model to learn that it should
+treat these two entities as almost the same thing and the model might
+learn spurious relationships that treat these very differently</li>
+</ul></li>
+<li>So we add another layer called an “embedding”
+<ul class="incremental">
+<li>This maps the number associated with a token to a vector of
+floats</li>
+<li>Hope that this mapping maps things like “dog” and “canine” to be
+very close to each other</li>
+<li>Can be done either through old-school statistical methods or by
+independently training another neural net to do the embedding (usually
+the latter these days)</li>
+</ul></li>
+<li>So now we finally a bunch of vectors of floats, are we done?</li>
+<li>No!</li>
+</ul>
+</div>
+<div id="positional-encoding" class="slide section level1">
+<h1>Positional Encoding</h1>
+<ul class="incremental">
+<li>Remember: almost everything in a transformer block operates in an
+element-wise/token-wise fashion</li>
+<li>Only exception is the merge operation in attention</li>
+<li>But the merge operation is usually
+commutative/order-independent!</li>
+<li>So everything is either element-wise operations or commutative
+<ul class="incremental">
+<li><em>So transformer blocks have no way to incorporate the order in
+which tokens appear into their calculations!</em></li>
+<li>This is bad: “dog bites man” is different from “man bites dog”</li>
+</ul></li>
+<li>Usual solution is to encode that information directly into the
+tokens themselves</li>
+<li>This is called a <em>positional encoding</em>, where after embedding
+a token as a vector of floats, there is another operation that modifies
+the vector based on what the index of the token is in the input</li>
+<li>Different choices of exact positional encodings that aren’t terribly
+important to the core idea of transformers so we’ll skip for now</li>
+</ul>
+</div>
+<div id="encoding-text-to-vectors-of-floats-redux"
+class="slide section level1">
+<h1>Encoding Text to Vectors of Floats Redux</h1>
+<p>So final encoding process from text to numbers is:</p>
+<ul class="incremental">
+<li>Split text into tokens</li>
+<li>Assign each token a number from a global dictionary of all possible
+tokens</li>
+<li>Use some pretrained embeddding to take each number and map it to a
+vector of floats</li>
+<li>Use a positional encoding to take each vector of floats and modify
+them to take the index of where they appear in the input into
+account</li>
+<li>Now we’re finally ready to throw all this into some transformer
+blocks!</li>
+</ul>
+</div>
+<div id="decoding-vectors-of-floats-back-to-text"
+class="slide section level1">
+<h1>Decoding Vectors of Floats Back to Text</h1>
+<ul class="incremental">
+<li>What comes out of the transformer blocks is still vectors of
+floats</li>
+<li>Now we need to transform those back to text</li>
+<li>For LLMs generally the overall structure is
+<ul class="incremental">
+<li>Input: A bunch of text
+<ul class="incremental">
+<li>Covered by embedding + positional encoding then passing through
+transformer blocks</li>
+</ul></li>
+<li>Output: Probability distribution over all known words of what the
+next word should be.</li>
+<li>Glom the word with highest probability back to the input and then
+ask for the next word. Loop.</li>
+</ul></li>
+</ul>
+</div>
+<div id="decoding-vectors-of-floats-back-to-text-obstacles"
+class="slide section level1">
+<h1>Decoding Vectors of Floats Back to Text: Obstacles</h1>
+<ul class="incremental">
+<li>First problem:
+<ul class="incremental">
+<li>We feed <code>n</code> vectors of floats in, we get <code>n</code>
+vectors of floats out</li>
+<li>How do we merge this down to single vector of floats to turn back
+into a single word?
+<ul class="incremental">
+<li>We just throw away every single vector except the last one</li>
+<li>Isn’t this insanely wasteful? This waste is what enables the
+efficient training that propelled transformers to fame</li>
+</ul></li>
+</ul></li>
+<li>Second problem:
+<ul class="incremental">
+<li>How do we translate this single vector into to a distribution of
+probabilities over all words?</li>
+<li>Stick another linear layer (i.e. an MLP/vanilla neural net with just
+one layer) to take in the vector and output a set of probabilities, one
+for each possible word/token.</li>
+</ul></li>
+<li>Note that we actually usually implement this in the opposite order:
+<ul class="incremental">
+<li>First map to a set of probability distributions</li>
+<li>Then just choose the last probability distribution (not the last
+probability!)</li>
+</ul></li>
+</ul>
+</div>
+<div id="putting-it-all-back-together" class="slide section level1">
+<h1>Putting It All Back Together</h1>
+<ol class="incremental" style="list-style-type: decimal">
+<li>Start with an input text sequence consisting of <code>n</code>
+tokens</li>
+<li>Convert that to <code>n</code> vectors of size <code>d_model</code>
+using some pretrained embedding (will use <code>n</code> x
+<code>d_model</code> as short-hand for this)</li>
+<li>Add positional encoding: output is new set of <code>n</code> x
+<code>d_model</code> vectors</li>
+<li>Pass into (multi-head) attention mechanism: output is new set of
+<code>n</code> x <code>d_model</code> vectors</li>
+<li>Normalize the sum of input into attention and its output from the
+previous step: output is new set of <code>n</code> x
+<code>d_model</code> vectors</li>
+<li>Pass vectors into MLP: output is new set of <code>n</code> x
+<code>d_model</code> vectors</li>
+<li>Normalize the sum of input into MLP and its output from the previous
+step: output is new set of <code>n</code> x <code>d_model</code>
+vectors</li>
+<li>Repeat steps 4-7 for as many transformer blocks as the model has:
+output is new set of <code>n</code> x <code>d_model</code> vectors</li>
+<li>Pass into final linear layer: output is new set of <code>n</code> x
+<code>d_vocabulary</code> vectors (<code>d_vocabulary</code> is the
+number of possible distinct tokens)</li>
+<li>Choose the last vector: output is <code>1</code> x
+<code>d_vocabulary</code> vector(s)</li>
+<li>Choose index of vector with highest scalar value: output is
+<code>1</code> scalar</li>
+<li>Lookup that scalar value using vocabulary dictionary back to a text
+token: output is a single new token</li>
+</ol>
+</div>
+<div id="context-window" class="slide section level1">
+<h1>Context Window</h1>
+<p>We’ve heard of context windows for things like ChatGPT.</p>
+<ul class="incremental">
+<li>But might have noticed that nothing in theory limits the size of the
+input</li>
+<li>So why do models have hard cut-offs for input size (context window
+sizes)?</li>
+<li>Artificial limitation driven by empirical data
+<ul class="incremental">
+<li>We notice that performance degrades very rapidly past the length of
+the longest sequences used in training (it looks almost like a cliff in
+performance drop-off)</li>
+<li>Longer sequences quickly become more expensive in training
+(attention runs in quadratic time relative to sequence length)</li>
+<li>So we draw a line in the sand and say “these are the longest
+sequences we’ll use in training” and then that becomes a practical limit
+enforced by the API to prevent horrible breakdown in performance.</li>
+</ul></li>
+</ul>
+</div>
+<div id="why-does-performance-drop-off-a-cliff"
+class="slide section level1">
+<h1>Why Does Performance Drop Off a Cliff?</h1>
+<ul class="incremental">
+<li>Look at the attention-specific slides!</li>
+<li>Given this performance drop</li>
+</ul>
+</div>
+</body>
+</html>
