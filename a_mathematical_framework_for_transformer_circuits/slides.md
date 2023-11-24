@@ -25,9 +25,9 @@
 # Transformer Circuits
 
 + Can we identify circuits in a transformer architecture?
-+ E.g. can I identify a part of the transformer that understands addition, another
-  part that understands multiplication, and then recombine them to build a neural net
-  that performs arithmetic without any need for re-training/fine-tuning?
++ E.g. can I identify a part of the transformer that understands symmetry, another
+  part that understands swapping, and then recombine them to build a neural net
+  that reverses strings without any need for re-training/fine-tuning?
 
 # Re-Framing Transformers
 
@@ -38,3 +38,26 @@
         * Note that this probability distribution in practice is some infinite
           list of parameters since we're talking about *all possible* sequences
     - Task of making a language model is to find a good approximation
+
+# Notion of Residual Streams
+
++ A transformer over an input of `n` tokens, can be thought of as having `n`
+  residual streams flowing through the transformer
++ Streams are almost entirely independent (element-wise operations)
+    * Only thing that isn't element-wise is attention!
++ Single stream that gets attention and MLP results added periodically
+
+# Change in Perspective
+
++ Residual connections are not connecting the input back to the output of a
+  layer
++ Residual connections are keeping the original input and connecting the output
+  of that layer back to the input!
+
+# What is Attention Really?
+
++ Attention moves information from one residual stream to another
+
+# Zero-Layer Transformers
+
++ Bigram estimation
