@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Transformer Circuits</title>
+  <style type="text/css">
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Transformer Circuits</h1>
+</div>
+<div id="the-paper-were-focusing-on" class="slide section level1">
+<h1>The Paper We’re Focusing On</h1>
+<ul class="incremental">
+<li>“A Mathematical Framework for Transformer Circuits”</li>
+<li>Elhage, Nanda, Olsson et al.</li>
+<li><a
+href="https://transformer-circuits.pub/2021/framework/index.html">https://transformer-circuits.pub/2021/framework/index.html</a></li>
+</ul>
+</div>
+<div id="quick-recap-of-the-goal-of-circuits"
+class="slide section level1">
+<h1>Quick Recap of the Goal of Circuits</h1>
+<ul class="incremental">
+<li>Circuits are theorized <em>factorizable</em> parts of a model
+<ul class="incremental">
+<li>E.g. image classification model, can we carve out the part of the
+model that identifies “cats” and the part that identifies “dogs?”</li>
+</ul></li>
+<li>One important benchmark of whether it’s truly factorizable is
+whether we can mix and match
+<ul class="incremental">
+<li>If we carved out “cats” and “dogs” correctly we should be able to
+create a new model from our old model that exclusively identifies cats
+vs dogs without needing to retrain, by just combining the “cats” circuit
+and “dogs” circuit</li>
+</ul></li>
+<li>Relation to alignment
+<ul class="incremental">
+<li>If we understand circuits and can mix and match then we should be
+able to exactly tune models to what we want them to do more precisely
+than just the blunt sledgehammer of gradient descent training</li>
+</ul></li>
+</ul>
+</div>
+<div id="transformer-circuits" class="slide section level1">
+<h1>Transformer Circuits</h1>
+<ul class="incremental">
+<li>Can we identify circuits in a transformer architecture?</li>
+<li>E.g. can I identify a part of the transformer that understands
+symmetry, another part that understands swapping, and then recombine
+them to build a neural net that reverses strings without any need for
+re-training/fine-tuning?</li>
+</ul>
+</div>
+<div id="re-framing-transformers" class="slide section level1">
+<h1>Re-Framing Transformers</h1>
+<ul class="incremental">
+<li>What are language models?
+<ul class="incremental">
+<li>Ideally they are probability distributions over all possible word
+sequences in language
+<ul class="incremental">
+<li>Theoretical starting point</li>
+<li>Note that this probability distribution in practice is some infinite
+list of parameters since we’re talking about <em>all possible</em>
+sequences</li>
+</ul></li>
+<li>Task of making a language model is to find a good approximation</li>
+</ul></li>
+</ul>
+</div>
+<div id="notion-of-residual-streams" class="slide section level1">
+<h1>Notion of Residual Streams</h1>
+<ul class="incremental">
+<li>A transformer over an input of <code>n</code> tokens, can be thought
+of as having <code>n</code> residual streams flowing through the
+transformer</li>
+<li>Streams are almost entirely independent (element-wise operations)
+<ul class="incremental">
+<li>Only thing that isn’t element-wise is attention!</li>
+</ul></li>
+<li>Single stream that gets attention and MLP results added
+periodically</li>
+</ul>
+</div>
+<div id="change-in-perspective" class="slide section level1">
+<h1>Change in Perspective</h1>
+<ul class="incremental">
+<li>Residual connections are not connecting the input back to the output
+of a layer</li>
+<li>Residual connections are keeping the original input and connecting
+the output of that layer back to the input via simple summation</li>
+</ul>
+</div>
+<div id="logit-lens-as-a-first-step" class="slide section level1">
+<h1>“Logit Lens” as a First Step</h1>
+<ul class="incremental">
+<li><a
+href="https://www.lesswrong.com/posts/AcKRB8wDpdaN6v6ru/interpreting-gpt-the-logit-lens">https://www.lesswrong.com/posts/AcKRB8wDpdaN6v6ru/interpreting-gpt-the-logit-lens</a></li>
+<li>Crucial insight:
+<ul class="incremental">
+<li>We can always unembed after any transformer block</li>
+</ul></li>
+<li>Observations from different stages of the residual stream
+<ul class="incremental">
+<li>From the very beginning we look “close” to the output</li>
+<li>Usually don’t look close to the input</li>
+<li>Doesn’t look like a symmetric gradient</li>
+</ul></li>
+<li>But transformer circuits looks closer and tries to examine what’s
+going on inside transformer blocks</li>
+</ul>
+</div>
+<div id="one-residual-stream-per-token" class="slide section level1">
+<h1>One Residual Stream Per Token</h1>
+<ul class="incremental">
+<li>Every input token has a single continuous stream running from
+beginning to end</li>
+<li>Can think of it as RAM chip
+<ul class="incremental">
+<li>For <code>n</code> tokens we have <code>n</code> independent RAM
+chips</li>
+<li>Think of number of dimensions in our residual stream as the amount
+of memory</li>
+</ul></li>
+</ul>
+</div>
+<div id="pause-for-quick-linear-algebra-check"
+class="slide section level1">
+<h1>Pause for Quick Linear Algebra Check</h1>
+<ul class="incremental">
+<li>Do people know what vector spaces are?</li>
+<li>Do people know what (linear) subspaces are?</li>
+<li>Do people know what dimensions are?</li>
+</ul>
+</div>
+<div id="what-is-attention-really" class="slide section level1">
+<h1>What is Attention Really?</h1>
+<ul class="incremental">
+<li>Attention moves information from one residual stream to another</li>
+<li>One interesting contribution of this paper:
+<ul class="incremental">
+<li>Multi-head attention can be thought of <em>exactly</em> as
+<code>n</code> independent</li>
+<li>attention heads</li>
+<li>Write to different subspaces</li>
+<li>Note dimension of each subspace is small relative to dimension of
+residual stream</li>
+<li>Each head reads from one subspace and writes to another</li>
+</ul></li>
+<li>Generation of context vector and multiplying by output of attention
+is cross-residual stream
+<ul class="incremental">
+<li>Writes from one stream to another</li>
+<li>Can be split up into individual small matrices</li>
+</ul></li>
+</ul>
+</div>
+</body>
+</html>

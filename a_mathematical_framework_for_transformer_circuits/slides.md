@@ -52,12 +52,45 @@
 + Residual connections are not connecting the input back to the output of a
   layer
 + Residual connections are keeping the original input and connecting the output
-  of that layer back to the input!
+  of that layer back to the input via simple summation
+
+# "Logit Lens" as a First Step
+
++ [https://www.lesswrong.com/posts/AcKRB8wDpdaN6v6ru/interpreting-gpt-the-logit-lens](https://www.lesswrong.com/posts/AcKRB8wDpdaN6v6ru/interpreting-gpt-the-logit-lens)
++ Crucial insight:
+    * We can always unembed after any transformer block
++ Observations from different stages of the residual stream
+    * From the very beginning we look "close" to the output
+    * Usually don't look close to the input
+    * Doesn't look like a symmetric gradient
++ But transformer circuits looks closer and tries to examine what's going on
+  inside transformer blocks
+
+# One Residual Stream Per Token
+
++ Every input token has a single continuous stream running from beginning to end
++ Can think of it as RAM chip
+    * For `n` tokens we have `n` independent RAM chips
+    * Think of number of dimensions in our residual stream as the amount of
+      memory
+
+# Pause for Quick Linear Algebra Check
+
++ Do people know what vector spaces are?
++ Do people know what (linear) subspaces are?
++ Do people know what dimensions are?
 
 # What is Attention Really?
 
 + Attention moves information from one residual stream to another
-
-# Zero-Layer Transformers
-
-+ Bigram estimation
++ One interesting contribution of this paper: 
+    * Multi-head attention can be thought of *exactly* as `n` independent
+    * attention heads
+    * Write to different subspaces
+    * Note dimension of each subspace is small relative to dimension of residual
+      stream
+    * Each head reads from one subspace and writes to another
++ Generation of context vector and multiplying by output of attention is
+  cross-residual stream
+    * Writes from one stream to another
+    * Can be split up into individual small matrices
