@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>More Reinforcement Learning</title>
+  <style type="text/css">
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+  <script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">More Reinforcement Learning</h1>
+</div>
+<div id="reinforcement-learning" class="slide section level1">
+<h1>Reinforcement Learning</h1>
+<ul class="incremental">
+<li>Last time with image classification (handwritten digits) that was
+<em>supervised learning</em>
+<ul class="incremental">
+<li>Give the machine examples of answers</li>
+<li>Use those answers to train the machine</li>
+<li>Assumes high confidence in the correctness of your training
+examples</li>
+</ul></li>
+<li>Reinforcement learning is another paradigm
+<ul class="incremental">
+<li>What happens if you aren’t sure of the correctness of your training
+examples?</li>
+</ul></li>
+</ul>
+</div>
+<div id="problem-statement-of-reinforcment-learning"
+class="slide section level1">
+<h1>Problem Statement of Reinforcment Learning</h1>
+<ul class="incremental">
+<li>I have an agent that can be modeled as a state machine</li>
+<li>That state machine has to perform actions with some form of
+feedback</li>
+<li>Some actions do well in the short-term, but are catastrophic in the
+long-term</li>
+<li>I want the agent to find the optimal long-term strategy
+<ul class="incremental">
+<li>At least some examples of immediate feedback are very clear</li>
+<li>But <em>I don’t know the optimal long-term strategy</em></li>
+</ul></li>
+<li>This is very general! Almost every form of planning can be recast as
+a reinforcement learning problem</li>
+</ul>
+</div>
+<div id="examples" class="slide section level1">
+<h1>Examples</h1>
+<ul class="incremental">
+<li>Solving a maze
+<ul class="incremental">
+<li>Clear immediate feedback
+<ul class="incremental">
+<li>You made it to the exit!</li>
+</ul></li>
+<li>Unclear longer-term strategy
+<ul class="incremental">
+<li>This is a bit of a toy example, humans know how to solve mazes</li>
+</ul></li>
+</ul></li>
+<li>Playing chess
+<ul class="incremental">
+<li>Clear immediate feedback
+<ul class="incremental">
+<li>Next move is checkmate!</li>
+</ul></li>
+<li>Unclear longer-term strategy
+<ul class="incremental">
+<li>Humans don’t know the optimal strategy for e.g. guaranteeing
+checkmate from the starting position (or if one exists)</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="more-general-examples" class="slide section level1">
+<h1>More General Examples</h1>
+<ul class="incremental">
+<li>Self-driving car
+<ul class="incremental">
+<li>Clear immediate feedback
+<ul class="incremental">
+<li>Crash is bad</li>
+<li>Hit a pedestrian is bad</li>
+<li>Arrive at destination is good</li>
+</ul></li>
+<li>Unclear longer-term strategy
+<ul class="incremental">
+<li>Does changing a lane now result in a crash 10 seconds from now?</li>
+</ul></li>
+</ul></li>
+<li>AI policymaker
+<ul class="incremental">
+<li>Clear immediate feedback
+<ul class="incremental">
+<li>Resulting in millions of deaths is bad</li>
+</ul></li>
+<li>Unclear longer-term strategy
+<ul class="incremental">
+<li>What policies will cause ~10 years from now widespread famine
+causing millions of deaths?</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="reminder-of-key-terms" class="slide section level1">
+<h1>Reminder of key terms</h1>
+<ul class="incremental">
+<li>Reward function <span class="math inline">\(R\)</span>: immediate
+reward</li>
+<li>Value function <span class="math inline">\(Q\)</span>: maximum
+possible reward</li>
+<li>Policy <span class="math inline">\(\pi\)</span>: the learned
+strategy that an agent actually performs</li>
+<li>If we know <span class="math inline">\(Q\)</span> we have an
+implicit <span class="math inline">\(\pi\)</span> (do the action htat
+has the best maximum possible reward)</li>
+<li>If we know the best <span class="math inline">\(\pi\)</span> we have
+a way of computing <span class="math inline">\(Q\)</span> (keep playing
+the policy and sum all rewards). Note this is complicated by
+stochasticity.</li>
+<li>Approximation parameters <span
+class="math inline">\(\theta\)</span>: These are usually just the
+weights of your underlying neural net</li>
+<li>Episode/Trajectory: one “playthrough” of a game</li>
+</ul>
+</div>
+<div id="different-ways-of-saying-the-same-thing"
+class="slide section level1">
+<h1>Different Ways of Saying the Same Thing</h1>
+<ul class="incremental">
+<li><span class="math inline">\(\pi_{\theta}(s, a)\)</span></li>
+<li><span class="math inline">\(\pi(s, a \mid \theta)\)</span></li>
+<li><span class="math inline">\(\pi_{\theta}(a \mid s)\)</span></li>
+<li><span class="math inline">\(\pi\)</span> for now outputs a boolean.
+For a given action <span class="math inline">\(a\)</span> in a state
+<span class="math inline">\(s\)</span> with weights <span
+class="math inline">\(\theta\)</span>, either we say “yes do <span
+class="math inline">\(a\)</span>” or “no, don’t do <span
+class="math inline">\(a\)</span>.”</li>
+</ul>
+</div>
+<div id="reminder-of-q-learning" class="slide section level1">
+<h1>Reminder of Q-Learning</h1>
+<ul class="incremental">
+<li>Self-consistency checks via Bellman’s Equation</li>
+<li><span class="math inline">\(Q(s, a) = R(s, a) + max_{i} Q(s_{a},
+a_i)\)</span></li>
+</ul>
+</div>
+<div id="downsides-of-q-learning" class="slide section level1">
+<h1>Downsides of Q-Learning</h1>
+<ul class="incremental">
+<li>Can have convergence issues (either it successfully converges to a
+global optimum, or goes absolutely wild)</li>
+<li>Intermediate versions of the model can be very bad</li>
+</ul>
+</div>
+<div id="policy-gradient" class="slide section level1">
+<h1>Policy Gradient</h1>
+<ul class="incremental">
+<li>Q-Learning was an example of a “value function-based” reinforcement
+learning approach</li>
+<li>We can have a policy-based approach as well</li>
+<li>Policy-based approaches correspond closer to natural intuitions
+about reinforcement learning
+<ul class="incremental">
+<li>Do more of those things that give you more reward</li>
+<li>Do less of those things that give you less reward</li>
+<li>Reminder different from the “self-consistency check” of
+Q-Learning</li>
+</ul></li>
+<li>Downsides:
+<ul class="incremental">
+<li>For Q-Learning you are always able to use any training example to
+get better</li>
+<li>For policy gradient approaches, often you have training limitations,
+e.g. you can only use training examples where you were using the same
+version of <span class="math inline">\(\pi\)</span> as the version you
+currently have</li>
+<li>Policy gradient has no formal guarantee of converging to a global
+optimum whereas for certain restricted scenarios Q-Learning has
+convergence results</li>
+</ul></li>
+<li>Upsides:
+<ul class="incremental">
+<li>Intermediate training optimums often are more useful than
+Q-Learning</li>
+<li>A lot easier to handle stochastic scenarios</li>
+</ul></li>
+</ul>
+</div>
+<div id="basic-strategy-behind-policy-gradient-methods"
+class="slide section level1">
+<h1>Basic Strategy behind Policy Gradient Methods</h1>
+<ul class="incremental">
+<li>Keep iterating on different versions of our policy</li>
+<li>Just like all RL algorithms, we will be “creating our own training
+examples as we go,” in this case using our current policy itself to
+create trajectories</li>
+<li>For each trajectory, add up all the rewards we get to end up with a
+function from <span class="math inline">\(\theta\)</span> to overall
+“return” <span class="math inline">\(G\)</span> (the sum of all the
+<span class="math inline">\(R\)</span> we got)</li>
+<li>Update <span class="math inline">\(\theta\)</span> to try to
+increase <span class="math inline">\(G\)</span></li>
+</ul>
+</div>
+<div
+id="reminder-of-what-this-looks-like-relative-to-supervised-learning"
+class="slide section level1">
+<h1>Reminder of what this looks like relative to Supervised
+Learning</h1>
+<ul class="incremental">
+<li>Supervised learning:
+<ul class="incremental">
+<li>Each training example/batch ends up with a function <span
+class="math inline">\(f\)</span> from <span
+class="math inline">\(\theta\)</span> to loss <span
+class="math inline">\(L\)</span> and then we calculate the gradient of
+<span class="math inline">\(f\)</span> and use that to update <span
+class="math inline">\(\theta\)</span></li>
+</ul></li>
+<li>Policy gradient method:
+<ul class="incremental">
+<li>Each episode/trajector (or batch of episodes/trajectories) ends up
+creating a function <span class="math inline">\(f\)</span> from <span
+class="math inline">\(\theta\)</span> to returns <span
+class="math inline">\(G\)</span> and then we calculate the gradient of
+<span class="math inline">\(f\)</span> and use that to update <span
+class="math inline">\(\theta\)</span></li>
+</ul></li>
+</ul>
+</div>
+<div id="but-there-are-problems" class="slide section level1">
+<h1>But There are Problems</h1>
+<ul class="incremental">
+<li>With our current definition of <span
+class="math inline">\(\pi\)</span> we don’t have a differentiable
+function
+<ul class="incremental">
+<li>Either no we decide not to perform this action in the future (so
+subtract the associated <span class="math inline">\(r\)</span> from
+<span class="math inline">\(G\)</span>) or yes we do (keep <span
+class="math inline">\(G\)</span> the same)</li>
+</ul></li>
+<li>No way of increasing the value of <span
+class="math inline">\(G\)</span>!
+<ul class="incremental">
+<li>We don’t have “counter-factuals” other than potentially (and even
+this has problems) just subtracting out reward for actions we don’t
+take</li>
+</ul></li>
+<li>Also our information is incredibly sparse
+<ul class="incremental">
+<li>A lot of times the answer will be “keep doing what you’re
+doing!”</li>
+</ul></li>
+</ul>
+</div>
+<div id="modification" class="slide section level1">
+<h1>Modification</h1>
+<ul class="incremental">
+<li>Re-configure <span class="math inline">\(\pi\)</span> so that it
+always outputs probabilities of actions</li>
+<li>Instead of calculating <span class="math inline">\(G\)</span>
+directly, calculate the expected value of <span
+class="math inline">\(G\)</span>, that is just multiply all rewards by
+the probability output by <span class="math inline">\(\pi\)</span>.</li>
+<li>This is now differentiable!</li>
+<li>We now have a reasonable way of increasing <span
+class="math inline">\(G\)</span> in a given batch of
+episodes/trajectories
+<ul class="incremental">
+<li>Because probabilities must sum to 1, if we started with 0.5 and 0.5
+for two different actions that each had reward 2 and 4, if we modify to
+0.1 and 0.9, we end up with a better overall sum.</li>
+<li>This does require us to have some diversity in our batch,
+e.g. different actions taken from the same state</li>
+</ul></li>
+</ul>
+</div>
+<div id="recap" class="slide section level1">
+<h1>Recap</h1>
+<ul class="incremental">
+<li>Make your policy <span class="math inline">\(\pi\)</span> some sort
+of probability function</li>
+<li>Generate a bunch of training examples (episodes/trajectories) by
+having your policy play the game</li>
+<li>Calculate the expected returns (overall rewards multiplied by
+probabilities) of each of those episodes</li>
+<li>This ends up with a function from <span
+class="math inline">\(\theta\)</span> to <span
+class="math inline">\(G\)</span>. Modify <span
+class="math inline">\(\theta\)</span> in each training iteration to
+maximize <span class="math inline">\(G\)</span>.</li>
+</ul>
+</div>
+<div id="reinforce" class="slide section level1">
+<h1>REINFORCE</h1>
+<ul class="incremental">
+<li>That’s REINFORCE! Congrats!</li>
+<li>We have a bit of a difference between what I’ve present and the
+usual update algorithm: <span class="math inline">\(\theta_{next} =
+\theta + \alpha \gamma^t G_t \nabla _\theta \text{ln}(\pi _\theta (a_t
+\mid s_t))\)</span></li>
+<li>I <em>think</em> what I’ve presented ends up being basically
+equivalent. But not 100% sure, let’s discuss!</li>
+</ul>
+</div>
+</body>
+</html>
