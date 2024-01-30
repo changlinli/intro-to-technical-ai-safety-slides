@@ -104,5 +104,3 @@ Let's generalize what I just did with Google.
   element vector, scale the first by 100, then the second by 10, and the third
   by 1.
 + For greater than as comparator, mutatis mutandis.
-
-# Problems with RASP
