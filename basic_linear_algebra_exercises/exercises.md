@@ -1,3 +1,25 @@
+## The Overall Gameplan
+
+What's the overall map of where we're trying to go today?
+
+It turns out that modern AI/ML relies essentially on matrices everywhere. If we
+want to understand what an AI model is doing, then we must understand what a
+matrix is doing, in a way that is more comprehensible than simply a blob of
+floating point numbers. To understand what a matrix is doing, we must then
+understand their theoretical foundations, namely linear algebra.
+
+By doing so, we can demystify matrices away from blobs of floating point numbers
+and towards more understandable concepts such as "this matrix represents a
+rotation."
+
+By the end of this session you should be able to understand:
+
+1. What a vector space is
+2. What a linear function is
+3. The relationship between a matrix and a linear function
+4. Why matrix multiplication is defined the way it is
+
+## Motivating Vector Spaces
 Linear algebra, as the name suggests, is the study of linear functions.
 
 One motivation for vector spaces arises from an intuition that in our world
@@ -17,7 +39,15 @@ units of blue" seems a lot easier to understand. There we have a restricted form
 of multiplication in the form of "scaling red by 2.0 units" or "scaling blue by
 0.9 units."
 
-The notion of a vector space takes this idea and generalizes it.
+Other examples of this abound in nature. For example sound. It's not very clear
+what it means to multiply two sounds together (although as we'll see later on in
+this course it's not impossible to come up with a notion of multiplication
+either), but it is much more straightforward to think about what adding two
+sounds together is: just play them together at the same time! Then
+scaling/multiplying by a constant is just making the sound louder or softer.
+
+The notion of a vector space takes this idea and generalizes it by defining what
+it means to "add" two vectors and what the word "scaling" means.
 
 A vector space consists of the following elements:
 
@@ -31,32 +61,66 @@ A vector space consists of the following elements:
     * There is a zero vector $0$ such that $0 + v = v + 0 = v$ for all $v$
     * There are additive inverses: for every $v$ there exists a vector $w$ such that $v + w = 0$
 + A set of elements each called a "scalar" along with operations called
-  "(scalar) addition" and "scalar multiplication". For almost all purposes in
-  machine learning we assume that these scalars are the real numbers. This is
-also often just called "scaling" a vector by a scalar.
+  "addition among scalars" and "multiplication among scalars". For almost all purposes in
+  machine learning we assume that these scalars are the real numbers and
+  addition/multiplication among scalars are just the usual addition and
+  multiplication on real numbers. The
+  crucial operation is multiplying a vector *by* a scalar. This is
+  also often just called "scaling" a vector by a scalar. Apart from being able
+  to add and multiply scalars like we can for the real numbers, multiplying a
+  vector by a scalar must distribute over vector addition. That is:
+     * $k(v + w)$ for a scalar $k$ and vectors $v$ and $w$ must be equal to $kv
+       + kw$.
 
-Let's see how that works for colors, where each color is considered a vector,
-and our scalars are the real numbers. 
+Note that vectors do not have to be vectors in the sense of what we ordinarily
+consider "mathematical" objects. We can describe physical phenomena as vector
+spaces.
 
-+ Vector addition is color mixing. For simplicity's sake here I'll say that we
-  are adding colors as if they were light rather than as if they were pigment
-  (so that all colors added together form white rather than black/gray).
-+ Colors are closed over mixing: if I mix two colors I always get another color
-+ Mixing two colors commutes: the order we mix colors doesn't matter
-+ Mixing colors is associative: if I have red, green, and blue, no matter if I
-  first mix red and green then blue or if I first mix green and blue, then red
-  we still end up with white.
-+ Since we are thinking of colors as light, the zero vector here should be the
-  absence of light, i.e. black. Any light combined with the absence of light is
-  still the same.
-+ Additive inverses are the trickiest bit here. We can use colored filters here to
-  represent color subtraction, but we need to strain a little bit to say that a
-  colored filter is a "color."
-+ Scalar multiplication is increasing the brightness of a color
+For example, let's see how we could define sounds as a vector space, where each
+sound is considered a vector, and our scalars are the real numbers. 
 
-Note that vectors do not have to be vectors in the sense that they are often
-described in, say, mechanical engineering, that is things that have a magnitude
-and direction. Let's look at some other examples of vector spaces.
++ Vector addition is sound mixing, that is playing one sound over another.
+  * Sounds are closed over mixing: if I mix two sounds together I always get
+    another sound. Otherwise it's a category error. I can't accidentally mix two
+    sounds together and get a color (unless you have synthesthesia!)
+  * Mixing two sounds commutes: the order we mix sounds doesn't matter
+  * Mixing sounds is associative: if I have a lion roar, a car horn, and a violin
+    holding a note, no matter if I first mix the roar and horn then violin or if I first
+    mix the horn and violin, then the roar we still end up with the same sound.
+  * The zero vector is complete silence. Adding silence to any sound never changes
+    it.
+  * Additive inverses: the same sound just played 180 degrees out of phase is the
+    additive inverse to the original sound. If you play the two together you get
+    silence. This is the principle behind noise cancellation. Every sound has an
+    inverse because every sound can be shifted by 180 degrees out of phase.
++ Scalar multiplication is increasing the volume of the sound:
+  * It distributes over vector addition: if you double the volume of one sound
+    and then double the volume of another sound and mix them together, it's the
+    same thing as if you had mixed them together first and then doubled the
+    volume of the final result.
+
+But we can also define more common "mathematical" objects as vector spaces as
+well.
+
+For example,
+
+As a reminder, we're focusing mainly on real vector spaces, i.e. those vector
+spaces whose scalars are real numbers, because those are the main spaces we deal
+with in machine learning. Nonetheless the concept of a vector can use other
+scalars as well.
+
+<details>
+<summary>Optional Aside</summary>
+For those who would like to read more about the general concept of scalars for a
+vector space, the term here is "field", that is any field can be used as scalars
+</details>
+
+Note that to properly define a (real) vector space, we must always specify not only
+what the vectors are, but also what exact operation vector addition corresponds
+to as well as what exact operation scalar multiplication corresponds to.
+However, as you read machine learning papers, you may notice that a paper only says "take
+the vector space such-and-such," that is they only define the vectors and don't
+define vector addition and 
 
 *Exercise*: 
 
@@ -266,3 +330,5 @@ Note that a vector space is always trivially a subspace of itself.
 > + The set of all vectors $(x, y)$ such that $x$ and $y$ are both even numbers.
 > + The set of all vectors $(x, y)$ such that $x$ and $y$ are equal to each
 >   other.
+
+Inner products.
