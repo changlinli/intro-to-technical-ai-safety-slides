@@ -160,6 +160,20 @@ Much like scalar multiplication distributes over vectors, a linear function is a
 function that distributes over
 A linear function is a function that obeys
 
+Optional Exercise:
+
+> Every vector space has a basis. Can you prove this?
+
+Optional Exercise:
+
+> Every basis for a vector space must have the same number of vectors. Can you prove this?
+
+
+Because every basis for a vector space has the same length, we can use this
+length to define a global property about the vector space in question. The
+length of every basis of a vector space is called the dimension of that vector
+space.
+
 
 *Exercise*:
 
@@ -226,3 +240,29 @@ A linear function is a function that obeys
 > this means that this corresponds to a linear function $f$ whose domain has
 > dimension $n$ and codomain has dimension $m$. Can you come up with values for
 > that matrix such that its rank is less than $m$? and no value is zero?
+
+Note that unlike the function itself (e.g. "rotates points by 90 degrees around
+the origin") or the dimension of a vector space, a matrix is basis-dependent.
+That is, different basis vectors will generate different matrices for the same
+function between the same vector spaces.
+
+Let's think about the function $f$ that does $(x, y, z) \mapsto (x, 0)$. This is
+technically a function from $R^3$ to $R^2$, but "in essence" all it's doing is
+the same thing as our previous function from $R^3$ to $R$ defined as $(x, y)
+\mapsto x$.
+
+A (linear) subspace of a vector space is a subset of vectors such that 
+
+Note that a vector space is always trivially a subspace of itself.
+
+*Exercise*:
+
+> Given the vector space $R^2$ with the usual addition and scalar multiplication
+> operations, which one of the following subsets of $R^2$ are valid linear
+> subspaces and which aren't?
+>
+> + The set of all vectors $\left{ (x, 1) \vert x \in R \right}$, i.e. vectors
+>   that have a one in their second component.
+> + The set of all vectors $(x, y)$ such that $x$ and $y$ are both even numbers.
+> + The set of all vectors $(x, y)$ such that $x$ and $y$ are equal to each
+>   other.
