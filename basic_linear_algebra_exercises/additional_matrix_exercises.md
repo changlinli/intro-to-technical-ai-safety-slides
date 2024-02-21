@@ -1,5 +1,5 @@
 So based on what we've said so far about matrices, one way to think about them
-is that 
+is that they are essentially lookup tables.
 
 For example, the matrix 
 
@@ -31,10 +31,28 @@ the first column) and $f : (0, 1) \mapsto -1 \cdot (1, 0) + 0 \cdot (0, 1)$
 Likewise for another $f$ where $f : R^2 \to R^3$, the following matrix
 
 ```math
-\begin{bmatrix} 0 & -1 \\\ 1 & 0 \\\  \end{bmatrix}
+\begin{bmatrix} 0 & -1 \\\ 1 & 0 \\\ 1 & 0 \end{bmatrix}
 ```
 
-Note that the columns of the matrix always correspond to the dimension of the
+corresponds to
+
+Note that the number of columns of the matrix always correspond to the dimension
+of the domain and the number of rows to the dimension of the codomain, since we
+have as many columns as we have basis vectors in the domain and as many rows as
+we have basis vectors in the codomain.
+
+Remember, however, that the range of a function does not have to be equal to its
+codomain. In particular the range of a function can have a dimension
+
+*Exercise*:
+
+> Take the vector space $R^2$ and the subspace that consists of the set of all
+> vectors $(x, y)$ such that $x$ and $y$ are equal to each other.
+>
+> Can you come up with a set of basis vectors for that subspace, i.e. a set of
+> vectors within that subspace ? How large is
+> that set?
+
 
 Let's take what we've defined so far and do some more calculations with them.
 
@@ -155,13 +173,26 @@ arrows together tip to tail) between two vectors $v$ and $w$.
 
 Just like how there is a standard basis for $R^n$, if we decide to equip $R^n$
 with an inner product, there is a standard choice there too, namely the dot
-product.
+product. We sometimes denote the dot product specifically by $v \cdot w$ and
+sometimes by $\langle v, w \rangle$ when we want to make clear that the dot
+product is only one particular example of an inner product and there are other
+potential examples.
 
-The dot product of two n-tuples in $R^n$ is defined as 
+For $(v_0, \ldots, v_n), (w_0, \ldots, w_n)$ in $R^n$ with the usual vector addition and scalar multiplication, we
+define the dot product as
 
-A thing to emphasize here is that inner products are *optional* additions to a
-vector space. A vector space does not need to have an inner product. The same
-vector space could have multiple different kinds of inner products that you
+```math
+(v_0, \ldots, v_n) \cdot (w_0, \ldots, w_n) = v_0w_0 + \cdots + v_nw_n
+```
+
+*Exercise*:
+
+> Can you come up with an example of an inner product that is not the dot
+> product? One way of doing this is to not use $R^n$ as your vector space.
+
+Again I want to emphasize here is that inner products are *optional* additions
+to a vector space. A vector space does not need to have an inner product. The
+same vector space could have multiple different kinds of inner products that you
 define for it. All the stuff we've done with linear functions and matrices have
 not required
 
