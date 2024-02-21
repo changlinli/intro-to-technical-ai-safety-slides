@@ -486,13 +486,13 @@ saying that linear functions preserve vector addition and scalar multiplication
 is that linear functions distribute over vector addition and scalar
 multiplication. In particular,
 
-> A function f $f$ is linear if and only if $f(k_0v_0 = k_1v_1) = k_1(f(v_0)) +
+> A function f $f$ is linear if and only if $f(k_0v_0 + k_1v_1) = k_0(f(v_0)) +
 > k_1(f(v_1))$.
 >
 > Specialized just to vector addition this means $f(v_0 + v_1) = f(v_0) +
 > f(v_1)$.
 >
-> Specialized just to scalar multiplicatoin this means $f(k_0v_0) = k_0f(v_0)$.
+> Specialized just to scalar multiplication this means $f(k_0v_0) = k_0f(v_0)$.
 
 Let's look at some examples of this.
 
@@ -508,8 +508,6 @@ Since $f$ is a linear function, we see that we get the same answer either way.
 Note that $+$ in $f(2 \cdot (1, 3) + 3\cdot(4, 2))$ refers to vector addition
 in $R^2$, while $+$ in $2f((1, 3)) + 3(f(4, 2))$ refers to vector addition in
 $R$.
-
-Let's 
 
 The range of a linear function is always a linear subspace of its codomain.
 
