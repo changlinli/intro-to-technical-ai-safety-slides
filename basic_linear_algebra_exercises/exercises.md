@@ -642,7 +642,8 @@ calculate how to calculate any linear function $f$!
 *Exercise*:
 
 > Can you do the same calculation for the same $f$, but now for an alternative basis
-> consisting of $(0.6, 0)$ and $(0, 1.55)$?
+> consisting of $(0.6, 0)$ and $(0, 1.55)$? You should end up with the same
+> answer $(-3.1, 1.2)$ at the end of the day.
 
 *Exercise*:
 
