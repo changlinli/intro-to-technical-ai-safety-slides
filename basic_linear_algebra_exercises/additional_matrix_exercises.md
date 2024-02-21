@@ -51,10 +51,53 @@ codomain and a linear subspace can have a dimension!
 > Can you come up with a set of basis vectors for that subspace, i.e. a set of
 > vectors within that subspace ? How large is that set?
 
+*Exercise*:
 
+> Let's take another look at another $3 \times 2$ matrix. As is usual we'll
+> assume that we are working with $R^2$ and $R^3$ and that are bases are the
+> standard basis vectors.
+>
+> ```math
+> \begin{bmatrix} 0 & 1 \\\ 1 & 0 \\\ 1 & 0 \end{bmatrix}
+> ```
+> As we can see from the 3 rows of the matrix, the codomain of this function has a
+> dimension of three. What is the dimension of the range of this function? That
+> is how many elements form a basis of its range?
 
+In general it turns out that the dimension of the range of a function cannot
+exceed the dimension of its domain.
 
-Let's take what we've defined so far and do some more calculations with them.
+<details>
+<summary>Optional Exercise</summary>
+Prove this.
+</details>
+
+So for example, we know that the dimension of the range of a function
+represented by a $3 \times 2$ matrix cannot be equal to the dimension of its
+codomain.
+
+However, even for a square matrix, the dimension of the range of its associated
+function may not be equal to its codomain.
+
+*Exercise*:
+
+> Let's look at the following $3 \times 3$ matrix for $R^3$ with the standard
+> basis vectors:
+>
+> ```math
+> \begin{bmatrix} 1 & 1 & 1 \\\ 1 & 1 & 1 \\\ 1 & 1 & 1 \end{bmatrix}
+> ```
+>
+> What is the range of this function? What is the dimension of its range?
+
+It turns out it is often useful to know what the dimension of the range is of
+the function that a matrix represents. It is useful enough that it has its own
+name, the rank of a matrix. A matrix is considered "low-rank" if its rank is
+less than the number of rows it has, that is the range of the associated
+function is smaller than the codomain of the associated function.
+
+Let's take what we've defined so far and do some more calculations with them in
+$R^n$ with the standard basis vectors.
 
 Given the vector 
 
