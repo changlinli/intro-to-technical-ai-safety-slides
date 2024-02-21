@@ -387,8 +387,6 @@ elements, so all that's needed is to find a basis of $R^n$ that has $n$
 vectors.
 </details>
 
-<details>
-
 *Exercise*:
 
 > Can you come up with any other alternative basis for $R^3$ that aren't its
