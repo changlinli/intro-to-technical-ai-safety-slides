@@ -34,15 +34,14 @@ Likewise for another $f$ where $f : R^2 \to R^3$, the following matrix
 \begin{bmatrix} 0 & -1 \\\ 1 & 0 \\\ 1 & 0 \end{bmatrix}
 ```
 
-corresponds to
-
 Note that the number of columns of the matrix always correspond to the dimension
 of the domain and the number of rows to the dimension of the codomain, since we
 have as many columns as we have basis vectors in the domain and as many rows as
 we have basis vectors in the codomain.
 
 Remember, however, that the range of a function does not have to be equal to its
-codomain. In particular the range of a function can have a dimension
+codomain. In particular the range of a function is a linear subspace of its
+codomain and a linear subspace can have a dimension!
 
 *Exercise*:
 
@@ -50,8 +49,9 @@ codomain. In particular the range of a function can have a dimension
 > vectors $(x, y)$ such that $x$ and $y$ are equal to each other.
 >
 > Can you come up with a set of basis vectors for that subspace, i.e. a set of
-> vectors within that subspace ? How large is
-> that set?
+> vectors within that subspace ? How large is that set?
+
+
 
 
 Let's take what we've defined so far and do some more calculations with them.
