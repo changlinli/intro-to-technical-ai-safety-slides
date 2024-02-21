@@ -185,31 +185,50 @@ multiplication? Well let's say we're given the matrix $M_0$ for some function
 $f_0 : V_0 -> V_1$ and another matrix $M_1$ for some other function $f_1 : V_1
 -> V_2$.
 
-Let's let $v_0$ be a vector in $V_0$. Then applying $f_2(f_1(v_0))$ would look
+Let's let $v_0$ be a vector in $V_0$. Then applying $f_1(f_0(v_0))$ would look
 like multiplying $v_0$ (as a one column matrix) by $M_0$ and then $M_1$. That is 
-$f_2(f_1(v_0))$ can be represented by $M_0 \times (M_1 \times v_0)$.
+$f_1(f_0(v_0))$ can be represented by $M_1 \times (M_0 \times v_0)$.
 
-So then a fairly natural question arises. Instead of writing $f_2(f_1(v_0))$, we
-could also write this as function composition, i.e. $(f_2 \circ f_1)(v_0)$. Can
-we do the same thing for $M_0 \times (M_1 \times v_0)$? The answer is yes! We
-can re-associate the parentheses and calculate
+So then a fairly natural question arises. Instead of writing $f_1(f_0(v_0))$, we
+could also write this as function composition, i.e. $(f_1 \circ f_0)(v_0)$. Can
+we do the same thing for $M_1 \times (M_0 \times v_0)$? The answer is yes! We
+can re-associate the parentheses!
 
 That means that matrix multiplication is just the same thing as function
 composition!
 
 *Exercise*:
 
-From 
+> Let's work out an example of this by hand. Again we'll assume all domains and
+> codomains of all functions are $R^2$ with the standard basis vectors. Let's
+> let $M_0$ be 
+> ```math
+> \begin{bmatrix} 0 & -1\\\ 1 & 0 \end{bmatrix}
+> ```
+> and let $M_1$ be
+> ```math
+> \begin{bmatrix} -1 & 0\\\ 0 & -1 \end{bmatrix}
+> ```
+>
+> 1. What does $M_1$ mean as a function?
+> 2. Calculate what $f_1(f_0(v_0))$ is where $v_0 = (3, 2)$ by the usual trick
+>    of thinking of matrices as lookup tables. You will need to do this twice,
+>    once for $M_0$ and once for $M_1$.
+> 3. Do the usual matrix multiplication of multiplying rows by columns and
+>    adding them together and multiply $M_1 \times M_0$. Now do the same lookup
+>    trick, but now you should only do it once.
+> 4. You should observe the same answer. What is it?
 
-A column vector
+From thinking of matrices as functions, we observe all sorts of properties
 
-This is similar to how in theory in a programming language with
+1. Matrix dimensions must agree for matrix multiplication to make sense, i.e. a
+   $a \times b$ dimensional matrix can only be multiplied with a $b \times c$
+   dimensional matrix.
+2. Matrix multiplication is not commutative.
 
-You can represent 
+*Exercise*:
 
-Now we understand how to use matrices to perform
-
-
+> Prove each of these properties by thinking of these matrices as functions.
 
 ## Inner Products
 
@@ -217,11 +236,6 @@ We've now covered matrices,
 
 But for understanding, say the transformer architecture, one other thing that is
 important will be the notion of inner products.
-
-To motivate the idea of an inner product, let's first return to the idea of
-vectors again. We've define vectors abstractly so far, 
-
-It's often useful 
 
 Inner products arise from a realization that every day concepts of "length,"
 "angle," and "similarity" on vectors are not independent concepts, but in fact
@@ -329,18 +343,17 @@ not required
 
 *Exercise*:
 
-> Which vector
+> Let's say we have a vector $v$ in a vector space equipped with an inner
+> product. Among all the vectors $w$ that have the same length, i.e. $\lVert w
+> \rVert = \lVert v \rVert$, which vector produces the greatest inner product?
+> 
+> Let's narrow our focus to vectors in $R^2$ with the inner product as the dot
+> product. For the vector $(1, 1)$, which vectors of the same length create the
+> largest inner product with it? The smallest inner product? An inner product of
+> zero?
 
+The previous exercise demonstrates how inner products capture a notion of
+similarity. The larger the inner product is between two vectors, the more
+similar they are!
 
-*Exercise*:
-
-> Let's compute the 
-
-Here are some final exercises to make sure that you understand the material.
-These exercises will cover stuff that you've already answered, so don't be
-worried 
-
-*Exercise*:
-
-> Why is matrix multiplication defined in the order it is? Can you derive its
-> arithmetic purely from 
+And you're done!
