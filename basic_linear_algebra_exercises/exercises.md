@@ -112,44 +112,6 @@ sound is considered a vector, and our scalars are the real numbers.
     same thing as if you had mixed them together first and then doubled the
     volume of the final result.
 
-*Exercise*:
-
-> I can define a form of addition and scalar multiplication for quantities of
-> brine, i.e. salty water. Let's say that our vectors are volumes of brine, and
-> vector addition consists of mixing two different quantities of brine,
-> potentially of different salinity together. Does this form a valid vector space?
-
-<details>
-<summary>Hint</summary>
-How would you define the zero vector here? What constant volume and salinity of
-water can be added to any volume and salinity of water without changing its
-volume or salinity?
-
-Given that zero vector, are there valid additive inverses here?
-</details>
-
-<details>
-<summary>Solution</summary>
-<p>
-Like many physical phenomena, it is possible to really contort a definition of
-a vector space to fit (and you can try!), but absent major contortion, vectors
-defined as physical quantities of brine do not form a vector space.
-</p>
-
-<p>
-It is possible to define a reasonable zero vector, namely a zero quantity of
-water, but it is not possible to define reasonable additive inverses, when
-vector addition is mixing of water.
-</p>
-
-<p>
-You could define a negative quantity of water, but that is usually interpreted
-as taking away water rather than mixing in new water.
-</p>
-
-An even thornier problem is 
-</details>
-
 But we can also define more common "mathematical" objects as vector spaces as
 well.
 
@@ -224,7 +186,11 @@ scalars. See
 
 <details>
 <summary>Solution</summary>
-No this is not. There is no zero vector.
+No this is not. There is no zero vector. In particular, if we specify any $(x,
+y)$ to be the zero vector, $(x - 1, y - 1)$ will always be less than it, so
+vector addition of $(x, y)$ and $(x - 1, y - 1)$ will result in $(x, y)$,
+which violates what a zero vector is for $(x - 1, y - 1)$ (adding a zero vector
+to $(x - 1, y - 1)$ should still return $(x - 1, y - 1)$).
 </details>
 
 
@@ -286,19 +252,8 @@ first two elements, we would have the sequence $100.2, 1.1, 101.3, 102.4, 203.7,
 and $y$. How can you form a real vector space where each vector is a sequence
 $F_{x, y}$ for some $x$ and $y$?
 
-<details>
-<summary>Hint</summary>
-
-</details>
-
-Let our vectors be the fibonacci sequences whose first two 
-
-
-Let our vectors be colors perceived by humans. What is vector addition here?
-What is a reasonable basis for this vector space?
-
-Can you make a vector space out of the colors? What is a reasonable basis?
-
+Let's turn our attention now to how we can specify a vector space without
+needing to exhaustively list every single vector, via a basis.
 
 A basis can be thought of as the "fundamental set" of vectors that carries all the
 information about a vector space, such that every vector can be reduced to a sum
@@ -393,9 +348,6 @@ vectors, all its bases must be of the same size. That is all its bases must
 have the same number of vectors.
 </details>
 <details>
-<summary>Solution</summary>
-TODO
-</details>
 
 <details>
 <summary>Optional Exercise</summary>
@@ -406,9 +358,6 @@ Prove that if a vector space has a basis, even if infinite, all its bases must
 be of the same size (i.e. cardinality).
 </details>
 <details>
-<summary>Solution</summary>
-TODO
-</details>
 
 <details>
 <summary>Optional Exercise</summary>
@@ -420,9 +369,6 @@ this.
 Prove that all vector spaces have a basis.
 </details>
 <details>
-<summary>Solution</summary>
-TODO
-</details>
 
 Because all vector spaces have a basis and because all the bases of a vector
 space must be of the same size, we can talk about "the" size of a vector
@@ -445,9 +391,6 @@ vectors.
 </details>
 
 <details>
-<summary>Solution</summary>
-TODO
-</details>
 
 *Exercise*:
 
@@ -480,7 +423,6 @@ Because every basis for a vector space has the same length, we can use this
 length to define a global property about the vector space in question. The
 length of every basis of a vector space is called the dimension of that vector
 space.
-
 
 ## Linear Subspace
 
@@ -582,6 +524,7 @@ Note that $+$ in $f(2 \cdot (1, 3) + 3\cdot(4, 2))$ refers to vector addition
 in $R^2$, while $+$ in $2f((1, 3)) + 3(f(4, 2))$ refers to vector addition in
 $R$.
 
+Let's 
 
 The range of a linear function is always a linear subspace of its codomain.
 
@@ -593,12 +536,6 @@ The range of a linear function is always a linear subspace of its codomain.
 > linear combination must also be in the range of $f$.
 
 <details>
-<summary>Hint</summary>
-
-Prove that
-</details>
-
-<details>
 <summary>Solution</summary>
 Take two vectors from $f(W)$, i.e. the range of $f$, $w_0$ and $w_1$. Examine
 their linear combination as represented by $z = k_0w_0 + k_1w_1$ for scalars
@@ -608,14 +545,17 @@ Since we know that $w_0$ and $w_1$ are in the range of $f$, there must have
 been at least two (although possibly more) vectors $v_0$ and $v_1$ such that
 $f(v_0) = w_0$ and $f(v_1) = w_1$.
 
-
-Prove that
+We can thus write $z = k_0f(v_0) + k_1f(v_1)$. By using the distributive
+property of linear functions, but just reversing the direction of equality, we
+get that $z = f(k_0v_0 + k_1v_1)$, which implies that there is a vector which
+$f$ maps to $z$, that is $z$ is in fact in the range of $f$.
 </details>
 
-We call the origin
-
-Geometrically what are linear transformations? Linear transformations are those
-transformations which keep all straight lines straight
+If we restrict our attention to $R^n$, we can get a more geometric
+interpretation of linear functions as laid out in
+[https://www.youtube.com/watch?v=kYB8IZa5AuE](https://www.youtube.com/watch?v=kYB8IZa5AuE).
+If you'd like, you can watch that video, and then think about how to prove the
+statements said in that video using our definition of linear functions.
 
 *Exercise*:
 
@@ -801,7 +741,10 @@ If we give each component of the liner combination its own row we get
 | $0 \cdot (1, 0)$ | $-1 \cdot (1, 0)$ |
 | $1 \cdot (0, 1)$ | $0 \cdot (0, 1)$ |
 
-Finally if just tell the reader of the table separately what the basis vectors are, i.e. tell the reader "this table is using the standard basis of $R^2$ for its domain and the standard basis of $R^2$ for its codomain," we can get rid of explicitly writing the basis vectors.
+Finally if just tell the reader of the table separately what the basis vectors
+are, i.e. tell the reader "this table is using the standard basis of $R^2$ for
+its domain and the standard basis of $R^2$ for its codomain," we can get rid of
+explicitly writing the basis vectors.
 
 | Column 0 | Column 1 |
 | ------ | ------ |
@@ -809,6 +752,8 @@ Finally if just tell the reader of the table separately what the basis vectors a
 | 1 | 0 |
 
 And that's a matrix!
+
+$\begin{matrix} 0 & -1\\ 1 & 0 \end{matrix}$.
 
 *Exercise*:
 
@@ -827,19 +772,8 @@ And that's a matrix!
 > Can you write what linear function this matrix corresponds to in English
 > (assuming that our basis for both the domain and codomain are the standard
 > basis $(1, 0, 0)$, $(0, 1, 0)$, $(0, 0, 1)$)?
-
-*Exercise*:
-
-> If $f$ and $g$ are linear functions represented by the matrices $M_f$ and
-> $M_g$, then their product $M_f M_g$ is also a matrix, which means that it must
-> correspond to a linear function. What is that linear function?
-
-*Exercise*:
-
-> Let's say you have a real-valued matrix of size $m \times n$. As a reminder
-> this means that this corresponds to a linear function $f$ whose domain has
-> dimension $n$ and codomain has dimension $m$. Can you come up with values for
-> that matrix such that its rank is less than $m$ and no value is zero?
+>
+> $\begin{matrix} 1 & 0 & 0\\ 1 & 0 & 0 \\ 1 & 0 & 0 \end{matrix}$
 
 Note that unlike the function itself (e.g. "rotates points by 90 degrees around
 the origin") or the dimension of a vector space, a matrix is basis-dependent.
@@ -858,13 +792,3 @@ technically a function from $R^3$ to $R^2$, but "in essence" all it's doing is
 the same thing as our previous function from $R^3$ to $R$ defined as $(x, y)
 \mapsto x$.
 
-
-## Inner Products
-
-Inner products are a way of defining
-
-First and foremost, inner products are an *optional* addition to a vector
-space. That is a vector space does not need to have an inner product. A vector
-could also possibly have many different kinds of inner products added to it.
-
-That being said
