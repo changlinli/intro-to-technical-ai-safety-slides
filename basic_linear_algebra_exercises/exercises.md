@@ -151,7 +151,7 @@ $(x_0, y_0) + (x_1, y_1) = (x_0 + y_1, y_0 + x_1)$.
 
 But almost always, the vector addition we use on $R^2$ is $(x_0, y_0) + (x_1,
 y_1) = (x_0 + x_1, y_0 + y_1)$ and scalar multiplication will be $k(x, y) =
-(kx, ky)$. Therefore by convention we often just say the "vector space R^2" and
+(kx, ky)$. Therefore by convention we often just say the "vector space $R^2$" and
 implicitly assume that vector addition and scalar multiplication are exactly
 those operators. This is strictly speaking an abuse of terminology, or at least
 ambiguous, as $R^2$ is a set of vectors, not a vector space itself, but it is
@@ -174,7 +174,7 @@ rarely in machine learning, so we won't talk about them.
 For those who would like to read more about the general concept of scalars for a
 vector space, the term here is "field", that is any field can be used as
 scalars. See
-[https://en.wikipedia.org/wiki/Field_(mathematics)](https://en.wikipedia.org/wiki/Field_(mathematics)).
+[https://en.wikipedia.org/wiki/Field_(mathematics)]("https://en.wikipedia.org/wiki/Field_(mathematics")).
 </details>
 
 *Exercise*:
@@ -748,7 +748,7 @@ explicitly writing the basis vectors.
 
 And that's a matrix!
 
-$\begin{matrix} 0 & -1\\ 1 & 0 \end{matrix}$.
+$\begin{bmatrix} 0 & -1\\ 1 & 0 \end{bmatrix}$.
 
 *Exercise*:
 
@@ -768,7 +768,7 @@ $\begin{matrix} 0 & -1\\ 1 & 0 \end{matrix}$.
 > (assuming that our basis for both the domain and codomain are the standard
 > basis $(1, 0, 0)$, $(0, 1, 0)$, $(0, 0, 1)$)?
 >
-> $\begin{matrix} 1 & 0 & 0\\ 1 & 0 & 0 \\ 1 & 0 & 0 \end{matrix}$
+> $\begin{bmatrix} 1 & 0 & 0\\ 1 & 0 & 0 \\ 1 & 0 & 0 \end{bmatrix}$
 
 Note that unlike the function itself (e.g. "rotates points by 90 degrees around
 the origin") or the dimension of a vector space, a matrix is basis-dependent.
