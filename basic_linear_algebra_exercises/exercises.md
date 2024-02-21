@@ -547,8 +547,11 @@ statements said in that video using our definition of linear functions.
 > that violate our linearity requirements?
 > 
 > $f(x) = x$
+>
 > $f(x) = 2x$
+>
 > $f(x) = 2x + 1$
+>
 > $f(x) = x^2$
 
 *Exercise*:
