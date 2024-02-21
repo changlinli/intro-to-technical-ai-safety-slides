@@ -20,6 +20,7 @@ By the end of this session you should be able to understand:
 4. Why matrix multiplication is defined the way it is
 
 ## Motivating Vector Spaces
+
 Linear algebra, as the name suggests, is the study of linear functions.
 
 One motivation for vector spaces arises from an intuition that in our world
@@ -47,7 +48,7 @@ sounds together is: just play them together at the same time! Then
 scaling/multiplying by a constant is just making the sound louder or softer.
 
 The notion of a vector space takes this idea and generalizes it by defining what
-it means to "add" two vectors and what the word "scaling" means.
+it means to "add" two "vectors" and what the word "scaling" means.
 
 A vector space consists of the following elements:
 
@@ -67,14 +68,13 @@ A vector space consists of the following elements:
   multiplication on real numbers. The
   crucial operation is multiplying a vector *by* a scalar. This is
   also often just called "scaling" a vector by a scalar. Apart from being able
-  to add and multiply scalars like we can for the real numbers, multiplying a
+  to add and multiply scalars among themselves like we can for the real numbers, multiplying a
   vector by a scalar must distribute over vector addition. That is:
-     * $k(v + w)$ for a scalar $k$ and vectors $v$ and $w$ must be equal to $kv
-       + kw$.
+     * $k(v + w)$ for a scalar $k$ and vectors $v$ and $w$ must be equal to $kv + kw$.
 
-Note that vectors do not have to be vectors in the sense of what we ordinarily
-consider "mathematical" objects. We can describe physical phenomena as vector
-spaces.
+Note that the notion of a "vector" here is extremely broad. Vectors do not have
+to be vectors in the sense of what we ordinarily consider "mathematical"
+objects. We can describe physical phenomena as vector spaces.
 
 For example, let's see how we could define sounds as a vector space, where each
 sound is considered a vector, and our scalars are the real numbers. 
@@ -82,17 +82,17 @@ sound is considered a vector, and our scalars are the real numbers.
 + Vector addition is sound mixing, that is playing one sound over another.
   * Sounds are closed over mixing: if I mix two sounds together I always get
     another sound. Otherwise it's a category error. I can't accidentally mix two
-    sounds together and get a color (unless you have synthesthesia!)
+    sounds together and get a color (unless you have synesthesia!)
   * Mixing two sounds commutes: the order we mix sounds doesn't matter
   * Mixing sounds is associative: if I have a lion roar, a car horn, and a violin
     holding a note, no matter if I first mix the roar and horn then violin or if I first
     mix the horn and violin, then the roar we still end up with the same sound.
   * The zero vector is complete silence. Adding silence to any sound never changes
     it.
-  * Additive inverses: the same sound just played 180 degrees out of phase is the
-    additive inverse to the original sound. If you play the two together you get
+  * Additive inverses: the same sound just played out of phase is the additive
+    inverse to the original sound. If you play the two together you get
     silence. This is the principle behind noise cancellation. Every sound has an
-    inverse because every sound can be shifted by 180 degrees out of phase.
+    inverse because every sound can be shifted out of phase.
 + Scalar multiplication is increasing the volume of the sound:
   * It distributes over vector addition: if you double the volume of one sound
     and then double the volume of another sound and mix them together, it's the
@@ -112,7 +112,9 @@ scalars as well.
 <details>
 <summary>Optional Aside</summary>
 For those who would like to read more about the general concept of scalars for a
-vector space, the term here is "field", that is any field can be used as scalars
+vector space, the term here is "field", that is any field can be used as
+scalars. See
+[https://en.wikipedia.org/wiki/Field_(mathematics)](https://en.wikipedia.org/wiki/Field_(mathematics)).
 </details>
 
 Note that to properly define a (real) vector space, we must always specify not only
@@ -216,7 +218,9 @@ A subspace of a vector space is some subset of
 
 <details>
 <summary>Solution</summary>
-
+One possible alternative basis for $R^3$ is to simply take the standard basis
+and double one of the vectors, e.g. so that we have $(2, 0, 0)$, $(0, 1, 0)$,
+and $(0, 0, 1)$.
 </details>
 
 
@@ -315,20 +319,80 @@ technically a function from $R^3$ to $R^2$, but "in essence" all it's doing is
 the same thing as our previous function from $R^3$ to $R$ defined as $(x, y)
 \mapsto x$.
 
-A (linear) subspace of a vector space is a subset of vectors such that 
+## Linear Subspace
 
-Note that a vector space is always trivially a subspace of itself.
+A (linear) subspace of a vector space is a subset of vectors such that the
+subset remains closed under vector addition and scalar multiplication from the
+original vector space. That is for any two vectors contained in the subset,
+their sum is also contained in the subset. For any vector contained in the
+subset, any rescaling of that vector by scalar multiplication must also be in
+the subset.
+
+So for example, in $R^2$, the set of vectors that all have a zero in their
+second component, i.e. the set $\left\{ (x, 0) \vert x \in R \right\}$, is a
+(linear) subspace of $R^2$.
 
 *Exercise*:
 
 > Given the vector space $R^2$ with the usual addition and scalar multiplication
 > operations, which one of the following subsets of $R^2$ are valid linear
-> subspaces and which aren't?
+> subspaces and which aren't? For the ones that aren't, can you give examples
+> that violate closure of vector addition or closure of scalar multiplication?
 >
-> + The set of all vectors $\left{ (x, 1) \vert x \in R \right}$, i.e. vectors
+> + The set of all vectors $\left\{ (x, 1) \vert x \in R \right\}$, i.e. vectors
 >   that have a one in their second component.
 > + The set of all vectors $(x, y)$ such that $x$ and $y$ are both even numbers.
 > + The set of all vectors $(x, y)$ such that $x$ and $y$ are equal to each
 >   other.
 
-Inner products.
+<details>
+<summary>Solution</summary>
+The set $\left\{ (x, 1) \vert x \in R \right\}$ is not a valid linear subspace
+of $R^2$ under the usual vector addition and scalar multplication operators. It
+is not closed under scalar multiplication or vector addition.
+If I multiply by a scalar constant $k$ I get $k(x, 1) = (kx, k)$, which is not
+a part of $\left\{ (x, 1) \vert x \in R \right\}$ if $k /not= 1$. Likewise if I
+add two vectors $(x, 1)$ and $(y, 1)$ I get $(x + y, 2)$, which is not a member
+of the subset.
+
+The set of all vectors $(x, y)$ such that $x$ and $y$ are both even numbers is
+also not a valid linear subspace of $R^2$. This is not closed under scalar
+multiplication since I can multiply e.g. $0.5 \cdot (2, 2) = (1, 1)$ , which is
+not contained in my subset.
+
+The set of all vectors $(x, y)$ such that $x$ and $y$ are equal to each other
+is a valid linear subspace of $R^2$. Given $(a, a)$ and $(b, b)$, adding them
+together results in a tuple whose two components are still equal to each other,
+namely $(a + b, a + b)$, same for multiplying by a scalar.
+</details>
+
+## Matrices as notation
+
+We use notation for all sorts of things in life. For example, we use *numerals*
+as notation for *numbers*, but it is important to distinguish between the two.
+6, 110, and VI are all different numerals, but they all represent the same number.
+
+Matrices, as we shall see, spring from the same intuition, and are a form of
+notation for linear functions. In particular, just like we have different base
+systems for numbers, such as base-10 or base-2, that result in different
+numerals for the same number, matrices constructed with different basis vectors
+will result in different matrices for the same linear function.
+
+In practice, much like how we often assume that a given numeral is a base-10
+numeral without additional elaboration, when working with $R^n$, we generally
+assume that a given matrix uses the standard basis vectors.
+
+Just like how numerals allow us to perform arithmetic computation with numbers,
+we shall see that matrices allow us to perform computation with linear
+functions.
+
+However, when we move away from direct computation, it will often be easier to
+understand what a matrix is "really doing," by understanding what the function
+it notates is doing, rather than getting bogged down in a two-dimensional array
+of floating point numbers.
+
+## Inner Products
+
+Inner products are a way of 
+
+
