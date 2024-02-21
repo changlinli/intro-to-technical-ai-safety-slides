@@ -96,6 +96,13 @@ name, the rank of a matrix. A matrix is considered "low-rank" if its rank is
 less than the number of rows it has, that is the range of the associated
 function is smaller than the codomain of the associated function.
 
+*Exercise*:
+
+> Let's say you have a real-valued matrix of size $m \times n$. As a reminder
+> this means that this corresponds to a linear function $f$ whose domain has
+> dimension $n$ and codomain has dimension $m$. Can you come up with values for
+> that matrix such that its rank is less than $m$ and no value is zero?
+
 Let's take what we've defined so far and do some more calculations with them in
 $R^2$ with the standard basis vectors.
 
@@ -138,18 +145,61 @@ column on the right-hand side.
 
 > Work this out by hand and convince yourself that this is true.
 
-So it turns out that multiplying a matrix by a column vector is exactly how we
+So it turns out that multiplying a matrix by a one-column matrix is exactly how we
 can calculate applying a function to a vector!
 
 In particular, now it makes sense why an $m \times n$ matrix can only be
 multiplied with an $n \times 1$ column vector, and why the resulting column
-vector is $m \times 1$: an $m \times n$ matrix is a function from a vector space
+matrix is $m \times 1$: an $m \times n$ matrix is a function from a vector space
 of dimension $n$ to a codomain of dimension $m$. Therefore it can only take in
 vectors of dimension $n$ as input and outputs vectors of dimension $m$.
 
-As an aside, you may wonder why 
+As an aside, you may wonder what it means for a vector $v$ to be turned into a
+one-column matrix. After all, aren't all matrices functions not vectors? Well
+a one-column matrix is a function that goes from a vector space of one dimension
+and just maps that single basis vector to a single linear combination of $n$
+bsais vectors in the codomain, i.e. just maps a single basis vector to $v$ in
+the codomain.
 
-Given the vector $()$
+This function can be *identified*, i.e. thought of, as just a vector.
+
+This is similar to how in programming, we can write
+
+```
+x : Int
+x = 5
+```
+
+but we could also write
+
+```
+f : () -> Int
+f(()) = 5
+```
+
+and these are basically the same thing, just up to an extraneous function
+application!
+
+But this then brings us to another question: what exactly is matrix
+multiplication? Well let's say we're given the matrix $M_0$ for some function
+$f_0 : V_0 -> V_1$ and another matrix $M_1$ for some other function $f_1 : V_1
+-> V_2$.
+
+Let's let $v_0$ be a vector in $V_0$. Then applying $f_2(f_1(v_0))$ would look
+like multiplying $v_0$ (as a one column matrix) by $M_0$ and then $M_1$. That is 
+$f_2(f_1(v_0))$ can be represented by $M_0 \times (M_1 \times v_0)$.
+
+So then a fairly natural question arises. Instead of writing $f_2(f_1(v_0))$, we
+could also write this as function composition, i.e. $(f_2 \circ f_1)(v_0)$. Can
+we do the same thing for $M_0 \times (M_1 \times v_0)$? The answer is yes! We
+can re-associate the parentheses and calculate
+
+That means that matrix multiplication is just the same thing as function
+composition!
+
+*Exercise*:
+
+From 
 
 A column vector
 
@@ -158,19 +208,6 @@ This is similar to how in theory in a programming language with
 You can represent 
 
 Now we understand how to use matrices to perform
-
-*Exercise*:
-
-> If $f$ and $g$ are linear functions represented by the matrices $M_f$ and
-> $M_g$, then their product $M_f M_g$ is also a matrix, which means that it must
-> correspond to a linear function. What is that linear function?
-
-*Exercise*:
-
-> Let's say you have a real-valued matrix of size $m \times n$. As a reminder
-> this means that this corresponds to a linear function $f$ whose domain has
-> dimension $n$ and codomain has dimension $m$. Can you come up with values for
-> that matrix such that its rank is less than $m$ and no value is zero?
 
 
 
