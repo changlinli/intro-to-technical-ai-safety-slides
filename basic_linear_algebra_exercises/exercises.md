@@ -347,7 +347,6 @@ Prove that for a given vector space, if all its bases contain a finite number of
 vectors, all its bases must be of the same size. That is all its bases must
 have the same number of vectors.
 </details>
-<details>
 
 <details>
 <summary>Optional Exercise</summary>
@@ -357,7 +356,6 @@ Just ignore this exercise if you don't have this familiarity.
 Prove that if a vector space has a basis, even if infinite, all its bases must
 be of the same size (i.e. cardinality).
 </details>
-<details>
 
 <details>
 <summary>Optional Exercise</summary>
@@ -368,7 +366,6 @@ this.
 
 Prove that all vector spaces have a basis.
 </details>
-<details>
 
 Because all vector spaces have a basis and because all the bases of a vector
 space must be of the same size, we can talk about "the" size of a vector
