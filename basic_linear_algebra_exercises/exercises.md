@@ -403,17 +403,6 @@ One possible basis that has no zeroes in any of its triplets is $\{(1, 1, 1),
 (2, 1, 1), (1, 1, 2)\}$.
 </details>
 
-
-<details>
-<summary>Optional Exercise</summary>
-> Every vector space has a basis. Can you prove this?
-</details>
-
-<details>
-<summary>Optional Exercise</summary>
-> Every basis for a vector space must have the same number of vectors. Can you prove this?
-</details>
-
 Because every basis for a vector space has the same length, we can use this
 length to define a global property about the vector space in question. The
 length of every basis of a vector space is called the dimension of that vector
