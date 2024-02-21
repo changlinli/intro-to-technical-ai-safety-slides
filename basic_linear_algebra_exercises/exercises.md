@@ -748,7 +748,7 @@ explicitly writing the basis vectors.
 
 And that's a matrix!
 
-$\begin{bmatrix} 0 & -1\\ 1 & 0 \end{bmatrix}$.
+$\begin{bmatrix} 0 & -1\\\ 1 & 0 \end{bmatrix}$.
 
 *Exercise*:
 
@@ -768,7 +768,7 @@ $\begin{bmatrix} 0 & -1\\ 1 & 0 \end{bmatrix}$.
 > (assuming that our basis for both the domain and codomain are the standard
 > basis $(1, 0, 0)$, $(0, 1, 0)$, $(0, 0, 1)$)?
 >
-> $\begin{bmatrix} 1 & 0 & 0\\ 1 & 0 & 0 \\ 1 & 0 & 0 \end{bmatrix}$
+> $\begin{bmatrix} 1 & 0 & 0\\\ 1 & 0 & 0 \\\ 1 & 0 & 0 \end{bmatrix}$
 
 Note that unlike the function itself (e.g. "rotates points by 90 degrees around
 the origin") or the dimension of a vector space, a matrix is basis-dependent.
