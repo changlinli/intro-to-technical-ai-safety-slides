@@ -319,7 +319,8 @@ sum of this set of vectors.
 <details>
 <summary>Solution</summary>
 
-+ You could throw away either $(1, 0, 0)$ or $(1, 0, 1)$ (but not both).
++ You could throw away $(1, 0, 0)$, $(0, 0, 1)$, or $(1, 0, 1)$ (but not more
+  than one of them!).
 + Yes.
 + You cannot throw away $(0, 1, 0)$. If you do, you cannot form any vector with
   a non-zero second component from a scaled sum of the resulting set of vectors.
