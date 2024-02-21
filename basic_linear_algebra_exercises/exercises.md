@@ -339,12 +339,14 @@ sum of this set of vectors.
 
 <details>
 <summary>Solution</summary>
+
 + You could throw away either $(1, 0, 0)$ or $(1, 0, 1)$ (but not both).
 + Yes.
 + You cannot throw away $(0, 1, 0)$. If you do, you cannot form any vector with
   a non-zero second component from a scaled sum of the resulting set of vectors.
 + If we take $\{(1, 0, 0), (0, 1, 0), (1, 0, 1)\}$, we can write $(4, 3, -2) =
   6(1, 0, 0) + 3(0, 1, 0) + (-2)(1, 0, 1)$.
+
 </details>
 
 As you may have noticed from that exercise, there is no single basis for a
