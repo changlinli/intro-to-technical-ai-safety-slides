@@ -130,16 +130,22 @@ Given that zero vector, are there valid additive inverses here?
 
 <details>
 <summary>Solution</summary>
+<p>
 Like many physical phenomena, it is possible to really contort a definition of
 a vector space to fit (and you can try!), but absent major contortion, vectors
 defined as physical quantities of brine do not form a vector space.
+</p>
 
+<p>
 It is possible to define a reasonable zero vector, namely a zero quantity of
 water, but it is not possible to define reasonable additive inverses, when
 vector addition is mixing of water.
+</p>
 
+<p>
 You could define a negative quantity of water, but that is usually interpreted
 as taking away water rather than mixing in new water.
+</p>
 
 An even thornier problem is 
 </details>
@@ -305,22 +311,40 @@ k_n$. When we say it is "a minimal set," what we mean is that if you removed
 any $v_i$ from that set, this property would no longer hold true.
 
 <details>
-<summary>Optional Aside</summary>
+<summary>Terminology Aside</summary>
+<p>
 The set of all vectors $W$ that can be formed via scaled sums of some other set
 of vectors $V$ is known as known as the span of $V$. Hence a more compact way
 of describing a basis is that is a minimal set of vectors whose span is the
-entirety of the vector space.
+entirety of the vector space, or equivalently that it is a minimal set of
+vectors that spans the vector space.
+</p>
 
-Yet another piece of terminology is linear independence. 
+<p>
+Yet another piece of terminology is linear independence. We say that a vector
+$v$ is linearly independent of a set of other vectors $V$ if there is no way to
+write $v$ as a scaled sum of the vectors in $V$. We can also say that a set $V$
+is linearly independent if no vector in $V$ can be written as the scaled sum of
+the other vectors. Therefore another way we could define a basis is to replace
+the word "minimal" with "linearly independent" and say that a basis is a
+linearly independent set of vectors that spans a vector space.
+</p>
+
+<p>
+Finally though I've been using the term "scaled sum," the more common term for
+$k_0 v_0 + k_1 v_1 + \cdots$ is a linear combination of the vectors $v_0, v_1,
+\ldots$.
+</p>
 </details>
 
 For example for $R^3$, the most commonly used basis is the set $\{(1, 0, 0),
 (0, 1, 0), (0, 0, 1)\}$. It is so common that it is often called $R^3$'s
 "standard basis."
 
-The scaled sum used to form any other vector is just using the components of
-the other vector as scalars. For example to write $(4, 3, -2)$ using this
-basis, we can just write it as $4(1, 0, 0) + 3(0, 1, 0) + (-2)(0, 0, 1)$.
+The scaled sum/linear combination used to form any other vector is just using
+the components of the other vector as scalars. For example to write $(4, 3,
+-2)$ using this basis, we can just write it as $4(1, 0, 0) + 3(0, 1, 0) +
+(-2)(0, 0, 1)$.
 
 On the other hand $\{(1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 0, 1)\}$ is not a
 valid basis. This is because it is no longer a minimal set, since we can omit
@@ -334,7 +358,7 @@ sum of this set of vectors.
 >   make a valid basis? 
 > + Are there multiple choices to the question above?
 > + Which vector(s) cannot be thrown out and still maintain our property that
->   every vector can be written as a scaled sum of this set?
+>   every vector can be written as a scaled sum/linear combination of this set?
 > + Using your new basis, can you write $(4, 3, -2)$ as a scaled sum of that basis?
 
 <details>
@@ -364,7 +388,7 @@ understand facts about vector spaces even if you don't prove them.
 
 <details>
 <summary>Optional Exercise</summary>
-Prove that for a given vector sace, if all its bases contain a finite number of
+Prove that for a given vector space, if all its bases contain a finite number of
 vectors, all its bases must be of the same size. That is all its bases must
 have the same number of vectors.
 </details>
@@ -427,8 +451,9 @@ TODO
 
 *Exercise*:
 
-> Can you come up with an alternative basis for $R^3$? Can you come up with a
-> basis that doesn't have any zeroes in any of its triplets' components?
+> Can you come up with any other alternative basis for $R^3$ that aren't its
+> standard basis? Can you come up with a basis that doesn't have any zeroes in
+> any of its triplets' components?
 
 <details>
 <summary>Solution</summary>
@@ -440,10 +465,6 @@ One possible basis that has no zeroes in any of its triplets is $\{(1, 1, 1),
 (2, 1, 1), (1, 1, 2)\}$.
 </details>
 
-
-Much like scalar multiplication distributes over vectors, a linear function is a
-function that distributes over
-A linear function is a function that obeys
 
 <details>
 <summary>Optional Exercise</summary>
@@ -460,82 +481,6 @@ length to define a global property about the vector space in question. The
 length of every basis of a vector space is called the dimension of that vector
 space.
 
-
-*Exercise*:
-
-> Which of the following functions on $R \to R$ is linear according to the
-> definition we've given? For those which aren't linear, can you examples of $x$
-> that violate our linearity requirements?
-> 
-> $f(x) = x$
-> $f(x) = 2x$
-> $f(x) = 2x + 1$
-> $f(x) = x^2$
-
-*Exercise*:
-
-> Which of the following transformations $R^2 \to R^2$ is linear according to the
-> definition we've given?
->
-> 1. Rotating all our points by 90 degrees around the origin.
-> 2. Point-wise doubling all the components of every point.
-
-*Exercise*:
-
-> Can you implement the linear function $f: R^2 \to R^2$ that rotates all points by
-> 90 degrees around the origin by describing what it does to the basis vectors
-> $(1, 0)$ and $(0, 1)$?
->
-> What about for the basis vectors $(1, 1)$ and $(1, 2)$?
-
-*Exercise*:
-
-> Using the basis vectors $(1, 0)$ and $(0, 1)$ and your previous answer, can
-> you describe what the result is of applying $f$ to the vector $(-1, 3)$?
->
-> Can you do the same thing now but using the basis vectors $(1, 1)$ and $(1,
-> 2)$?
-
-*Exercise*:
-
-> Given the basis vectors $(1, 0)$ and $(0, 1)$ for both the domain and codomain
-> of $f$ and still taking $f : R^2 \to R^2$ as the function that performs a 90
-> degree rotation, what is the resulting matrix that describes $f$?
->
-> What about if I change the basis vectors to $(1, 1)$ and $(1, 2)$ for both the
-> domain and codomain?
->
-> What about if the basis for the domain is $(1, 0)$ and $(0, 1)$ but the basis
-> vectors for the codomain are $(1, 1)$ and $(1, 2)$?
-
-*Exercise*:
-
-> Can you write what linear function this matrix corresponds to in English
-> (assuming that our basis for both the domain and codomain are the standard
-> basis $(1, 0, 0)$, $(0, 1, 0)$, $(0, 0, 1)$)?
-
-*Exercise*:
-
-> If $f$ and $g$ are linear functions represented by the matrices $M_f$ and
-> $M_g$, then their product $M_f M_g$ is also a matrix, which means that it must
-> correspond to a linear function. What is that linear function?
-
-*Exercise*:
-
-> Let's say you have a real-valued matrix of size $m \times n$. As a reminder
-> this means that this corresponds to a linear function $f$ whose domain has
-> dimension $n$ and codomain has dimension $m$. Can you come up with values for
-> that matrix such that its rank is less than $m$? and no value is zero?
-
-Note that unlike the function itself (e.g. "rotates points by 90 degrees around
-the origin") or the dimension of a vector space, a matrix is basis-dependent.
-That is, different basis vectors will generate different matrices for the same
-function between the same vector spaces.
-
-Let's think about the function $f$ that does $(x, y, z) \mapsto (x, 0)$. This is
-technically a function from $R^3$ to $R^2$, but "in essence" all it's doing is
-the same thing as our previous function from $R^3$ to $R$ defined as $(x, y)
-\mapsto x$.
 
 ## Linear Subspace
 
@@ -586,9 +531,110 @@ namely $(a + b, a + b)$, same for multiplying by a scalar.
 
 ## Linear Functions
 
+Linear functions are intimately tied to the notion of vector spaces. They are
+functions from a vector space to another vector space that "preserve" all the
+properties of vector addition and scalar multiplication.
+
+But first let's get some preliminaries about functions out of the way.
+
+I'll often write a function's "type signature" as $f: V \to W$, where $V$ is
+the input vector space and $W$ is the output vector space.
+
+We call the former the domain of a function and the latter the codomain of a
+function. This is exactly the same as programming, where we might have a
+function `f : Int -> String`.
+
+Also like in programming `f : Int -> String` doesn't mean that `f` can output
+every string. We might define `f(x) = "hello"`. It is hence useful to
+distinguish the set of values that a function can output from the full set of
+values denoted by its "type signature." This is called the range of a function.
+So in this case, even though the codomain of `f` is `String`, i.e. all strings,
+its range is only the set consisting of the single `"hello"`.
+
+Similarly for vector spaces, the range of a function `f` is not necesssarily
+its codomain; it can be a strict subset of the codomain.
+
+Let's return our attention to specifically linear functions.  Another way of
+saying that linear functions preserve vector addition and scalar multiplication
+is that linear functions distribute over vector addition and scalar
+multiplication. In particular,
+
+> A function f $f$ is linear if and only if $f(k_0v_0 = k_1v_1) = k_1(f(v_0)) +
+> k_1(f(v_1))$.
+>
+> Specialized just to vector addition this means $f(v_0 + v_1) = f(v_0) +
+> f(v_1)$.
+>
+> Specialized just to scalar multiplicatoin this means $f(k_0v_0) = k_0f(v_0)$.
+
+Let's look at some examples of this.
+
+The function $f : R^2 \to R$ that sums its components together, so that $(x, y)
+\mapsto x + y$ is a linear function. For example for $f(2 \cdot (1, 3) +
+3\cdot(4, 2))$, I could calculate this  starting inside the $f$, so that I get
+$f((2, 6) + (12, 6)) = f((14, 12)) = 26$.
+
+I could also calculate this by first distributing $f$, so that I get $2f((1,
+3)) + 3(f(4, 2)) = 2\cdot 4 + 3 \cdot 6 = 26$.
+
+Since $f$ is a linear function, we see that we get the same answer either way.
+Note that $+$ in $f(2 \cdot (1, 3) + 3\cdot(4, 2))$ refers to vector addition
+in $R^2$, while $+$ in $2f((1, 3)) + 3(f(4, 2))$ refers to vector addition in
+$R$.
+
+
+The range of a linear function is always a linear subspace of its codomain.
+
+*Exercise*:
+
+> Prove this. Namely given two vector spaces $V$ and $W$ as well as a linear
+> function $f: V \to W$, prove that the range of $f$ is a linear subspace of
+> $W$. That is prove that if any $w_0$ and $w_1$ are in the range of $f$, their
+> linear combination must also be in the range of $f$.
+
+<details>
+<summary>Hint</summary>
+
+Prove that
+</details>
+
+<details>
+<summary>Solution</summary>
+Take two vectors from $f(W)$, i.e. the range of $f$, $w_0$ and $w_1$. Examine
+their linear combination as represented by $z = k_0w_0 + k_1w_1$ for scalars
+$k_0$ and $k_1$.
+
+Since we know that $w_0$ and $w_1$ are in the range of $f$, there must have
+been at least two (although possibly more) vectors $v_0$ and $v_1$ such that
+$f(v_0) = w_0$ and $f(v_1) = w_1$.
+
+
+Prove that
+</details>
+
+We call the origin
 
 Geometrically what are linear transformations? Linear transformations are those
 transformations which keep all straight lines straight
+
+*Exercise*:
+
+> Which of the following functions on $R \to R$ is linear according to the
+> definition we've given? For those which aren't linear, can you examples of $x$
+> that violate our linearity requirements?
+> 
+> $f(x) = x$
+> $f(x) = 2x$
+> $f(x) = 2x + 1$
+> $f(x) = x^2$
+
+*Exercise*:
+
+> Which of the following transformations $R^2 \to R^2$ is linear according to the
+> definition we've given?
+>
+> 1. Rotating all our points by 90 degrees around the origin.
+> 2. Point-wise doubling all the components of every point.
 
 ## Matrices as notation
 
@@ -614,6 +660,197 @@ However, when we move away from direct computation, it will often be easier to
 understand what a matrix is "really doing," by understanding what the function
 it notates is doing, rather than getting bogged down in a two-dimensional array
 of floating point numbers.
+
+With that in mind, let's return to linear functions. So far we've been defining
+our linear functions either as equations, or as English prose. The latter can
+be very difficult to actually perform calculations and as for the former, it's
+not obvious how to write a linear function as a single equation.
+
+Our motivating question is going to be "can we define a notation to calculate
+linear functions for arbitrary linear functions?"
+
+To begin with, let's remind ourselves that given a basis for a vector space,
+any vector in that vector space can be written as a linear combination of those
+basis vectors. This is somewhat analogous to how a base-n numeral system lets you
+write any number as a combination of $n$ numbers which forms a numeral.
+
+And just like how if you know how to add each individual number of the $n$
+numbers that form a base-n numeral system, via some extrapolation rules, you
+can define how to define how to add any two numbers by manipulating the base-n
+numerals.
+
+In particular, notice that as long as we define what a linear function $f$ does to
+each individual basis vector $v_i$, i.e. we know $f(v_i)$ we can use the fact
+that linear functions distribute over linear combinations to describe what the
+linear function does to any vector $w$ via the following steps:
+
++ Define $w = k_0v_0 + k_1v_1 + \cdots + k_nv_n$
++ Hence $f(w) = f(k_0v_0 + k_1v_1 + \cdots + k_nv_n)$
++ By linearity $f(k_0v_0 + k_1v_1 + \cdots + k_nv_n) = k_0f(v_0) + k_1f(v_1) + \cdots + k_nf(v_n)$
++ We know what the values $f(v_i)$ are, so as long as we know how to scale and
+  add those values together, we know
+
+Let's take the linear function $f : R^2 -> R^2$ that rotates all points by 90
+degrees around the origin to illustrate how this works. If you haven't seen it
+before, it might not be obvious how to write down $f$ in a way that let's us
+calculate what $f$ should do to any arbitrary value of $R^2$.
+
+Let's first instead just specify what $f$ should do the standard basis of
+$R^2$. It should map $(1, 0)$ to $(0, 1)$ and it should map $(0, 1)$ to $(-1,
+0)$.
+
+Based on that let's take an arbitrary element of $R^2$, $(1.2, 3.1)$ and figure
+out what $f$ maps it to.
+
++ Define $(1.2, 3.1) = 1.2 \cdot (1, 0) + 3.1 \cdot (0, 1)$
++ Hence $f((1.2, 3.1)) = f(1.2 \cdot (1, 0) + 3.1 \cdot (0, 1))$
++ By linearity $f(1.2 \cdot (1, 0) + 3.1 \cdot (0, 1)) = 1.2f((1, 0)) + 3.1f((0, 1))$
++ But we know $f((1, 0)) = (0, 1)$ and $f((0, 1)) = (-1, 0)$
++ So $1.2f((1, 0)) + 3.1f((0, 1)) = 1.2 \cdot (0, 1) + 3.1 \cdot (-1, 0) =
+  (-3.1, 1.2)$
+
+Great so just by knowing what $f$ does to basis vectors, and knowing how to
+write every vector as a linear combination of basis vectors, we know how to
+calculate how to calculate any linear function $f$!
+
+*Exercise*:
+
+> Can you do the same calculation for the same $f$, but now for an alternative basis
+> consisting of $(0.6, 0)$ and $(0, 1.55)$?
+
+*Exercise*:
+
+> Using the basis vectors $(1, 0)$ and $(0, 1)$ and your previous answer, can
+> you describe what the result is of applying the 90-degree rotation function
+> $f$ to the vector $(-1, 3)$?
+>
+> Can you do the same thing now but using the basis vectors $(1, 1)$ and $(1,
+> 2)$?
+
+An easy way to notate what a linear function does is via a table that shows
+what we do to each basis vector. For example, we could write down our previous
+function that rotates all vectors by 90 degrees using the following table.
+
+| (1, 0) | (0, 1) |
+| ------ | ------ |
+| (0, 1) | (-1, 0)|
+
+*Exercise*:
+
+> Can you write down what the table should look like for rotation by 90 degrees
+> if I use $(1, 1)$ and $(1, 2)$ as my basis vectors instead?
+
+*Exercise*:
+
+> Can you write down what the table should look like for rotation by 180 degrees
+> if I use $(1, 0)$ and $(0, 1)$ as my basis vectors?
+
+Note that all this holds even for times where $f$ does not have the same domain
+and codomain. For example, let's take the linear function $f : R^2 \to R$ such
+that $(x, y) \mapsto x + y$. Its table for the standard basis on $R^2$ would
+look like the following:
+
+| (1, 0) | (0, 1) |
+| ------ | ------ |
+| 1 | 1 |
+
+Note that these tables are an "isomorphic" description of linear functions.
+That is every linear function can be described with such a table and every such
+table is a valid linear function.  For example, 
+
+| (1, 1) | (2, 1) |
+| ------ | ------ |
+| (2, 1, 3, 9) | (9, 2, 1, -1) |
+
+describes some linear function $f : R^2 \to R^4$, even if I don't know how to
+describe this function in English or with traditional equations!
+
+This is very powerful, since we now have a rigorous way of notating *any*
+linear function in a way that is amenable to performing computation.
+
+We don't even have to stick to $R^n$! For example the following table describes
+a linear function on some vector space of a restricted set of sounds!
+
+| sounds of frequency 90 hertz | sounds of frequency 180 hertz |
+| ---------------------------- | ----------------------------- |
+| sounds of frequency 40 hertz | sounds of frequency 300 hertz |
+
+But it turns out we can actually break down this notation even further. So far
+we've been taking advantage of the fact that every vector in the domain of a
+function can be written as a linear combination of vectors, but we can notice
+that the same is true of a function's codomain. Every vector in a function's
+codomain (and therefore every vector in a function's range), can be written as
+a linear combination of basis vectors as well!
+
+So for example, we could write 
+
+| (1, 0) | (0, 1) |
+| ------ | ------ |
+| (0, 1) | (-1, 0)|
+
+as 
+
+| (1, 0) | (0, 1) |
+| ------ | ------ |
+| 0 \cdot (1, 0) + 1 \cdot (0, 1) | -1 \cdot (1, 0) + 0 \cdot (0, 1) |
+
+If we give each component of the liner combination its own row we get
+
+| (1, 0) | (0, 1) |
+| ------ | ------ |
+| 0 \cdot (1, 0) | -1 \cdot (1, 0) |
+| 1 \cdot (0, 1) | 0 \cdot (0, 1) |
+
+Finally if 
+
+*Exercise*:
+
+> Given the basis vectors $(1, 0)$ and $(0, 1)$ for both the domain and codomain
+> of $f$ and still taking $f : R^2 \to R^2$ as the function that performs a 90
+> degree rotation, what is the resulting matrix that describes $f$?
+>
+> What about if I change the basis vectors to $(1, 1)$ and $(1, 2)$ for both the
+> domain and codomain?
+>
+> What about if the basis for the domain is $(1, 0)$ and $(0, 1)$ but the basis
+> vectors for the codomain are $(1, 1)$ and $(1, 2)$?
+
+*Exercise*:
+
+> Can you write what linear function this matrix corresponds to in English
+> (assuming that our basis for both the domain and codomain are the standard
+> basis $(1, 0, 0)$, $(0, 1, 0)$, $(0, 0, 1)$)?
+
+*Exercise*:
+
+> If $f$ and $g$ are linear functions represented by the matrices $M_f$ and
+> $M_g$, then their product $M_f M_g$ is also a matrix, which means that it must
+> correspond to a linear function. What is that linear function?
+
+*Exercise*:
+
+> Let's say you have a real-valued matrix of size $m \times n$. As a reminder
+> this means that this corresponds to a linear function $f$ whose domain has
+> dimension $n$ and codomain has dimension $m$. Can you come up with values for
+> that matrix such that its rank is less than $m$ and no value is zero?
+
+Note that unlike the function itself (e.g. "rotates points by 90 degrees around
+the origin") or the dimension of a vector space, a matrix is basis-dependent.
+That is, different basis vectors will generate different matrices for the same
+function between the same vector spaces.
+
+As stated before, this is very similar to base-n notation for numerals, where
+different bases will give rise to different numerals for the same number. And
+again, much like how base-10 is the usual assumed base for a numeral if no
+additional clarification is provided, if we are working with a function $f :
+R^n \to R^m$ and no additional clarification is provided, we generally assume
+that the bases for $R^n$ and $R^m$ are their respective standard bases.
+
+Let's think about the function $f$ that does $(x, y, z) \mapsto (x, 0)$. This is
+technically a function from $R^3$ to $R^2$, but "in essence" all it's doing is
+the same thing as our previous function from $R^3$ to $R$ defined as $(x, y)
+\mapsto x$.
+
 
 ## Inner Products
 
