@@ -19,6 +19,17 @@ By the end of this session you should be able to understand:
 3. The relationship between a matrix and a linear function
 4. Why matrix multiplication is defined the way it is
 
+I will refrain from using equations too much in this introduction, because
+equations can often make it seem like vector spaces only apply to things built
+out of numbers when they are in fact more general than that. However, I will
+still use them from time to time, because almost all machine learning papers
+will use equations. An extremely important skill to learn as an ML practitioner
+and technical AI safety practitioner is to not be afraid of equations!
+
+Many programmers' eyes glaze over when it comes to equations, but power through
+it! Simply not having an "oh no!" knee-jerk reaction to equations is one of the
+biggest superpowers when it comes to reading ML research directly.
+
 ## Motivating Vector Spaces
 
 Linear algebra, as the name suggests, is the study of linear functions.
@@ -70,7 +81,9 @@ A vector space consists of the following elements:
   also often just called "scaling" a vector by a scalar. Apart from being able
   to add and multiply scalars among themselves like we can for the real numbers, multiplying a
   vector by a scalar must distribute over vector addition. That is:
-     * $k(v + w)$ for a scalar $k$ and vectors $v$ and $w$ must be equal to $kv + kw$.
+    * $k(v + w) = kv + kw$ for a scalar $k$ and vectors $v$ and $w$
+    * $(k_0 + k_1)v = k_0v + k_1v$ for scalars $k_0$ and $k_1$ and a vector $v$
+    * We also require that $1v = v$.
 
 Note that the notion of a "vector" here is extremely broad. Vectors do not have
 to be vectors in the sense of what we ordinarily consider "mathematical"
@@ -99,15 +112,94 @@ sound is considered a vector, and our scalars are the real numbers.
     same thing as if you had mixed them together first and then doubled the
     volume of the final result.
 
+*Exercise*:
+
+> I can define a form of addition and scalar multiplication for quantities of
+> brine, i.e. salty water. Let's say that our vectors are volumes of brine, and
+> vector addition consists of mixing two different quantities of brine,
+> potentially of different salinity together. Does this form a valid vector space?
+
+<details>
+<summary>Hint</summary>
+How would you define the zero vector here? What constant volume and salinity of
+water can be added to any volume and salinity of water without changing its
+volume or salinity?
+
+Given that zero vector, are there valid additive inverses here?
+</details>
+
+<details>
+<summary>Solution</summary>
+Like many physical phenomena, it is possible to really contort a definition of
+a vector space to fit (and you can try!), but absent major contortion, vectors
+defined as physical quantities of brine do not form a vector space.
+
+It is possible to define a reasonable zero vector, namely a zero quantity of
+water, but it is not possible to define reasonable additive inverses, when
+vector addition is mixing of water.
+
+You could define a negative quantity of water, but that is usually interpreted
+as taking away water rather than mixing in new water.
+
+An even thornier problem is 
+</details>
+
 But we can also define more common "mathematical" objects as vector spaces as
 well.
 
-For example,
+The most common example of this is $R^n$. $R^n$ consists of the set of
+real-valued n-tuples. For example vectors in $R^2$ are pairs that look like
+$(0.1, 0.2)$ or $(-5, 91.1)$. Vectors in $R^3$ are triplets that look like $(2,
+1, 0.5)$ and so on and so forth. For $R^n$, we define vector addition as
+element-wise addition, and scalar multiplication as element-wise multiplication
+by that scalar. E.g. $(x_{0}, x_{1}, \ldots, x_{n}) + (y_{0}, y_{1}, \ldots,
+y_{n}) = (x_{0} + y_{0}, x_{1} + y_{1}, \ldots, x_{n} + y{n})$.
+
+That is $(x_i)_{i=0} ^n + (y_j)_{j=0}^n = (x_i + y_i)_{i=0}^n$.
+
+For a scalar $k$, $k(x_0, x_1, \ldots, x_n) = (kx_0, k_x1, \ldots, kx_n)$, or
+equivalently $k(x_i)_{i=0} = k(x_i)_{i=0} ^n$.
+
+So for example $(1, 2) + (2, 3) = (3, 5)$ and $3 \cdot (1, 2) = (3, 6)$.
+
+$R^n$ by far is the most common vector space you will see in machine learning,
+so we'll spend just a few more paragraphs on it.
+
+Note that to properly define a (real, i.e. using real numbers as scalars)
+vector space, we must always specify not only what the vectors are, but also
+what exact operation vector addition corresponds to as well as what exact
+operation scalar multiplication corresponds to.  However, as you read machine
+learning papers, you may notice that a paper only says "take the vector space
+such-and-such," that is they only define the vectors and don't define vector
+addition and scalar multiplication. This is because by convention, we almost
+always use certain vector addition definitions and scalar multiplication
+definitions for certain sets of vectors.
+
+So for example, technically speaking, just saying $R^2$ forms a vector space is a
+category error, since $R^2$ merely describes a set of vectors and there are
+many different notions of vector addition and scalar multiplication that we
+could add to the set to fully form a vector space. For example, we could define
+$(x_0, y_0) + (x_1, y_1) = (x_0 + y_1, y_0 + x_1)$.
+
+But almost always, the vector addition we use on $R^2$ is $(x_0, y_0) + (x_1,
+y_1) = (x_0 + x_1, y_0 + y_1)$ and scalar multiplication will be $k(x, y) =
+(kx, ky)$. Therefore by convention we often just say the "vector space R^2" and
+implicitly assume that vector addition and scalar multiplication are exactly
+those operators. This is strictly speaking an abuse of terminology, or at least
+ambiguous, as $R^2$ is a set of vectors, not a vector space itself, but it is
+*extremely* common and so is widely used and accepted in almost all fields that
+use linear algebra.
+
+However, it is *always* a valid question when someone simply defines a set of
+vectors as a vector space to ask the speaker to clarify which vector addition
+and scalar multiplication operators are intended.
 
 As a reminder, we're focusing mainly on real vector spaces, i.e. those vector
-spaces whose scalars are real numbers, because those are the main spaces we deal
-with in machine learning. Nonetheless the concept of a vector can use other
-scalars as well.
+spaces whose scalars are real numbers, because those are the main spaces we
+deal with in machine learning. Nonetheless the concept of a vector can use
+other scalars as well. A common other set of scalars that are sometimes used
+are the complex numbers. While this is useful in physics, this shows up rather
+rarely in machine learning, so we won't talk about them.
 
 <details>
 <summary>Optional Aside</summary>
@@ -117,12 +209,18 @@ scalars. See
 [https://en.wikipedia.org/wiki/Field_(mathematics)](https://en.wikipedia.org/wiki/Field_(mathematics)).
 </details>
 
-Note that to properly define a (real) vector space, we must always specify not only
-what the vectors are, but also what exact operation vector addition corresponds
-to as well as what exact operation scalar multiplication corresponds to.
-However, as you read machine learning papers, you may notice that a paper only says "take
-the vector space such-and-such," that is they only define the vectors and don't
-define vector addition and 
+*Exercise*:
+
+> Let's say I instead defined additon on $R^2$ to be element-wise maximums.
+> That is $(x_0, y_0) + (x_1, y_1) = (\text{max}(x_0, x_1), \text{max}(y_0,
+> y_1))$. We keep scalar multiplication the same as the usual definition. Is
+> this a valid vector space?
+
+<details>
+<summary>Solution</summary>
+No this is not. There is no zero vector.
+</details>
+
 
 *Exercise*: 
 
@@ -200,27 +298,144 @@ A basis can be thought of as the "fundamental set" of vectors that carries all t
 information about a vector space, such that every vector can be reduced to a sum
 of those vectors.
 
-More formally, a basis is a set of vectors $v_0, \ldots, v_n$ such that every
-vector in our vector space can be written as a scaled sum of just those $n$
-vectors, i.e. as $k_1v_1 + k_2v_2 + \cdots + k_nv_n$ for some $k_1, \ldots, k_n$.
+More formally, a basis is a minimal set of vectors $v_0, \ldots, v_n$ such that
+every vector in our vector space can be written as a scaled sum of just those
+$n$ vectors, i.e. as $k_1v_1 + k_2v_2 + \cdots + k_nv_n$ for some $k_1, \ldots,
+k_n$. When we say it is "a minimal set," what we mean is that if you removed
+any $v_i$ from that set, this property would no longer hold true.
 
-Every vector space has a basis
+<details>
+<summary>Optional Aside</summary>
+The set of all vectors $W$ that can be formed via scaled sums of some other set
+of vectors $V$ is known as known as the span of $V$. Hence a more compact way
+of describing a basis is that is a minimal set of vectors whose span is the
+entirety of the vector space.
 
-Geometrically what are linear transformations? Linear transformations are those
-transformations which keep all straight lines straight
+Yet another piece of terminology is linear independence. 
+</details>
 
-A subspace of a vector space is some subset of 
+For example for $R^3$, the most commonly used basis is the set $\{(1, 0, 0),
+(0, 1, 0), (0, 0, 1)\}$. It is so common that it is often called $R^3$'s
+"standard basis."
+
+The scaled sum used to form any other vector is just using the components of
+the other vector as scalars. For example to write $(4, 3, -2)$ using this
+basis, we can just write it as $4(1, 0, 0) + 3(0, 1, 0) + (-2)(0, 0, 1)$.
+
+On the other hand $\{(1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 0, 1)\}$ is not a
+valid basis. This is because it is no longer a minimal set, since we can omit
+$(1, 0, 1)$, without harming our ability to represent every vector as a scaled
+sum of this set of vectors.
+
+*Exercise*:
+
+> Let's say for some reason we really wanted to keep $(1, 0, 1)$. 
+> + What other vector could we throw out to this set minimal again, i.e. to
+>   make a valid basis? 
+> + Are there multiple choices to the question above?
+> + Which vector(s) cannot be thrown out and still maintain our property that
+>   every vector can be written as a scaled sum of this set?
+> + Using your new basis, can you write $(4, 3, -2)$ as a scaled sum of that basis?
+
+<details>
+<summary>Solution</summary>
++ You could throw away either $(1, 0, 0)$ or $(1, 0, 1)$ (but not both).
++ Yes.
++ You cannot throw away $(0, 1, 0)$. If you do, you cannot form any vector with
+  a non-zero second component from a scaled sum of the resulting set of vectors.
++ If we take $\{(1, 0, 0), (0, 1, 0), (1, 0, 1)\}$, we can write $(4, 3, -2) =
+  6(1, 0, 0) + 3(0, 1, 0) + (-2)(1, 0, 1)$.
+</details>
+
+As you may have noticed from that exercise, there is no single basis for a
+vector space. Every vector space has many possible bases (unless the vector
+space itself consists of only one vector).
+
+This raises the question "do all bases of a vector space have the same number
+of vectors?" The answer is yes. It is not obvious that this is true and proving
+it may be a bit tricky if you're new to this stuff. For our purposes we'll just
+state this by fiat, but if you are so inclined, you may want to prove this as
+an optional exercise.
+
+The following three exercises are optional. It may be useful to look at them to
+understand facts about vector spaces even if you don't prove them.
+
+<details>
+<summary>Optional Exercise</summary>
+Prove that for a given vector sace, if all its bases contain a finite number of
+vectors, all its bases must be of the same size. That is all its bases must
+have the same number of vectors.
+</details>
+<details>
+<summary>Solution</summary>
+TODO
+</details>
+
+<details>
+<summary>Optional Exercise</summary>
+Note that this requires some familiarity with infinite sets and cardinality.
+Just ignore this exercise if you don't have this familiarity.
+
+Prove that if a vector space has a basis, even if infinite, all its bases must
+be of the same size (i.e. cardinality).
+</details>
+<details>
+<summary>Solution</summary>
+TODO
+</details>
+
+<details>
+<summary>Optional Exercise</summary>
+Note that this will require knowledge of the Axiom of Choice
+[https://en.wikipedia.org/wiki/Axiom_of_choice](https://en.wikipedia.org/wiki/Axiom_of_choice).
+If you are not familiar with set theory axioms, don't worry about completing
+this.
+
+Prove that all vector spaces have a basis.
+</details>
+<details>
+<summary>Solution</summary>
+TODO
+</details>
+
+Because all vector spaces have a basis and because all the bases of a vector
+space must be of the same size, we can talk about "the" size of a vector
+space's bases, even though the bases themselves may consist of different
+vectors. We call the size of a vector space's bases the dimension of a vector
+space.
+
+This leads to a very nice statement when it comes to $R^n$. The dimension of
+$R^n$ is exactly $n$.
+
+*Exercise*:
+
+> Prove this. That is prove that any basis of $R^n$ must have exactly $n$ vectors.
+
+<details>
+<summary>Hint</summary>
+We already know that all bases of a vector space must have the same number of
+elements, so all that's needed is to find a basis of $R^n$ that has $n$
+vectors.
+</details>
+
+<details>
+<summary>Solution</summary>
+TODO
+</details>
 
 *Exercise*:
 
 > Can you come up with an alternative basis for $R^3$? Can you come up with a
-> basis that doesn't have any zeroes in any of its tuples?
+> basis that doesn't have any zeroes in any of its triplets' components?
 
 <details>
 <summary>Solution</summary>
 One possible alternative basis for $R^3$ is to simply take the standard basis
 and double one of the vectors, e.g. so that we have $(2, 0, 0)$, $(0, 1, 0)$,
 and $(0, 0, 1)$.
+
+One possible basis that has no zeroes in any of its triplets is $\{(1, 1, 1),
+(2, 1, 1), (1, 1, 2)\}$.
 </details>
 
 
@@ -228,14 +443,15 @@ Much like scalar multiplication distributes over vectors, a linear function is a
 function that distributes over
 A linear function is a function that obeys
 
-Optional Exercise:
-
+<details>
+<summary>Optional Exercise</summary>
 > Every vector space has a basis. Can you prove this?
+</details>
 
-Optional Exercise:
-
+<details>
+<summary>Optional Exercise</summary>
 > Every basis for a vector space must have the same number of vectors. Can you prove this?
-
+</details>
 
 Because every basis for a vector space has the same length, we can use this
 length to define a global property about the vector space in question. The
@@ -366,6 +582,12 @@ together results in a tuple whose two components are still equal to each other,
 namely $(a + b, a + b)$, same for multiplying by a scalar.
 </details>
 
+## Linear Functions
+
+
+Geometrically what are linear transformations? Linear transformations are those
+transformations which keep all straight lines straight
+
 ## Matrices as notation
 
 We use notation for all sorts of things in life. For example, we use *numerals*
@@ -393,6 +615,10 @@ of floating point numbers.
 
 ## Inner Products
 
-Inner products are a way of 
+Inner products are a way of defining
 
+First and foremost, inner products are an *optional* addition to a vector
+space. That is a vector space does not need to have an inner product. A vector
+could also possibly have many different kinds of inner products added to it.
 
+That being said
