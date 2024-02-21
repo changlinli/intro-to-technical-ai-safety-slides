@@ -614,7 +614,7 @@ linear function does to any vector $w$ via the following steps:
 + Hence $f(w) = f(k_0v_0 + k_1v_1 + \cdots + k_nv_n)$
 + By linearity $f(k_0v_0 + k_1v_1 + \cdots + k_nv_n) = k_0f(v_0) + k_1f(v_1) + \cdots + k_nf(v_n)$
 + We know what the values $f(v_i)$ are, so as long as we know how to scale and
-  add those values together, we know
+  add those values together, we know what the final result should be.
 
 Let's take the linear function $f : R^2 -> R^2$ that rotates all points by 90
 degrees around the origin to illustrate how this works. If you haven't seen it
@@ -646,16 +646,20 @@ calculate how to calculate any linear function $f$!
 
 *Exercise*:
 
-> Using the basis vectors $(1, 0)$ and $(0, 1)$ and your previous answer, can
-> you describe what the result is of applying the 90-degree rotation function
-> $f$ to the vector $(-1, 3)$?
+> Let's use the basis vectors $(1, 0)$ and $(0, 1)$. Remember that rotating $(1,
+> 0)$ gets you $(0, 1)$ and rotating $(0, 1)$ gets you $(-1, 0)$. Can you
+> describe what the result is of applying the 90-degree rotation function $f$ to
+> the vector $(-1, 3)$?
 >
 > Can you do the same thing now but using the basis vectors $(1, 1)$ and $(1,
 > 2)$?
 
 An easy way to notate what a linear function does is via a table that shows
 what we do to each basis vector. For example, we could write down our previous
-function that rotates all vectors by 90 degrees using the following table.
+function that rotates all vectors by 90 degrees using the following table. Each
+column header of this table is a basis vector in the domain of the function and
+each value below the header is the vector that we map that basis vector to via
+$f$.
 
 | (1, 0) | (0, 1) |
 | ------ | ------ |
@@ -758,8 +762,8 @@ And that's a matrix!
 *Exercise*:
 
 > Can you write what linear function this matrix corresponds to in English
-> (assuming that our basis for both the domain and codomain are the standard
-> basis $(1, 0, 0)$, $(0, 1, 0)$, $(0, 0, 1)$)?
+> , assuming that our basis for both the domain and codomain are the standard
+> basis $(1, 0, 0)$, $(0, 1, 0)$, $(0, 0, 1)$?
 >
 > ```math
 > \begin{bmatrix} 1 & 0 & 0\\\ 1 & 0 & 0 \\ 1 & 0 & 0 \end{bmatrix}
@@ -776,9 +780,3 @@ again, much like how base-10 is the usual assumed base for a numeral if no
 additional clarification is provided, if we are working with a function $f :
 R^n \to R^m$ and no additional clarification is provided, we generally assume
 that the bases for $R^n$ and $R^m$ are their respective standard bases.
-
-Let's think about the function $f$ that does $(x, y, z) \mapsto (x, 0)$. This is
-technically a function from $R^3$ to $R^2$, but "in essence" all it's doing is
-the same thing as our previous function from $R^3$ to $R$ defined as $(x, y)
-\mapsto x$.
-
