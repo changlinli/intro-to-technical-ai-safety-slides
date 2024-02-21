@@ -429,7 +429,7 @@ subset, any rescaling of that vector by scalar multiplication must also be in
 the subset.
 
 So for example, in $R^2$, the set of vectors that all have a zero in their
-second component, i.e. the set $\left\{ (x, 0) \vert x \in R \right\}$, is a
+second component, i.e. the set $(x, 0)$ for all $x \in R$, is a
 (linear) subspace of $R^2$.
 
 *Exercise*:
@@ -439,7 +439,7 @@ second component, i.e. the set $\left\{ (x, 0) \vert x \in R \right\}$, is a
 > subspaces and which aren't? For the ones that aren't, can you give examples
 > that violate closure of vector addition or closure of scalar multiplication?
 >
-> + The set of all vectors $\left\{ (x, 1) \vert x \in R \right\}$, i.e. vectors
+> + The set of all vectors $(x, 1)$ for $x \in R$, i.e. vectors
 >   that have a one in their second component.
 > + The set of all vectors $(x, y)$ such that $x$ and $y$ are both even numbers.
 > + The set of all vectors $(x, y)$ such that $x$ and $y$ are equal to each
