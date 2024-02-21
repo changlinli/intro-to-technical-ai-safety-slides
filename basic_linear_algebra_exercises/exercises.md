@@ -792,21 +792,28 @@ as
 
 | (1, 0) | (0, 1) |
 | ------ | ------ |
-| 0 \cdot (1, 0) + 1 \cdot (0, 1) | -1 \cdot (1, 0) + 0 \cdot (0, 1) |
+| $0 \cdot (1, 0) + 1 \cdot (0, 1)$ | $-1 \cdot (1, 0) + 0 \cdot (0, 1)$ |
 
 If we give each component of the liner combination its own row we get
 
 | (1, 0) | (0, 1) |
 | ------ | ------ |
-| 0 \cdot (1, 0) | -1 \cdot (1, 0) |
-| 1 \cdot (0, 1) | 0 \cdot (0, 1) |
+| $0 \cdot (1, 0)$ | $-1 \cdot (1, 0)$ |
+| $1 \cdot (0, 1)$ | $0 \cdot (0, 1)$ |
 
-Finally if 
+Finally if just tell the reader of the table separately what the basis vectors are, i.e. tell the reader "this table is using the standard basis of $R^2$ for its domain and the standard basis of $R^2$ for its codomain," we can get rid of explicitly writing the basis vectors.
+
+| Column 0 | Column 1 |
+| ------ | ------ |
+| 0 | -1 |
+| 1 | 0 |
+
+And that's a matrix!
 
 *Exercise*:
 
 > Given the basis vectors $(1, 0)$ and $(0, 1)$ for both the domain and codomain
-> of $f$ and still taking $f : R^2 \to R^2$ as the function that performs a 90
+> of $f$ and still taking $f : R^2 \to R^2$ as the function that performs a 180
 > degree rotation, what is the resulting matrix that describes $f$?
 >
 > What about if I change the basis vectors to $(1, 1)$ and $(1, 2)$ for both the
