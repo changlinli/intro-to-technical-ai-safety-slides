@@ -120,8 +120,8 @@ and the vector
 
 let's go again over the full sequence of how to compute the result.
 
-1. $f((3, 2)) = 3\cdotf((1, 0)) + 2\cdotf((0, 1))$
-2. $3\cdotf((1, 0)) + 2\cdotf((0, 1)) = 3\cdot(0\cdot (1, 0) + 1\cdot(0, 1)) + 2
+1. $f((3, 2)) = 3\cdot f((1, 0)) + 2\cdot f((0, 1))$
+2. $3\cdot f((1, 0)) + 2\cdot f((0, 1)) = 3\cdot(0\cdot (1, 0) + 1\cdot(0, 1)) + 2
    \cdot (-1 \cdot (1, 0) + 0 \cdot (0, 1))$
 3. So our final result is $(0, 3) + (-2, 3) = (-2, 3)$
 
