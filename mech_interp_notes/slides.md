@@ -19,7 +19,7 @@
 # Rewriting things as sums
 
 + Residual streams as the 
-+ Rewriting multi-head attention as the sum of 
++ Rewriting multi-head attention as the sum of different attention heads
 
 # End-to-end sum decomposition of a single MLP
 
@@ -71,10 +71,15 @@
 
 # The Power of Linearity
 
-+ Let's zoom out from the matrices
-+ Let's say I want to answer the question "how much of my attention is based off
-  of the position of a token and how much is based off the token's contents"
-+ This is hard
++ $f(g(x) + h(x)) = f(g(x)) + f(h(x))$
++ Left-hand side of equation is going layer-by-layer
++ Right-hand side of equation is doing vertical slices
+
+# Power of end-to-end explanations
+
++ "How much of this attention head's output is based off the position of a
+  token and how much is based off the token's contents?"
++ If the attention head is n layers deep, this is a hard question
 
 
 + We have two linear functions, $Q$ and $K$.
