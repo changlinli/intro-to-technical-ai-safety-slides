@@ -230,6 +230,9 @@ From thinking of matrices as functions, we observe all sorts of properties
 
 > Prove each of these properties by thinking of these matrices as functions.
 
+Let's remind ourselves again that matrices don't have to just represent linear
+functions from $R^n \to R^m$. As an optional exercise, we can generate a matrix
+that works with polynomials.
 
 <details>
 <summary>Optional Exercise</summary>
