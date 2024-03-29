@@ -1,7 +1,7 @@
 So based on what we've said so far about matrices, one way to think about them
 is that they are essentially lookup tables.
 
-For example, the matrix 
+For example, the above matrix 
 
 ```math
 \begin{bmatrix} 0 & -1\\\ 1 & 0 \end{bmatrix}
@@ -28,11 +28,11 @@ means $f : (1, 0) \mapsto 0 \cdot (1, 0) + 1 \cdot (0, 1)$ (just reading down
 the first column) and $f : (0, 1) \mapsto -1 \cdot (1, 0) + 0 \cdot (0, 1)$
 (just reading down the second column).
 
-Likewise for another $f$ where $f : R^2 \to R^3$, the following matrix
-
+Likewise for another $f$ where $f : R^2 \to R^3$, it might be encoded by the following matrix
 ```math
 \begin{bmatrix} 0 & -1 \\\ 1 & 0 \\\ 1 & 0 \end{bmatrix}
 ```
+.
 
 Note that the number of columns of the matrix always correspond to the dimension
 of the domain and the number of rows to the dimension of the codomain, since we
@@ -41,7 +41,8 @@ we have basis vectors in the codomain.
 
 Remember, however, that the range of a function does not have to be equal to its
 codomain. In particular the range of a function is a linear subspace of its
-codomain and a linear subspace can have a dimension!
+codomain and a linear subspace can have a dimension that is smaller than the
+original space!
 
 *Exercise*:
 

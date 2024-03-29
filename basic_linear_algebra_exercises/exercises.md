@@ -223,7 +223,7 @@ or negative, is always still positive. Therefore we are closed under scalar
 multiplication. Verifying the distributive properties relies on how
 addition of exponents turns into multiplication of elements.
 
-In particular:
+To sketch the full proof:
 
 + Vectors are closed under addition: the product of two positive real numbers is always another positive real number
 + Vector addition commutes: real number multiplication commutes
@@ -232,7 +232,12 @@ In particular:
   notice that $1.0 \cdot r = r \cdot 1.0 = r$ for all positive real numbers $r$.
 + There are (vector) additive inverses: there are multiplicative inverses for
   every positive real number $r$, namely $\frac{1}{r}$.
-+ There are 
++ Using $\circ$ for vector addition, then $k(x \circ y) = (x \times y) ^k = x^k
+  \times y^k = kx \circ ky$, showing that vector addition distributes across
+  scalar multiplication.
++ Using $+ _c$ for scalar addition, then $(k_0 +_c k_1)x = x^{k_0 \times k_1} =
+  x^{k_0} \times x^{k_1} = k_0x \circ k_1 x$, which shows that scalar addition
+  distributes across scalar multiplication.
 </details>
 
 *Exercise*:
@@ -251,6 +256,39 @@ first two elements, we would have the sequence $100.2, 1.1, 101.3, 102.4, 203.7,
 > Let $F_{x, y}$ denote the Fibonacci sequence starting with the real numbers $x$
 and $y$. How can you form a real vector space where each vector is a sequence
 $F_{x, y}$ for some $x$ and $y$?
+
+<details>
+<summary>Solution</summary>
+Vector addition is element-wise addition and scalar multiplication is
+element-wise multiplication by the scalar.
+
+E.g. given the Fibonacci sequence $F_{2, 1} = 2, 1, 3, 4, 7, 11, \ldots$ and
+the Fibonacci sequence $F_{3, 4} = 3, 4, 7, 11, 18, 29, \ldots$, then vector
+addition of these two sequences results in the sequence $(2 + 3), (1 + 4), (3 +
+7), (4 + 11), (7 + 18), (11 + 29), \ldots = 5, 5, 10, 15, 25, 40,
+\ldots$, i.e. $F_{5, 5}$. You might notice that this is the same thing as just
+adding the subscripts of each of the sequences (i.e. adding the $x$ and $y$ of
+$F_{x, y}$.
+
+Element-wise multiplication proceeds similarly by 
+
+For two Fibonacci sequences $x_n$ and $y_n$, if $x_{n + 2} = x_{n + 1} + x_n$
+and $y_{n + 2} = y_{n + 1}  + y_n$, then given $z_n = x_n + y_n$, $z_{n + 2} =
+x_{n + 2} + y_{n + 2} = x_{n + 1} + y_{n + 1} + x_n + y_n$
+
+```math
+z_{n + 2} &= x_{n + 2} + y_{n + 2} \\
+&= (x_{n + 1} + y_{n + 1}) + (x_n + y_n) \\
+&= (x_{n + 1} + x_n) + (y_{n + 1} + y_n) \\
+&= z_{n + 1} + z_n
+```
+
+so our $z$s also form a Fibonacci sequence which means that vector addition of
+Fibonacci sequences is closed. A similar amount of term rearrangement suffices to
+show that scalar multiplication of Fibonacci sequences is closed and that it
+fulfills the distribute properties necessary among vector addition, scalar
+multiplication, and scalar addition.
+</details>
 
 Let's turn our attention now to how we can specify a vector space without
 needing to exhaustively list every single vector, via a basis.
@@ -671,10 +709,72 @@ $f$.
 > Can you write down what the table should look like for rotation by 90 degrees
 > if I use $(1, 1)$ and $(1, 2)$ as my basis vectors instead?
 
+<details>
+<summary>Solution</summary>
+| (1, 1) | (1, 2) |
+| ------ | ------ |
+| (-1, 1) | (-2, 1)|
+</details>
+
+*Exercise*:
+
+> Using the table for 90-degree rotations based on the basis vectors $(1, 0)$
+> and $(0, 1)$ (which is provided below), write down what the vector $(8, 9)$
+> gets mapped to. You should proceed by first writing $(8, 9)$ as a linear
+> combination of $(1, 0)$ and $(0, 1)$, that is as $8 \cdot (1, 0) + 9 \cdot (0,
+> 1)$ and then lookup the values in your table and calculate the final answer.
+>
+> | (1, 0) | (0, 1) |
+> | ------ | ------ |
+> | (0, 1) | (-1, 0)|
+
+<details>
+<summary>Solution</summary>
+We start by breaking down $(8, 9)$ into $8 \cdot (1, 0) + 9 \cdot (0, 1)$. Then
+we lookup $(1, 0)$ to get $(0, 1)$ and lookup $(0, 1)$ to get $(-1, 0)$.
+
+Then our answer must be $8 \cdot (0, 1) + 9 \cdot (-1, 0) = (-9, 8)$.
+
+This means that the linear function represented by this table, i.e. rotation by
+90 degrees, maps the vector $(8, 9)$ to $(-9, 8)$.
+</details>
+
+*Exercise*:
+
+> Using the other table for 90-degree rotations based on the basis vectors $(1,
+> 1)$ and $(1, 2)$, write down what the vector $(8, 9)$ gets mapped to.
+>
+> Again proceed by first breaking down $(8, 9)$ as a linear combination of $(1,
+> 1)$ and $(1, 2)$ and then looking up what those vector are mapped to before
+> calculating your final answer.
+>
+> You should find that your final answer is the same as what you got previously,
+> even though our tables looked different due to a different choice of basis
+> vectors. This is again similar to different bases for numerals. If we do
+> arithmetic in base 2 or in base 10, we should end up with the same answer
+> either way.
+
+<details>
+<summary>Solution</summary>
+We start by breaking down $(8, 9)$ into $7 \cdot (1, 1) + 1 \cdot (1, 2)$. Then
+we lookup $(1, 1)$ to get $(-1, 1)$ and lookup $(1, 2)$ to get $(-2, 1)$.
+
+Then our answer must be $7 \cdot (-1, 1) + 1 \cdot (-2, 1) = (-9, 8)$.
+
+This is the same answer as before!
+</details>
+
 *Exercise*:
 
 > Can you write down what the table should look like for rotation by 180 degrees
 > if I use $(1, 0)$ and $(0, 1)$ as my basis vectors?
+
+<details>
+<summary>Solution</summary>
+| (1, 0) | (0, 1) |
+| ------ | ------ |
+| (-1, 0) | (0, -1)|
+</details>
 
 Note that all this holds even for times where $f$ does not have the same domain
 and codomain. For example, let's take the linear function $f : R^2 \to R$ such
@@ -683,11 +783,10 @@ look like the following:
 
 | (1, 0) | (0, 1) |
 | ------ | ------ |
-| 1 | 1 |
+| 1      | 1      |
 
-Note that these tables are an "isomorphic" description of linear functions.
-That is every linear function can be described with such a table and every such
-table is a valid linear function.  For example, 
+Note that every linear function can be described with such a table and every such
+table is a valid linear function. For example, 
 
 | (1, 1) | (2, 1) |
 | ------ | ------ |
@@ -748,6 +847,41 @@ And that's a matrix!
 \begin{bmatrix} 0 & -1\\\ 1 & 0 \end{bmatrix}
 ```
 
+So based on what we've said so far about matrices, one way to think about them
+is that they are essentially lookup tables.
+
+For example, the above matrix 
+
+```math
+\begin{bmatrix} 0 & -1\\\ 1 & 0 \end{bmatrix}
+```
+
+(given the basis vectors $(1, 0)$ and $(0, 1)$ for both the domain and codomain
+of the function) ultimately represents
+
+| (1, 0) | (0, 1) |
+| ------ | ------ |
+| $0 \cdot (1, 0)$ | $-1 \cdot (1, 0)$ |
+| $1 \cdot (0, 1)$ | $0 \cdot (0, 1)$ |
+
+which means that we can think of the columns and rows of the matrices as being
+associated with different basis vectors, where we read off what what the
+underlying function $f$ does by going down each column of a matrix:
+
+|        | (1, 0) | (0, 1) |
+| ------ | ------ | ------ |
+| (1, 0) | 0 | -1 |
+| (0, 1) | 1 | 0 |
+
+means $f : (1, 0) \mapsto 0 \cdot (1, 0) + 1 \cdot (0, 1)$ (just reading down
+the first column) and $f : (0, 1) \mapsto -1 \cdot (1, 0) + 0 \cdot (0, 1)$
+(just reading down the second column).
+
+*Exercise*:
+
+> Using the matrix as a lookup table, can you calculate what the vector $(5, 5)$
+> is mapped to?
+
 *Exercise*:
 
 > Given the basis vectors $(1, 0)$ and $(0, 1)$ for both the domain and codomain
@@ -780,4 +914,5 @@ different bases will give rise to different numerals for the same number. And
 again, much like how base-10 is the usual assumed base for a numeral if no
 additional clarification is provided, if we are working with a function $f :
 R^n \to R^m$ and no additional clarification is provided, we generally assume
-that the bases for $R^n$ and $R^m$ are their respective standard bases.
+that the bases for $R^n$ and $R^m$ are their respective standard bases, i.e. the
+basis vectors $(1, 0, 0, \ldots), (0, 1, 0, \ldots), (0, 0, 1, \ldots), \ldots$.
