@@ -283,7 +283,7 @@ z_{n + 2} &= x_{n + 2} + y_{n + 2} \\
 &= z_{n + 1} + z_n
 ```
 
-so our $z$s also form a Fibonacci sequence which means that vector addition of
+so our $z_0, z_1, z_2, \ldots$ also form a Fibonacci sequence which means that vector addition of
 Fibonacci sequences is closed. A similar amount of term rearrangement suffices to
 show that scalar multiplication of Fibonacci sequences is closed and that it
 fulfills the distribute properties necessary among vector addition, scalar
@@ -417,7 +417,7 @@ $R^n$ is exactly $n$.
 
 *Exercise*:
 
-> Prove this. That is prove that any basis of $R^n$ must have exactly $n$ vectors.
+> Prove this using the facts listed in the optional exercises. That is prove that any basis of $R^n$ must have exactly $n$ vectors.
 
 <details>
 <summary>Hint</summary>
