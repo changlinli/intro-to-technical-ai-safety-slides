@@ -197,7 +197,7 @@ to $(x - 1, y - 1)$ should still return $(x - 1, y - 1)$ ).
 *Exercise*: 
 
 > Let our vectors be the positive, non-zero real numbers. How can we
-define vector addition and the zero vector such that this forms a real vector
+define vector addition and the zero vector such that this forms a valid vector
 space? Remember our zero vector cannot be the real number $0.0$ because we have
 only the positive, non-zero real numbers. How can we define scalar
 multiplication using all real numbers (positive, negative, and zero) as our
