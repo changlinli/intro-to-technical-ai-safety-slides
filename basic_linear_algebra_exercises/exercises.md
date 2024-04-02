@@ -1098,9 +1098,10 @@ f((5, 5)) &= f(5 \cdot (1, 0) + 5 \cdot (0, 1)) \\
 
 *Exercise*:
 
-> Given again the standard basis vectors $(1, 0)$ and $(0, 1)$ for both the
-> domain and codomain of $f$ and still taking $f : R^2 \to R^2$ as the function
-> that performs a 180 degree rotation, what is the resulting matrix that
+> Let's take again the standard basis vectors $(1, 0)$ and $(0, 1)$ for both the
+> domain and codomain of $f$. Then let's take $f : R^2 \to R^2$ as the function
+> that reflects across the line consisting of all points $(x, y)$ where $x = -y$. In other words it's the function
+> that maps $(1, 0)$ to $(0, -1)$ and $(0, 1)$ to $(-1, 0)$. What is the resulting matrix that
 > describes $f$?
 >
 > What about if I change the basis vectors to $(1, 1)$ and $(1, 2)$ for both the
