@@ -1,48 +1,6 @@
-So based on what we've said so far about matrices, one way to think about them
-is that they are essentially lookup tables.
+## Matrix Rank
 
-For example, the above matrix 
-
-```math
-\begin{bmatrix} 0 & -1\\\ 1 & 0 \end{bmatrix}
-```
-
-(given the basis vectors $(1, 0)$ and $(0, 1)$ for both the domain and codomain
-of the function) ultimately represents
-
-| (1, 0) | (0, 1) |
-| ------ | ------ |
-| $0 \cdot (1, 0)$ | $-1 \cdot (1, 0)$ |
-| $1 \cdot (0, 1)$ | $0 \cdot (0, 1)$ |
-
-which means that we can think of the columns and rows of the matrices as being
-associated with different basis vectors, where we read off what what the
-underlying function $f$ does by going down each column of a matrix:
-
-|        | (1, 0) | (0, 1) |
-| ------ | ------ | ------ |
-| (1, 0) | 0 | -1 |
-| (0, 1) | 1 | 0 |
-
-means $f : (1, 0) \mapsto 0 \cdot (1, 0) + 1 \cdot (0, 1)$ (just reading down
-the first column) and $f : (0, 1) \mapsto -1 \cdot (1, 0) + 0 \cdot (0, 1)$
-(just reading down the second column).
-
-Likewise for another $f$ where $f : R^2 \to R^3$, it might be encoded by the following matrix
-```math
-\begin{bmatrix} 0 & -1 \\\ 1 & 0 \\\ 1 & 0 \end{bmatrix}
-```
-.
-
-Note that the number of columns of the matrix always correspond to the dimension
-of the domain and the number of rows to the dimension of the codomain, since we
-have as many columns as we have basis vectors in the domain and as many rows as
-we have basis vectors in the codomain.
-
-Remember, however, that the range of a function does not have to be equal to its
-codomain. In particular the range of a function is a linear subspace of its
-codomain and a linear subspace can have a dimension that is smaller than the
-original space!
+Let's start again with some exercises to review linear subspaces and matrices:
 
 *Exercise*:
 
@@ -104,8 +62,9 @@ function is smaller than the codomain of the associated function.
 > dimension $n$ and codomain has dimension $m$. Can you come up with values for
 > that matrix such that its rank is less than $m$ and no value is zero?
 
-Let's take what we've defined so far and do some more calculations with them in
-$R^2$ with the standard basis vectors.
+## Matrix computations
+
+One of the most important parts of matrices is that they allow us to express more things as computation which can be easily carried out on a computer. We've already seen how we can treat matrices as lookup tables. Let's look again at $R^2$ with the standard basis vectors and review the exact sequence of steps we perform.
 
 Given the matrix
 
@@ -119,32 +78,73 @@ and the vector
 (3, 2)
 ```
 
-let's go again over the full sequence of how to compute the result.
+Keeping in mind again that $(3, 2) = 3 \cdot (1, 0) + 2 \cdot (0, 1)$ let's go again over the full sequence of how to compute the result.
 
 1. $f((3, 2)) = 3\cdot f((1, 0)) + 2\cdot f((0, 1))$
 2. $3\cdot f((1, 0)) + 2\cdot f((0, 1)) = 3\cdot(0\cdot (1, 0) + 1\cdot(0, 1)) + 2
    \cdot (-1 \cdot (1, 0) + 0 \cdot (0, 1))$
 3. So our final result is $(0, 3) + (-2, 3) = (-2, 3)$
 
-But that turns out to be the exact same thing as if we lined up $(3, 2)$ as a
-column
+Let's focus some more on the second step there.
 
 ```math
-\begin{bmatrix} 3 \\\ 2 \end{bmatrix}
+3 \cdot (0\cdot (1, 0) + 1\cdot(0, 1)) + 2 \cdot (-1 \cdot (1, 0) + 0 \cdot (0, 1))
 ```
 
-and multiplied 
+This is the same thing (by distributing the multiplication) as 
 
 ```math
-\begin{bmatrix} 0 & -1\\\ 1 & 0 \end{bmatrix} \begin{bmatrix} 3 \\\ 2 \end{bmatrix}
+3 \cdot 0 \cdot (1, 0) + 3 \cdot 1 \cdot (0, 1) + 2 \cdot -1 \cdot (1, 0) + 2 \cdot 0 \cdot (0, 1)
 ```
 
-by taking each row of the first matrix and element-wise multiplying by the
-column on the right-hand side.
+which in turn is the same thing (by rearranging some of the additive terms) as
+
+```math
+3 \cdot 0 \cdot (1, 0) + 2 \cdot -1 \cdot (1, 0) + 3 \cdot 1 \cdot (0, 1) + 2 \cdot 0 \cdot (0, 1)
+```
+
+Since we're using the standard basis here, this whole thing is equal to
+
+```math
+(3 \cdot 0 + 2 \cdot -1, 3 \cdot 1 + 2 \cdot 0)
+```
+
+So if we make sure that we keep the same set of basis vectors and those basis vectors happen to be the standard basis throughout our entire computation, we have a much more compact way of computing a linear function applied to a vector given its matrix.
+
+Namely take each row of the matrix, do component-wise multiplication with the vector, then sum up that result and that's one component of the resulting vector. In our previuos example, we notice that $0$ and $-1$ are the first row of our matrix so we multiply by $3$ and $2$ respectively and add them together to the first component of our resulting vector and then we do the same for $1$ and $2$ as the second row of our matrix.
+
+For people who have learned matrix multiplication rules this should look very familiar! It might not have been apparent back then why we do multiplication that way, but now we can see that this particular order of multiplication and summation falls out as an inevitable consequence of how matrices represent linear functions.
 
 *Exercise*:
 
-> Work this out by hand and convince yourself that this is true.
+> Using the above ordering, compute the result of applying the function represented by the following matrix
+>
+> ```math
+> \begin{bmatrix} 2 & 1 \\ -4 & 0 \end{bmatrix}
+> ```
+>
+> to the vector $(2, 3)$.
+>
+> Now do the same for the function represented by 
+>
+> ```math
+> \begin{bmatrix} 2 & 1 & 8 \\ 1 & -4 & 0 \end{bmatrix}
+> ```
+>
+> to the vector $(1, 2, 3)$.
+>
+> We assume that we are in $R^n$ and using the standard
+> basis vectors for our matrix.
+
+For any people who remember matrix multiplication from school, there's still one operation we haven't yet justified, which is the multiplication of matrices themselves, rather than just a matrix and a vector.
+
+So we'll start with a motivating question: *thought of as linear functions, what exactly is matrix multiplication?*
+
+We can already get a hint from simplying thinking about the "type signature" of matrix multiplication what it might be. We take two matrices and get back another matrix. That means whatever matrix multiplication "really is," it's some operation that takes in two linear functions and gives you back another linear function.
+
+That sounds a lot like function composition (as a reminder function composition takes in two functions $f(x)$ and $g(x)$ and gives you back a new function $h(x) = f(g(x))$)! But is it?
+
+
 
 So it turns out that multiplying a matrix by a one-column matrix is exactly how we
 can calculate applying a function to a vector!
@@ -162,7 +162,7 @@ and just maps that single basis vector to a single linear combination of $n$
 bsais vectors in the codomain, i.e. just maps a single basis vector to $v$ in
 the codomain.
 
-This function can be *identified*, i.e. thought of, as just a vector.
+This function can be identified, i.e. thought of, as just a vector.
 
 This is similar to how in programming, we can write
 
