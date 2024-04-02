@@ -1197,3 +1197,48 @@ However, if you ever want clarification, it is always a sensible question to ask
 "what bases are a matrix defined with respect to" and "is the basis of the
 domain equal to the basis of the range?"
 
+
+Let's close out with a fun little optional exercise courtesy of Ludwig Schubert.  Let's
+remind ourselves again that matrices don't have to just represent linear
+functions from $R^n \to R^m$. As an optional exercise, we can generate a matrix
+that represents the differentiation of polynomials.
+
+<details>
+<summary>Optional Exercise</summary>
+Let's look at an example of an even more general function. In particular,
+differentiation itself can be thought of as a function. If we restrict ourselves
+to polynomials, then differentiation can be viewed as a function that takes in
+one polynomial and generates another. It takes in a polynomial of the form
+
+```math
+a_n x^n + a_{n - 1} x^{n - 1} + \cdots + a_0
+```
+
+and returns a polynomial of the form
+
+```math
+n a_n x^{n - 1} + (n - 1) a_{n - 1} x^{n - 2} + \cdots + 0
+```
+.
+
+Show that there is a way to view the collection of all polynomials as a vector
+space and a way to view differentiation as a linear operator. What are the
+vector addition and scalar multiplication operators? Using that can you show
+that differentiation obeys the linear laws for vector addition and scalar
+multiplication?
+
+Let's restrict our attention to only those polynomials which have degree less
+than or equal to 4. That is only polynomials of the form
+
+```math
+a_4 x^4 + a_3 x^3 + a_2 x^2 + a_1 x + a_0
+```
+
+Come up with a basis for the vector space of all polynomials with degree less
+than or equal to four. Using that basis create a matrix that represents
+differentiation of a polynomial with degree less than or equal to four.
+
+Is differentiation in general a linear operator? Why or why not? Is it always
+possible to create a matrix for it? Why or why not?
+</details>
+
