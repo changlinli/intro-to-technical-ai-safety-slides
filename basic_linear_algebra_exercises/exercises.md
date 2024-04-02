@@ -426,6 +426,14 @@ elements, so all that's needed is to find a basis of $R^n$ that has $n$
 vectors.
 </details>
 
+<details>
+<summary>Solution<summary>
+There is a basis of $R^n$ that has $n$ vectors, namely the basis consisting of
+$(1, 0, 0, \ldots), (0, 1, 0, \ldots), \ldots$. Since every basis of a vector
+space has the same number of elements, we know that all bases of $R^n$ must have
+$n$ vectors.
+</details>
+
 *Exercise*:
 
 > Can you come up with any other alternative basis for $R^3$ that aren't its
@@ -592,6 +600,14 @@ statements said in that video using our definition of linear functions.
 >
 > $f(x) = x^2$
 
+<details>
+<summary>Solution</summary>
+$f(x) = x$ is linear, $f(x) = 2x$ is linear, $f(x) = 2x + 1$ is not linear (even
+though it's called "a linear function" in many primary/secondary educational
+materials, usually these functions are referred to as "affine functions"), $f(x)
+= x^2$ is not linear.
+</details>
+
 *Exercise*:
 
 > Which of the following transformations $R^2 \to R^2$ is linear according to the
@@ -599,6 +615,11 @@ statements said in that video using our definition of linear functions.
 >
 > 1. Rotating all our points by 90 degrees around the origin.
 > 2. Point-wise doubling all the components of every point.
+
+<details>
+<summary>Solution</summary>
+Both are linear.
+</details>
 
 ## Matrices as notation
 
@@ -673,15 +694,58 @@ out what $f$ maps it to.
 + So $1.2f((1, 0)) + 3.1f((0, 1)) = 1.2 \cdot (0, 1) + 3.1 \cdot (-1, 0) =
   (-3.1, 1.2)$
 
-Great so just by knowing what $f$ does to basis vectors, and knowing how to
+Great! So just by knowing what $f$ does to basis vectors, and knowing how to
 write every vector as a linear combination of basis vectors, we know how to
 calculate how to calculate any linear function $f$!
 
 *Exercise*:
 
-> Can you do the same calculation for the same $f$, but now for an alternative basis
-> consisting of $(0.6, 0)$ and $(0, 1.55)$? You should end up with the same
-> answer $(-3.1, 1.2)$ at the end of the day.
+> Can you do the same calculation for the same $f$, but now for an alternative
+> basis consisting of $(0.6, 0)$ and $(0, 1.55)$? First figure out what $(0.6,
+> 0)$ and $(0, 1.55)$ should map to based on what $(1, 0)$ and $(0, 1)$ are
+> mapped to. Then decompose $(1.2, 3.1)$ into a linear combination of $(0.6, 0)$
+> and $(0, 1.55)$. You should end up with the same answer $(-3.1, 1.2)$ at the
+> end of the day.
+
+<details>
+<summary>Solution</summary>
+First let's figure out what $(0.6, 0)$ and $(0, 1.55)$ map to. You could realize
+that $(0.6, 0)$ and $(0, 1.55)$ are just rescaled versions of $(1, 0)$ and $(0,
+1)$ respectively, or you could do the full calculation by hand.
+
+We know $(0.6, 0) = 0.6 \cdot (1, 0) + 0 \cdot (0, 1)$ and $(0, 1.55) = 0 \cdot
+(1, 0) + 1.55 \cdot (0, 1)$.
+
+This means
+
+```math
+f((0.6, 0)) &= f(0.6 \cdot (1, 0) + 0 \cdot (0, 1)) \\
+&= 0.6 f((1, 0)) + 0 f((0, 1)) \\
+&= 0.6 \cdot (0, 1) + 0 \cdot (-1, 0) \\
+&= (0, 0.6)
+```
+
+and similarly
+
+```math
+f((0, 1.55)) &= f(0 \cdot (1, 0) + 1.55 \cdot (0, 1)) \\
+&= 0 \cdot f((1, 0)) + 1.55 \cdot f((0, 1)) \\
+&= 0 \cdot (0, 1) + 1.55 \cdot (-1, 0) \\
+&= (-1.55, 0)
+```
+
+So we know $f((0.6, 0)) = (0, 0.6)$ and $f((0, 1.55)) = (-1.55, 0)$. To
+calculate $f((1.2, 3.1))$ using $(0.6, 0)$ and $(0, 1.55)$ as our basis, we have
+to split $(1.2, 3.1)$ into a linear combination of our new basis, which happens
+to be $(1.2, 3.1) = 2 \cdot (0.6, 0) + 2 \cdot (0, 1.55)$. So then
+
+```math
+f((1.2, 3.1)) &= f(2 \cdot (0.6, 0) + 2 \cdot (0, 1.55)) \\
+&= 2 f((0.6, 0)) + 2 f((0, 1.55)) \\
+&= 2 \cdot (0, 0.6) + 2 \cdot (-1.55, 0) \\
+&= (-3.1, 1.2)
+```
+</details>
 
 *Exercise*:
 
@@ -693,12 +757,18 @@ calculate how to calculate any linear function $f$!
 > Can you do the same thing now but using the basis vectors $(1, 1)$ and $(1,
 > 2)$?
 
-An easy way to notate what a linear function does is via a table that shows
-what we do to each basis vector. For example, we could write down our previous
-function that rotates all vectors by 90 degrees using the following table. Each
-column header of this table is a basis vector in the domain of the function and
-each value below the header is the vector that we map that basis vector to via
-$f$.
+<details>
+<summary>Solution</summary>
+
+</details>
+
+Since it is sufficient to determine a linear function's behavior on any vector
+by specifying what it does to a particular choice of basis, one easy way to
+notate what a linear function does is via a table that shows what we do to each
+basis vector. For example, we could write down our previous function that
+rotates all vectors by 90 degrees using the following table. Each column header
+of this table is a basis vector in the domain of the function and each value
+below the header is the vector that we map that basis vector to via $f$.
 
 | (1, 0) | (0, 1) |
 | ------ | ------ |
