@@ -766,16 +766,95 @@ f((1.2, 3.1)) &= f(2 \cdot (0.6, 0) + 2 \cdot (0, 1.55)) \\
 
 *Exercise*:
 
-> Let's use the basis vectors $(1, 0)$ and $(0, 1)$. Remember that rotating $(1,
-> 0)$ gets you $(0, 1)$ and rotating $(0, 1)$ gets you $(-1, 0)$. Can you
-> describe what the result is of applying the 90-degree rotation function $f$ to
-> the vector $(-1, 3)$?
+> Let's use the basis vectors $(1, 1)$ and $(1, 2)$. Let's say that a function
+> $f : R^2 \to R^2$ has the following behavior: $f : (1, 1) \mapsto (3, 3)$ and $f : (1, 2)
+> \mapsto (5, 5)$. What does $f$ map $(-1, 3)$ to? Calculate this by splitting
+> $(-1, 3)$ into a linear combination of $(1, 1)$ and $(1, 2)$.
 >
-> Can you do the same thing now but using the basis vectors $(1, 1)$ and $(1,
-> 2)$?
+> Can you describe what $f$ does in English or as an equation?
+>
+> What is the dimension of the range of $f$?
 
 <details>
 <summary>Solution</summary>
+
+First let's decompose into our given basis vectors.
+
+```math
+(-1, 3) = -5 \cdot (1, 1) + 4 \cdot (1, 2)
+```
+
+which means
+
+```math
+\begin{align}
+f((-1, 3)) &= f(-5 \cdot (1, 1) + 4 \cdot (1, 2)) \\
+&= -5 f((1, 1)) + 4 f((1, 2)) \\
+&= -5 \cdot (3, 3) + 4 \cdot (5, 5) \\
+&= (-15, -15) + (20, 20) \\
+&= (5, 5) \\
+\end{align}
+```
+
+Written as a equation, we have
+
+```math
+f((x, y)) = (x + 2y, x + 2y)
+```
+
+The dimension of the range of our function is $1$. Notice that a valid basis for
+our range is the single vector $(1, 1)$.
+
+</details>
+
+*Exercise*:
+
+> I attempt to define a linear function $f : R^3 \to R^3$ by defining $f : (1,
+> 1, 0) \mapsto (2, 1, 5)$, $f : (1, 0, 1) \mapsto (3, 1, 4)$, and $f : (0, 1,
+> -1) \mapsto (7, 0, 1)$.
+>
+> This is not a well-defined linear function. What's wrong?
+
+<details>
+<summary>Hint</summary>
+
+There's nothing wrong with using a non-standard basis, i.e. it's perfectly fine
+to define $f$ without using $(1, 0, 0)$, $(0, 1, 0)$, and $(0, 0, 1)$. But are
+we sure we have a basis here?
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+There are two related reasons why this is not a well-defined linear function.
+The first is that $(1, 1, 0)$, $(1, 0, 1)$, and $(0, 1, -1)$ do not form a valid
+basis because not every element of $R^3$ can be written as a linear combination
+of those vectors. E.g. it is impossible to write $(1, 1, 1)$ as a linear
+combination of those vectors. Therefore we don't know what $f((1, 1, 1))$ is.
+
+We can see this by noticing that $(0, 1, -1)$ can be written as a linear combination of
+$(1, 1, 0)$ and $(1, 0, 1)$ via $(0, 1, -1) = 1 \cdot (1, 1, 0) + -1 \cdot (1,
+0, 1)$. This fact alone is enough to conclude that we don't have a valid basis,
+since we know that any basis of $R^3$ must have three linearly independent
+vectors and since one of our vectors can be written as the linear sum of the
+other two we must have less than three linearly independent vectors.
+
+The second related reason why this is not a well-defined linear function is that
+even though $(0, 1, -1) = 1 \cdot (1, 1, 0) + -1 \cdot (1, 0, 1)$, $f((0, 1,
+-1)) \not= 1 f((1, 1, 0)) + -1 f((1, 0, 1))$, hence linearity is violated.
+
+As an aside, to see that $(1, 1, 1)$ cannot be written as a combination of these
+three vectors, it is enough to consider linear sums of $(1, 1, 0)$ and $(1, 0,
+1)$ since we know that $(0, 1, -1)$ can be written as a linear sum of those two
+vectors as well. Then we notice that the only way for the second component of
+our linear sum to be $1$ is if $(1, 1, 0)$'s coefficient is $1$. Therefore, if a
+linear sum does exist, then it must be of the form $1 \cdot (1, 1, 0) + x \cdot
+(1, 0, 1)$. However, no choice of $x$ can change the difference between the
+first and third component of this sum, which must always be $1$. However, the
+difference between the first and third component of $(1, 1, 1)$ is $0$. Hence it
+is impossible for our linear sum to ever form $(1, 1, 1)$.
+
 
 </details>
 
@@ -793,29 +872,18 @@ below the header is the vector that we map that basis vector to via $f$.
 
 *Exercise*:
 
-> Can you write down what the table should look like for rotation by 90 degrees
-> if I use $(1, 1)$ and $(1, 2)$ as my basis vectors instead?
-
-<details>
-<summary>Solution</summary>
-
-| (1, 1) | (1, 2) |
-| ------ | ------ |
-| (-1, 1) | (-2, 1)|
-
-</details>
-
-*Exercise*:
-
 > Using the table for 90-degree rotations based on the basis vectors $(1, 0)$
-> and $(0, 1)$ (which is provided below), write down what the vector $(8, 9)$
-> gets mapped to. You should proceed by first writing $(8, 9)$ as a linear
+> and $(0, 1)$ (which we reproduce again below), write down what the vector $(8,
+> 9)$ gets mapped to. You should proceed by first writing $(8, 9)$ as a linear
 > combination of $(1, 0)$ and $(0, 1)$, that is as $8 \cdot (1, 0) + 9 \cdot (0,
 > 1)$ and then lookup the values in your table and calculate the final answer.
 >
 > | (1, 0) | (0, 1) |
 > | ------ | ------ |
 > | (0, 1) | (-1, 0)|
+>
+> Note that this should be almost exactly the same set of steps that you've done
+> for previous exercises.
 
 <details>
 <summary>Solution</summary>
@@ -826,6 +894,31 @@ Then our answer must be $8 \cdot (0, 1) + 9 \cdot (-1, 0) = (-9, 8)$.
 
 This means that the linear function represented by this table, i.e. rotation by
 90 degrees, maps the vector $(8, 9)$ to $(-9, 8)$.
+</details>
+
+*Exercise*:
+
+> Can you write down what the table should look like for rotation by 90 degrees
+> if I use $(0.6, 0)$ and $(0, 1.55)$ as my basis vectors instead? What about
+> $(1, 1)$ and $(1, 2)$ as my basis vectors instead?
+
+<details>
+<summary>Solution</summary>
+
+| (0.6, 0) | (0, 1.55) |
+| ------ | ------ |
+| (0, 0.6) | (-1.55, 0)|
+
+and
+
+| (1, 1) | (1, 2) |
+| ------ | ------ |
+| (-1, 1) | (-2, 1)|
+
+respectively. If the second table is not obvious to you, write out the
+decomposition of $(1, 1)$ as a linear combination of $(1, 0)$ and $(0, 1)$ and
+then apply $f$ to that linear combination. Do the same for $(1, 2)$.
+
 </details>
 
 *Exercise*:
@@ -860,9 +953,11 @@ This is the same answer as before!
 
 <details>
 <summary>Solution</summary>
+
 | (1, 0) | (0, 1) |
 | ------ | ------ |
 | (-1, 0) | (0, -1)|
+
 </details>
 
 Note that all this holds even for times where $f$ does not have the same domain
@@ -874,8 +969,8 @@ look like the following:
 | ------ | ------ |
 | 1      | 1      |
 
-Note that every linear function can be described with such a table and every such
-table is a valid linear function. For example, 
+**In other words, every single linear function can be compactly described using
+such a table.** For example, 
 
 | (1, 1) | (2, 1) |
 | ------ | ------ |
@@ -913,7 +1008,7 @@ as
 | ------ | ------ |
 | $0 \cdot (1, 0) + 1 \cdot (0, 1)$ | $-1 \cdot (1, 0) + 0 \cdot (0, 1)$ |
 
-If we give each component of the liner combination its own row we get
+If we give each component of the linear combination its own row we get
 
 | (1, 0) | (0, 1) |
 | ------ | ------ |
@@ -966,10 +1061,39 @@ means $f : (1, 0) \mapsto 0 \cdot (1, 0) + 1 \cdot (0, 1)$ (just reading down
 the first column) and $f : (0, 1) \mapsto -1 \cdot (1, 0) + 0 \cdot (0, 1)$
 (just reading down the second column).
 
+**Again to emphasize, a matrix is a lookup table for a particular linear
+function!** Every column of a matrix tells us what some basis vector
+
 *Exercise*:
 
-> Using the matrix as a lookup table, can you calculate what the vector $(5, 5)$
-> is mapped to?
+> Using the matrix as a lookup table for some function $f$, can you calculate
+> what the vector $(5, 5)$ is mapped to?
+
+<details>
+<summary>Solution</summary>
+
+Based on our table, we know by reading its columns that 
+
+```math
+\begin{align}
+(1, 0) &\mapsto 0 \cdot (1, 0) + 1 \cdot (0, 1) \\
+(0, 1) &\mapsto -1 \cdot (1, 0) + 0 \cdot (0, 1)
+\end{align}
+```
+
+So we get the following decomposition:
+
+```math
+\begin{align}
+f((5, 5)) &= f(5 \cdot (1, 0) + 5 \cdot (0, 1)) \\
+&= 5 \cdot f(1, 0) + 5 \cdot f(0, 1) \\
+&= 5 \cdot (0 \cdot (1, 0) + 1 \cdot (0, 1)) + 5 \cdot (-1 \cdot (1, 0) + 0 \cdot (0, 1)) \\
+&= 5 \cdot (0, 1) + 5 \cdot (-1, 0) \\
+&= (-5, 5)
+\end{align}
+```
+
+</details>
 
 *Exercise*:
 
@@ -983,15 +1107,65 @@ the first column) and $f : (0, 1) \mapsto -1 \cdot (1, 0) + 0 \cdot (0, 1)$
 > What about if the basis for the domain is $(1, 0)$ and $(0, 1)$ but the basis
 > vectors for the codomain are $(1, 1)$ and $(1, 2)$?
 
+<details>
+<summary>Hint</summary>
+
+For those cases where the basis vectors of our domain are $(1, 0)$ and $(0, 1)$,
+note that $(1, 0) \mapsto (0, -1)$ and $(0, 1) \mapsto (-1, 0)$, and then find
+how to break down $(0, -1)$ and $(-1, 0)$ as the linear combination of the basis
+vectors that make up the codomain.
+
+For those cases where the basis vector of our domain are $(1, 1)$ and $(1, 2)$,
+note that $(1, 1) \mapsto (-1, -1)$ and $(1, 2) \mapsto (-2, -1)$ and do the
+same.
+
+As an optional aside, can you show that my statement about $(1, 1)$ and $(1, 2)$
+is in fact true based on what I said about $(1, 0)$ and $(0, 1)$?
+
+</details>
+
+<details>
+<summary>Solution></summary>
+
+The three matrices are respectively
+
+```math
+\begin{bmatrix}
+0 & -1 \\
+-1 & 0
+\end{bmatrix}
+```
+
+```math
+\begin{bmatrix}
+-1 & -3 \\
+0 & 1
+\end{bmatrix}
+```
+
+```math
+\begin{bmatrix}
+1 & -2 \\
+-1 & 1
+\end{bmatrix}
+```
+
+</details>
+
 *Exercise*:
 
-> Can you write what linear function this matrix corresponds to in English
-> , assuming that our basis for both the domain and codomain are the standard
-> basis $(1, 0, 0)$, $(0, 1, 0)$, $(0, 0, 1)$?
+> Can you write what linear function this matrix corresponds to in English or in
+> equational form, assuming that our basis for both the domain and codomain are
+> the standard basis $(1, 0, 0)$, $(0, 1, 0)$, $(0, 0, 1)$?
 >
 > ```math
-> \begin{bmatrix} 1 & 0 & 0\\\ 1 & 0 & 0 \\ 1 & 0 & 0 \end{bmatrix}
+> \begin{bmatrix} 1 & 0 & 0 \\ 1 & 0 & 0 \\ 1 & 0 & 0 \end{bmatrix}
 > ```
+
+<details>
+<summary>Solution</summary>
+$f((x, y, z)) = (x, x, x)$
+</details>
 
 Note that unlike the function itself (e.g. "rotates points by 90 degrees around
 the origin") or the dimension of a vector space, a matrix is basis-dependent.
@@ -999,9 +1173,18 @@ That is, different basis vectors will generate different matrices for the same
 function between the same vector spaces.
 
 As stated before, this is very similar to base-n notation for numerals, where
-different bases will give rise to different numerals for the same number. And
-again, much like how base-10 is the usual assumed base for a numeral if no
-additional clarification is provided, if we are working with a function $f :
+different bases will give rise to different numerals for the same number.
+Technically the numeral `416` is ambiguous. Is this numeral given in base-10 or
+e.g. in octal or hexadecimal? What number `416` corresponds to will change based
+on the answer.
+
+However, in most circumstances, we assume that a given numeral is in base-10
+because it is so common. Likewise, if we are working with a function $f :
 R^n \to R^m$ and no additional clarification is provided, we generally assume
 that the bases for $R^n$ and $R^m$ are their respective standard bases, i.e. the
 basis vectors $(1, 0, 0, \ldots), (0, 1, 0, \ldots), (0, 0, 1, \ldots), \ldots$.
+
+However, if you ever want clarification, it is always a sensible question to ask
+"what bases are a matrix defined with respect to" and "is the basis of the
+domain equal to the basis of the range?"
+
