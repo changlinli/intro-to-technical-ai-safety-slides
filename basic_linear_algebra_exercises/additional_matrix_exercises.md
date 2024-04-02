@@ -142,7 +142,10 @@ So we'll start with a motivating question: *thought of as linear functions, what
 
 We can already get a hint from simplying thinking about the "type signature" of matrix multiplication what it might be. We take two matrices and get back another matrix. That means whatever matrix multiplication "really is," it's some operation that takes in two linear functions and gives you back another linear function.
 
-That sounds a lot like function composition (as a reminder function composition takes in two functions $f(x)$ and $g(x)$ and gives you back a new function $h(x) = f(g(x))$)! But is it?
+That sounds a lot like function composition (as a reminder function composition takes in two functions $f(x)$ and $g(x)$ and gives you back a new function $h(x) = f(g(x))$)! But is it? (spoiler it is: but let's go and make sure that it is)
+
+
+
 
 
 
