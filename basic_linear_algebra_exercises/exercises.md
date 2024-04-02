@@ -704,13 +704,12 @@ calculate how to calculate any linear function $f$!
 > basis consisting of $(0.6, 0)$ and $(0, 1.55)$? First figure out what $(0.6,
 > 0)$ and $(0, 1.55)$ should map to based on what $(1, 0)$ and $(0, 1)$ are
 > mapped to. Then decompose $(1.2, 3.1)$ into a linear combination of $(0.6, 0)$
-> and $(0, 1.55)$. You should end up with the same answer $(-3.1, 1.2)$ at the
+> and $(0, 1.55)$ . You should end up with the same answer $(-3.1, 1.2)$ at the
 > end of the day.
 
+<!-- For some crazy reason I can't seem to combine triple backticks with inline LaTeX without causing GitHub to barf and not render the triple backticks properly -->
 <details>
 <summary>Solution</summary>
-
-<!-- For some crazy reason I can't seem to combine triple backticks with inline LaTeX without causing GitHub to barf and not render the triple backticks properly -->
 
 First lets calculate the behavior of our function on our new basis vectors. You could either write this down in one step by recognizing that these vectors are just rescaled versions of the standard basis vectors.
 
@@ -802,8 +801,8 @@ Written as a equation, we have
 f((x, y)) = (x + 2y, x + 2y)
 ```
 
-The dimension of the range of our function is $1$. Notice that a valid basis for
-our range is the single vector $(1, 1)$.
+The dimension of the range of our function is 1. Notice that a valid basis for
+our range is the single vector (1, 1).
 
 </details>
 
