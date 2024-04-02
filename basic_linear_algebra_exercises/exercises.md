@@ -68,9 +68,9 @@ A vector space consists of the following elements:
   following rules:
     * Our vectors are closed under addition: adding two vectors together must
       always result in another vector
-    * Addition commutes: $v + w = w + v$
-    * Addition is associative: $v + (w + x) = (v + w) + x$
-    * There is a zero vector $0$ such that $0 + v = v + 0 = v$ for all $v$
+    * Addition commutes: $v + w = w + v$ where $v$ and $w$ are vectors in the vector space
+    * Addition is associative: $v + (w + x) = (v + w) + x$ where $v$, $w$, and $x$ are vectors in the vector space
+    * There is a zero vector $0$ such that $0 + v = v + 0 = v$ for all vectors $v$ in the vector space
     * There are additive inverses: for every $v$ there exists a vector $w$ such that $v + w = 0$
 + A set of elements each called a "scalar" along with operations called
   "addition among scalars" and "multiplication among scalars". For almost all purposes in
@@ -174,7 +174,7 @@ rarely in machine learning, so we won't talk about them.
 For those who would like to read more about the general concept of scalars for a
 vector space, the term here is "field", that is any field can be used as
 scalars. See
-[https://en.wikipedia.org/wiki/Field_(mathematics)]("https://en.wikipedia.org/wiki/Field_(mathematics")).
+[https://en.wikipedia.org/wiki/Field_(mathematics)]("https://en.wikipedia.org/wiki/Field_(mathematics)").
 </details>
 
 *Exercise*:
