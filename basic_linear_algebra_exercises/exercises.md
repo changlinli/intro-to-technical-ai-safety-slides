@@ -798,9 +798,11 @@ below the header is the vector that we map that basis vector to via $f$.
 
 <details>
 <summary>Solution</summary>
+
 | (1, 1) | (1, 2) |
 | ------ | ------ |
 | (-1, 1) | (-2, 1)|
+
 </details>
 
 *Exercise*:
