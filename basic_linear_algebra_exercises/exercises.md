@@ -739,7 +739,7 @@ calculate $f((1.2, 3.1))$ using $(0.6, 0)$ and $(0, 1.55)$ as our basis, we have
 to split $(1.2, 3.1)$ into a linear combination of our new basis, which happens
 to be $(1.2, 3.1) = 2 \cdot (0.6, 0) + 2 \cdot (0, 1.55)$. So then
 
-$$f((1.2, 3.1)) &= f(2 \cdot (0.6, 0) + 2 \cdot (0, 1.55)) \\ &= 2 f((0.6, 0)) + 2 f((0, 1.55)) \\ &= 2 \cdot (0, 0.6) + 2 \cdot (-1.55, 0) \\ &= (-3.1, 1.2)$$
+$$\begin{align}f((1.2, 3.1)) &= f(2 \cdot (0.6, 0) + 2 \cdot (0, 1.55)) \\ &= 2 f((0.6, 0)) + 2 f((0, 1.55)) \\ &= 2 \cdot (0, 0.6) + 2 \cdot (-1.55, 0) \\ &= (-3.1, 1.2)\end{align}$$
 </details>
 
 *Exercise*:
