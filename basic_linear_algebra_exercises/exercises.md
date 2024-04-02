@@ -179,7 +179,7 @@ scalars. See
 
 *Exercise*:
 
-> Let's say I instead defined additon on $R^2$ to be element-wise maximums.
+> Let's say I instead defined addition on $R^2$ to be element-wise maximums.
 > That is $(x_0, y_0) + (x_1, y_1) = (\text{max}(x_0, x_1), \text{max}(y_0,
 > y_1))$. We keep scalar multiplication the same as the usual definition. Is
 > this a valid vector space?
