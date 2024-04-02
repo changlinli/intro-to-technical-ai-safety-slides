@@ -427,7 +427,7 @@ vectors.
 </details>
 
 <details>
-<summary>Solution<summary>
+<summary>Solution</summary>
 There is a basis of $R^n$ that has $n$ vectors, namely the basis consisting of
 $(1, 0, 0, \ldots), (0, 1, 0, \ldots), \ldots$. Since every basis of a vector
 space has the same number of elements, we know that all bases of $R^n$ must have
