@@ -398,8 +398,8 @@ be of the same size (i.e. cardinality).
 
 <details>
 <summary>Optional Exercise</summary>
-Note that this will require knowledge of the Axiom of Choice
-[https://en.wikipedia.org/wiki/Axiom_of_choice](https://en.wikipedia.org/wiki/Axiom_of_choice).
+Note that this will require knowledge of the
+Axiom of Choice (https://en.wikipedia.org/wiki/Axiom_of_choice).
 If you are not familiar with set theory axioms, don't worry about completing
 this.
 
