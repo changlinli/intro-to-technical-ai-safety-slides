@@ -1164,6 +1164,12 @@ The three matrices are respectively
 
 <details>
 <summary>Solution</summary>
+Note that this matrix, as a lookup table, means that $(1, 0, 0) \mapsto (1, 0,
+0) + (0, 1, 0) + (0, 0, 1)$ and $(0, 1, 0) \mapsto 0$ and $(0, 0, 1) \mapsto 0$.
+
+In other words $(1, 0, 0) \mapsto (1, 1, 1)$ but is zero for all the other basis
+vectors. Written as an equation this means
+
 $f((x, y, z)) = (x, x, x)$
 </details>
 
