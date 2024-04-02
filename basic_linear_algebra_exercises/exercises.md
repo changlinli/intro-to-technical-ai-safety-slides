@@ -1062,12 +1062,14 @@ the first column) and $f : (0, 1) \mapsto -1 \cdot (1, 0) + 0 \cdot (0, 1)$
 (just reading down the second column).
 
 **Again to emphasize, a matrix is a lookup table for a particular linear
-function!** Every column of a matrix tells us what some basis vector
+function!** Every column of a matrix tells us what some basis vector is mapped
+to as a linear combination of another set of basis vectors.
 
 *Exercise*:
 
-> Using the matrix as a lookup table for some function $f$, can you calculate
-> what the vector $(5, 5)$ is mapped to?
+> Using the above matrix as a lookup table for some function $f$ with the
+> standard basis vectors for domain and codomain, can you calculate what the
+> vector $(5, 5)$ is mapped to?
 
 <details>
 <summary>Solution</summary>
@@ -1097,9 +1099,10 @@ f((5, 5)) &= f(5 \cdot (1, 0) + 5 \cdot (0, 1)) \\
 
 *Exercise*:
 
-> Given the basis vectors $(1, 0)$ and $(0, 1)$ for both the domain and codomain
-> of $f$ and still taking $f : R^2 \to R^2$ as the function that performs a 180
-> degree rotation, what is the resulting matrix that describes $f$?
+> Given again the standard basis vectors $(1, 0)$ and $(0, 1)$ for both the
+> domain and codomain of $f$ and still taking $f : R^2 \to R^2$ as the function
+> that performs a 180 degree rotation, what is the resulting matrix that
+> describes $f$?
 >
 > What about if I change the basis vectors to $(1, 1)$ and $(1, 2)$ for both the
 > domain and codomain?
