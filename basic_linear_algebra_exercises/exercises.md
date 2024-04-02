@@ -709,43 +709,60 @@ calculate how to calculate any linear function $f$!
 
 <details>
 <summary>Solution</summary>
-First let's figure out what $(0.6, 0)$ and $(0, 1.55)$ map to. You could realize
-that $(0.6, 0)$ and $(0, 1.55)$ are just rescaled versions of $(1, 0)$ and $(0,
-1)$ respectively, or you could do the full calculation by hand.
 
-We know $(0.6, 0) = 0.6 \cdot (1, 0) + 0 \cdot (0, 1)$ and $(0, 1.55) = 0 \cdot
-(1, 0) + 1.55 \cdot (0, 1)$.
+<!-- For some crazy reason I can't seem to combine triple backticks with inline LaTeX without causing GitHub to barf and not render the triple backticks properly -->
 
-This means
+First lets calculate the behavior of our function on our new basis vectors. You could either write this down in one step by recognizing that these vectors are just rescaled versions of the standard basis vectors.
 
 ```math
+\begin{align}
+f((0.6, 0)) &= (0, 0.6) \\
+f((0, 1.55)) &= (-1.55, 0)
+\end{align}
+```
+
+Or you could derive it manually.
+
+```math
+\begin{align}
 f((0.6, 0)) &= f(0.6 \cdot (1, 0) + 0 \cdot (0, 1)) \\
 &= 0.6 f((1, 0)) + 0 f((0, 1)) \\
 &= 0.6 \cdot (0, 1) + 0 \cdot (-1, 0) \\
 &= (0, 0.6)
+\end{align}
 ```
 
 and similarly
 
 ```math
+\begin{align}
 f((0, 1.55)) &= f(0 \cdot (1, 0) + 1.55 \cdot (0, 1)) \\
 &= 0 \cdot f((1, 0)) + 1.55 \cdot f((0, 1)) \\
 &= 0 \cdot (0, 1) + 1.55 \cdot (-1, 0) \\
 &= (-1.55, 0)
+\end{align}
 ```
 
-So we know $f((0.6, 0)) = (0, 0.6)$ and $f((0, 1.55)) = (-1.55, 0)$. To
-calculate $f((1.2, 3.1))$ using $(0.6, 0)$ and $(0, 1.55)$ as our basis, we have
-to split $(1.2, 3.1)$ into a linear combination of our new basis, which happens
-to be $(1.2, 3.1) = 2 \cdot (0.6, 0) + 2 \cdot (0, 1.55)$. So then
+We can then break our input vector down into a linear combination of basis vectors.
 
-``` math
-\begin{align}f((1.2, 3.1)) &= f(2 \cdot (0.6, 0) + 2 \cdot (0, 1.55)) \\ &= 2 f((0.6, 0)) + 2 f((0, 1.55)) \\ &= 2 \cdot (0, 0.6) + 2 \cdot (-1.55, 0) \\ &= (-3.1, 1.2)\end{align}
-```
-</details>
 ```math
-a^2+b^2=c^2
+\begin{align}
+(1.2, 3.1) = 2 \cdot (0.6, 0) + 2 \cdot (0, 1.55)
+\end{align}
 ```
+
+Then finally we can throw this all into our function and take advantage of linearity.
+
+```math
+\begin{align}
+f((1.2, 3.1)) &= f(2 \cdot (0.6, 0) + 2 \cdot (0, 1.55)) \\
+&= 2 f((0.6, 0)) + 2 f((0, 1.55)) \\
+&= 2 \cdot (0, 0.6) + 2 \cdot (-1.55, 0) \\
+&= (-3.1, 1.2)
+\end{align}
+```
+
+</details>
 
 *Exercise*:
 
