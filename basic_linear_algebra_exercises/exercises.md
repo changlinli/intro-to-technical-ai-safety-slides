@@ -1222,10 +1222,10 @@ n a_n x^{n - 1} + (n - 1) a_{n - 1} x^{n - 2} + \cdots + 0
 .
 
 Show that there is a way to view the collection of all polynomials as a vector
-space and a way to view differentiation as a linear operator. What are the
-vector addition and scalar multiplication operators? Using that can you show
-that differentiation obeys the linear laws for vector addition and scalar
-multiplication?
+space $P$ and a way to view differentiation as a linear operator $f : P \to P$.
+What are the vector addition and scalar multiplication operators? Using that can
+you show that differentiation obeys the linear laws for vector addition and
+scalar multiplication?
 
 Let's restrict our attention to only those polynomials which have degree less
 than or equal to 4. That is only polynomials of the form
