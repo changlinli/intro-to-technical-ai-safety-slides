@@ -190,7 +190,7 @@ No this is not. There is no zero vector. In particular, if we specify any $(x,
 y)$ to be the zero vector, $(x - 1, y - 1)$ will always be less than it, so
 vector addition of $(x, y)$ and $(x - 1, y - 1)$ will result in $(x, y)$,
 which violates what a zero vector is for $(x - 1, y - 1)$ (adding a zero vector
-to $(x - 1, y - 1)$ should still return $(x - 1, y - 1)$).
+to $(x - 1, y - 1)$ should still return $(x - 1, y - 1)$ ).
 </details>
 
 
