@@ -1125,7 +1125,7 @@ is in fact true based on what I said about $(1, 0)$ and $(0, 1)$?
 </details>
 
 <details>
-<summary>Solution></summary>
+<summary>Solution</summary>
 
 The three matrices are respectively
 
