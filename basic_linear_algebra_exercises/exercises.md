@@ -1088,7 +1088,7 @@ So we get the following decomposition:
 ```math
 \begin{align}
 f((5, 5)) &= f(5 \cdot (1, 0) + 5 \cdot (0, 1)) \\
-&= 5 \cdot f(1, 0) + 5 \cdot f(0, 1) \\
+&= 5 \cdot f((1, 0)) + 5 \cdot f((0, 1)) \\
 &= 5 \cdot (0 \cdot (1, 0) + 1 \cdot (0, 1)) + 5 \cdot (-1 \cdot (1, 0) + 0 \cdot (0, 1)) \\
 &= 5 \cdot (0, 1) + 5 \cdot (-1, 0) \\
 &= (-5, 5)
