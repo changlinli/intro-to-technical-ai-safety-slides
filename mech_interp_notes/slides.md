@@ -81,11 +81,58 @@
   token and how much is based off the token's contents?"
 + If the attention head is n layers deep, this is a hard question
 
+
++ We have two linear functions, $Q$ and $K$.
++ $\langle Q(x), K(y) \rangle = \langle x, Q^T(K(y))$
+
+
+
++ $\langle Q(x + x_p), K(y + y_p) \rangle = $
+
+# Decomposing Parts of the Transformer
+
+
+
+# Understanding the QK-circuit
+
++ The QK-circuit is a function from $d_{model} \to d_{model}$.
+
 # Refresher on matrices
 
 + All tied to linearity
 + Thinking of them as bilinear forms (attention)
 + Thinking of them as linear functions
+
+
+# Circuit Advantages
+
++ No need to look at individual points
++ Can talk about how things decompose
++ Can think about what's truly "fundamental" in a transformer
+
+
+# QK Circuit is more "fundamental" than Q or K alone
+
++ There are multiple different values for Q and K that would result in
+  *absolutely no* change to the transformer behavior.
++ Just have to make sure that $Q^TK$ does not change
++ Hint that $Q$ and $K$ are in some sense "implementation details"
+
+# OV Circuit is more "fundamental" than O or V alone
+
++ There are multiple different values for O and V that would result in
+  *absolutely no* change to the transformer behavior.
++ Just have to make sure that $OV$ does not change.
++ Hint that $O$ and $V$ are in some sense "implementation details"
+
+# Decomposing Transformers
+
+
+
+
++ Why fixing an attention pattern A means that we've "cut off" the rest of the
+  elements of the computation graph
+
 
 # Thinking of linear functions as bilinear functions
 
@@ -111,34 +158,6 @@
 [ 1 2 3 ]
 ```
 
-
-# Understanding the QK-circuit
-
-+ The QK-circuit is a function from $d_{model} \to d_{model}$.
-+ We have two linear functions, $Q$ and $K$.
-+ $\langle Q(x), K(y) \rangle = \langle x, Q^T(K(y))$
-
-# Circuit Advantages
-
-+ No need to look at individual points
-+ Can talk about how things decompose
-+ Can think about what's truly "fundamental" in a transformer
-
-
-# QK Circuit is more "fundamental" than Q or K alone
-
-+ There are multiple different values for Q and K that would result in
-  *absolutely no* change to the transformer behavior.
-+ Just have to make sure that $Q^TK$ does not change
-+ Hint that $Q$ and $K$ are in some sense "implementation details"
-
-# OV Circuit is more "fundamental" than O or V alone
-
-+ There are multiple different values for O and V that would result in
-  *absolutely no* change to the transformer behavior.
-+ Just have to make sure that $OV$ does not change.
-+ Hint that $O$ and $V$ are in some sense "implementation details"
-
 # Decomposing Attention Heads
 
 + Attention head is fully determined by four linear functions: $Q$, $K$, $V$,
@@ -150,6 +169,13 @@
 + So we can rewrite things in a more minimal way: attention head is fully
   determined by two linear functions: $f_{Q^TK}$ and $g_{OV}$ (we'll just call
   them $QK$ and $OV$ for simplicity)
+
+# Understanding 
+
+# Checking for things involving the compositon of attention head mechanisms
+
++ We need to check for the 
+
 
 # Verifying the composition of attention heads
 
@@ -166,3 +192,14 @@
     * $QK^0$, $OV^1$, $QK^1 \circ OV^0$, and $OV^0^T \circ QK^1$, $OV^0 \circ QK^1
       \circ OV^0$
     * Attention that 
+
+
+$C^1(x_k) = W_E^TW^h_{QK}W_E(x) + \sum _{i < k} $
+
+
+# The power of OV
+
+    
+
+
+# What does it mean to find a circuit in a transformer?
