@@ -595,9 +595,26 @@ So we can already see glimpses at how the inner product, this thing that "distri
 
 However, we still haven't defined $\langle v, w \rangle$ for arbitrary $v$ and $w$ yet. So I'll pull something that may seem like it came out of a hat, but we'll see how it lines up with all the properties we've discussed previously and hopefully that will help demystify it to some degree.
 
-We define an inner product $\langle v, w \rangle$ for vectors $v$ and $w$ in an
-$n$-dimensional real-valued vector space as $\sum _{i = 0} ^n v_i w_i$ for $v =
-\sum _{i = 0} ^n v_i b_i$ and $w = \sum _{i = 0} ^n w_i b_i$ for some basis
+We define an inner product $\langle v, w \rangle$ generated from a basis for vectors $v$ and $w$ in an
+$n$-dimensional real-valued vector space as 
+
+```math
+\langle v, w \rangle = \sum _{i = 0} ^n v_i w_i
+```
+
+where
+
+```math
+v = \sum _{i = 0} ^n v_i b_i
+```
+
+and
+
+```math
+w = \sum _{i = 0} ^n w_i b_i
+```
+
+for some basis
 $b_0, \ldots, b_n$ and scalars $v_i$ and $w_i$.
 
 Let's double-check that we still have our desired property for our chosen basis
