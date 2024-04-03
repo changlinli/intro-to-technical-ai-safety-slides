@@ -57,10 +57,10 @@ function is smaller than the codomain of the associated function.
 
 *Exercise*:
 
-> Let's say you have a real-valued matrix of size $m \times n$. As a reminder
+> Let's say you have a real-valued matrix of size $3 \times 2$. As a reminder
 > this means that this corresponds to a linear function $f$ whose domain has
-> dimension $n$ and codomain has dimension $m$. Can you come up with values for
-> that matrix such that its rank is less than $m$ and no value is zero?
+> dimension $2$ and codomain has dimension $3$. Can you come up with values for
+> that matrix such that its rank is less than $2$ and no value is zero?
 
 ## Matrix Multiplication
 
@@ -146,7 +146,7 @@ or more generally for an $m \times n$ matrix and $n$-tuple vector:
 
 ```math
 \begin{align}
-M &= \begin{bmatrix} a_{0, 0} & \ldots & a{0, n - 1} \\ \vdots & & \vdots \\ a_{m - 1, 0} \ldots a_{m - 1, n - 1} \end{bmatrix} \\
+M &= \begin{bmatrix} a_{0, 0} & \ldots & a{0, n - 1} \\ \vdots & & \vdots \\ a_{m - 1, 0} & \ldots & a_{m - 1, n - 1} \end{bmatrix} \\
 v &= (v_0, \ldots, v_n) \\
 M \times v &= (\sum _{i=0} ^n a_{0, i} v_i, \sum _{i=0} ^n a_{1, i} v_i, \ldots, \sum _{i=0} ^n a_{m - 1, i} v_i) \\
 \end{align}
@@ -187,8 +187,8 @@ operation that takes in two linear functions and gives you back another linear
 function.
 
 That sounds a lot like function composition (as a reminder function composition
-takes in two functions $f(x)$ and $g(x)$ and gives you back a new function $h(x)
-= f(g(x))$)! But is it? (spoiler it is: but let's go and make sure that it is).
+takes in two functions $f(x)$ and $g(x)$ and gives you back a new function $h(x) = f(g(x))$
+)! But is it? (spoiler it is: but let's go and make sure that it is).
 
 Let's begin by computing the composition of two linear functions using matrices
 the "long" way. That is, since composition of two functions is defined as
@@ -265,7 +265,7 @@ M_1 &= \begin{bmatrix} 5 & 6\\\ 7 & 8 \end{bmatrix}
 \end{align}
 ```
 
-Let's write out the full series of arithmetic operations we had to do to
+Let's write out the full series of matrix-vector multipication operations we had to do to
 calculate the final result $r$, without collapsing any of the intermediate
 multiplication or additions.
 
@@ -293,7 +293,7 @@ So those are exactly the terms of our new matrix!
 ```math
 \begin{bmatrix}
 (1 \cdot 5 + 3 \cdot 6) & (2 \cdot 5 + 4 \cdot 6) \\
-(1 \cdot 7 + 3 \cdot 8) & (2 \dot 7 + 4 \cdot 8)
+(1 \cdot 7 + 3 \cdot 8) & (2 \cdot 7 + 4 \cdot 8)
 \end{bmatrix}
 ```
 
@@ -308,18 +308,18 @@ M_1 &= \begin{bmatrix} 5 & 6\\\ 7 & 8 \end{bmatrix}
 
 And there we go! We've derived matrix multiplication completely from scratch. In
 order to compute the composition of two linear functions we multiply their two
-associated matrices. How do we do so? We multiply the $i$th row of the left matrix
-point-wise by the $j$th column of the right matrix and sum those results
-together to get the $i, j$th element of the matrix associated with the
+associated matrices. How do we do so? We multiply the $i$ th row of the left matrix
+point-wise by the $j$ th column of the right matrix and sum those results
+together to get the $i, j$ th element of the matrix associated with the
 composition of the two functions.
 
 We will notate matrix multiplication of two matrices $M_0$ and $M_1$ either via
-$M_0 \times M_1$ for emphasis or, just like with scalars, we may omit the
-symbol and directly write $M_0 M_1$.
+$M_1 \times M_0$ for emphasis or, just like with scalars, we may omit the
+symbol and directly write $M_1 M_0$.
 
 *Exercise*:
 
-> Using again the following two matrices for $$
+> Using again the following two matrices
 >
 > ```math
 > M_0 = \begin{bmatrix} 0 & -1\\\ 1 & 0 \end{bmatrix}
@@ -347,11 +347,6 @@ symbol and directly write $M_0 M_1$.
 <summary>Hint</summary>
 Remember that matrix multiplication is function composition. Can you use
 properties about function composition to prove this?
-</details>
-
-<details>
-<summary>Solution</summary>
-Note that 
 </details>
 
 Let's use the fact that matrix multiplication is simply the composition of linear functions to derive a few additional facts:
