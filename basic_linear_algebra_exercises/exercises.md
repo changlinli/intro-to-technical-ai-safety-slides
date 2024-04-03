@@ -304,7 +304,7 @@ k_n$. When we say it is "a minimal set," what we mean is that if you removed
 any $v_i$ from that set, this property would no longer hold true.
 
 <details>
-<summary>Terminology Aside</summary>
+<summary>Terminology Aside (linear independence)</summary>
 <p>
 The set of all vectors $W$ that can be formed via scaled sums of some other set
 of vectors $V$ is known as known as the span of $V$. Hence a more compact way
