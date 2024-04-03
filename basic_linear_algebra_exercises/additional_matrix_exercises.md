@@ -857,7 +857,7 @@ Indeed, the relationship beteween transposes and inner products extends far enou
 
 <details>
 <summary>Solution</summary>
-If we let $V$ and $W$ be
+If we write out the matrices we get
 
 ```math
 V = \begin{bmatrix} v_0 \\ v_1 \\ \vdots \\ v_n \end{bmatrix}
@@ -875,7 +875,13 @@ then
 V^T = \begin{bmatrix} v_0 & v_1 & \ldots & v_n \end{bmatrix}
 ```
 
-so $V^T W = v_0 w_0 + v_1 w_1 + \cdots + v_n w_n$, which is the exact same thing as calculating the dot product!
+so 
+
+```math
+V^T W = v_0 w_0 + v_1 w_1 + \cdots + v_n w_n
+```
+
+, which is the exact same thing as calculating the dot product!
 
 </details>
 
