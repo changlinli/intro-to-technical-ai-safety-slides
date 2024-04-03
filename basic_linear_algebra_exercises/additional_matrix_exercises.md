@@ -64,7 +64,11 @@ function is smaller than the codomain of the associated function.
 
 ## Matrix computations
 
-One of the most important parts of matrices is that they allow us to express more things as computation which can be easily carried out on a computer. We've already seen how we can treat matrices as lookup tables. Let's look again at $R^2$ with the standard basis vectors and review the exact sequence of steps we perform.
+One of the most important parts of matrices is that they allow us to express
+more things as computation which can be easily carried out on a computer. We've
+already seen how we can treat matrices as lookup tables. Let's look again at
+$R^2$ with the standard basis vectors and review the exact sequence of steps we
+perform.
 
 Given the matrix
 
@@ -109,15 +113,48 @@ Since we're using the standard basis here, this whole thing is equal to
 (3 \cdot 0 + 2 \cdot -1, 3 \cdot 1 + 2 \cdot 0)
 ```
 
-So if we make sure that we keep the same set of basis vectors and those basis vectors happen to be the standard basis throughout our entire computation, we have a much more compact way of computing a linear function applied to a vector given its matrix.
+So if we make sure that we keep the same set of basis vectors and those basis
+vectors happen to be the standard basis throughout our entire computation, we
+have a much more compact way of computing a linear function applied to a vector
+given its matrix.
 
-Namely take each row of the matrix, do component-wise multiplication with the vector, then sum up that result and that's one component of the resulting vector. In our previuos example, we notice that $0$ and $-1$ are the first row of our matrix so we multiply by $3$ and $2$ respectively and add them together to the first component of our resulting vector and then we do the same for $1$ and $2$ as the second row of our matrix.
+Namely take each row of the matrix, do component-wise multiplication with the
+vector, then sum up that result and that's one component of the resulting
+vector. In our previous example, we notice that $0$ and $-1$ are the first row
+of our matrix so we multiply by $3$ and $2$ respectively and add them together
+to the first component of our resulting vector and then we do the same for $1$
+and $2$ as the second row of our matrix.
 
-For people who have learned matrix multiplication rules this should look very familiar! It might not have been apparent back then why we do multiplication that way, but now we can see that this particular order of multiplication and summation falls out as an inevitable consequence of how matrices represent linear functions.
+For people who have learned matrix multiplication rules this should look very
+familiar! It might not have been apparent back then why we do multiplication
+that way, but now we can see that this particular order of multiplication and
+summation falls out as an inevitable consequence of how matrices represent
+linear functions.
+
+So in the special case of two-dimensional matrices we have matrix-vector
+multiplication defined as 
+
+```math
+\begin{align}
+M &= \begin{bmatrix} a & b \\ c & d \end{bmatrix} \\
+v &= (v_0, v_1) \\
+M \times v &= (av_0 + bv_1, cv_0 + dv_1)
+\end{align}
+```
+
+or more generally for an $m \times n$ matrix and $n$-tuple vector:
+
+```math
+\begin{align}
+M &= \begin{bmatrix} a_{0, 0} & \ldots & a{0, n - 1} \\ \vdots & & \vdots \\ a_{m - 1, 0} \ldots a_{m - 1, n - 1} \end{bmatrix} \\
+v &= (v_0, \ldots, v_n) \\
+M \times v &= (\sum _{i=0} ^n a_{0, i} v_i, \sum _{i=0} ^n a_{1, i} v_i, \ldots, \sum _{i=0} ^n a_{m - 1, i} v_i) \\
+\end{align}
+```
 
 *Exercise*:
 
-> Using the above ordering, compute the result of applying the function represented by the following matrix
+> Using the above, compute the result of applying the function represented by the following matrix
 >
 > ```math
 > \begin{bmatrix} 2 & 1 \\ -4 & 0 \end{bmatrix}
@@ -136,13 +173,229 @@ For people who have learned matrix multiplication rules this should look very fa
 > We assume that we are in $R^n$ and using the standard
 > basis vectors for our matrix.
 
-For any people who remember matrix multiplication from school, there's still one operation we haven't yet justified, which is the multiplication of matrices themselves, rather than just a matrix and a vector.
+For any people who remember matrix multiplication from school, there's still one
+operation we haven't yet justified, which is the multiplication of matrices
+themselves, rather than just a matrix and a vector.
 
-So we'll start with a motivating question: *thought of as linear functions, what exactly is matrix multiplication?*
+So we'll start with a motivating question: *thought of as linear functions, what
+exactly is matrix multiplication?*
 
-We can already get a hint from simplying thinking about the "type signature" of matrix multiplication what it might be. We take two matrices and get back another matrix. That means whatever matrix multiplication "really is," it's some operation that takes in two linear functions and gives you back another linear function.
+We can already get a hint from simply thinking about the "type signature" of
+matrix multiplication what it might be. We take two matrices and get back
+another matrix. That means whatever matrix multiplication "really is," it's some
+operation that takes in two linear functions and gives you back another linear
+function.
 
-That sounds a lot like function composition (as a reminder function composition takes in two functions $f(x)$ and $g(x)$ and gives you back a new function $h(x) = f(g(x))$)! But is it? (spoiler it is: but let's go and make sure that it is)
+That sounds a lot like function composition (as a reminder function composition
+takes in two functions $f(x)$ and $g(x)$ and gives you back a new function $h(x)
+= f(g(x))$)! But is it? (spoiler it is: but let's go and make sure that it is).
+
+Let's begin by computing the composition of two linear functions using matrices
+the "long" way. That is, since composition of two functions is defined as
+applying the first function and then applying the second function, let's go
+ahead and do that for an example.
+
+*Exercise*:
+
+> We have two linear functions $f_0$ and $f_1$. We'll assume all domains and
+> codomains of both functions are $R^2$ with the standard basis vectors. Let's
+> let $f_0$ be represented by the following matrix $M_0$
+>
+> ```math
+> \begin{bmatrix} 0 & -1\\\ 1 & 0 \end{bmatrix}
+> ```
+>
+> and let $f_1$ be represented by the matrix $M_1$
+>
+> ```math
+> \begin{bmatrix} -1 & 0\\\ 0 & -1 \end{bmatrix}
+> ```
+>
+> 1. Can you use $M_0$ and $M_1$ to describe in English what the functions $f_0$
+>    and $f_1$ are?
+> 2. Calculate $f_1(f_0(v_0))$ where $v_0 = (3, 2)$ by the usual trick
+>    of thinking of matrices as lookup tables. You will need to do this twice,
+>    once first to calculate $f_0(v_0)$ and then once to take that result and
+>    pass it through $f_1$.
+> 3. Again calculate $f_1(f_0(v_0))$ where $v_0 = (3, 2)$, but this time using
+>    the vector matrix multiplication and summation steps we described earlier.
+>    Again you'll need to do this twice, first multiplying $M_0$ and $v_0$ to
+>    get a new vector and then multiplying that vector by $M_1$. You should get
+>    the same answer as in step 2.
+
+Usually it is a bit of a syntactic trick to use function composition vs just
+serially applying two functions one after another. Whether we define a new
+function $h$
+
+
+But it turns out that thinking in terms of function composition rather than
+serial function application can save some computation for us because of a fact
+about linear functions: the composition of two linear functions results again in
+another linear function.
+
+<details>
+<summary>Optional Exercise</summary>
+Prove that the composition of two linear functions results always in another
+linear function (assuming that the two linear functions can be composed in the
+first place, i.e. that their domains and codomains match).
+</details>
+
+Normally, as we saw in the previous exercise, if I had two linear functions
+$f_0$ and $f_1$ with corresponding matrices $M_0$ and $M_1$ that I wanted to
+apply sequentially to many different vectors $v_0, v_1, v_2, \ldots$, I'd have
+to do two sets of matrix-vector multiplications: once for $M_0$ and once for
+$M_1$.
+
+But if the composition of two linear functions $f_0$ and $f_1$ is again a linear
+function (call it $f_2$), then that means there is a single matrix $M_2$ that
+corresponds to that $f_2$ that I can use instead. This saves me a considerable
+amount of computation if I'm doing this computation multiple times! Instead of
+multiplying twice by $M_0$ and $M_1$, I can just multiply by a single $M_2$ and
+be done with it.
+
+But how can I derive this $M_2$? Well let's look a bit more closely at the
+solution to the previous exercise. We're going to change up some of the numbers
+so that it's easier to track what's going on.
+
+```math
+\begin{align}
+v &= (9, 0) \\
+M_0 &= \begin{bmatrix} 1 & 2\\\ 3 & 4 \end{bmatrix} \\
+M_1 &= \begin{bmatrix} 5 & 6\\\ 7 & 8 \end{bmatrix}
+\end{align}
+```
+
+Let's write out the full series of arithmetic operations we had to do to
+calculate the final result $r$, without collapsing any of the intermediate
+multiplication or additions.
+
+```math
+\begin{align}
+r &= M_1 \times (M_0 \times v) \\
+&= M_1 \times (9 \cdot 1 + 0 \cdot 2, 9 \cdot 3 + 0 \cdot 4) \\
+&= ((9 \cdot 1 + 0 \cdot 2) \cdot 5 + (9 \cdot 3 + 0 \cdot 4) \cdot 6, (9 \cdot 1 + 0 \cdot 2) \cdot 7 + (9 \cdot 3 + 0 \cdot 4) \cdot 8) \\
+&= (9 \cdot 1 \cdot 5 + 0 \cdot 2 \cdot 5 + 9 \cdot 3 \cdot 6 + 0 \cdot 4 \cdot 6, 9 \cdot 1 \cdot 7 + 0 \cdot 2 \cdot 7 + 9 \cdot 3 \cdot 8 + 0 \cdot 4 \cdot 8) \\
+&= (9 \cdot (1 \cdot 5 + 3 \cdot 6) + 0 \cdot (2 \cdot 5 + 4 \cdot 6), 9 \cdot (1 \cdot 7 + 3 \cdot 8) + 0 \cdot (2 \dot 7 + 4 \cdot 8))
+\end{align}
+```
+
+I've rearranged terms in the last two lines in a pretty suggestive way. If you
+look at just the last line, we have something that looks a lot like
+a single instance of matrix-vector multiplication if I replace parentheses with
+single variable names!
+
+```math
+(9 \cdot a + 0 \cdot b, 9 \cdot c + 0 \cdot d)
+```
+
+So those are exactly the terms of our new matrix!
+
+```math
+\begin{bmatrix}
+(1 \cdot 5 + 3 \cdot 6) & (2 \cdot 5 + 4 \cdot 6) \\
+(1 \cdot 7 + 3 \cdot 8) & (2 \dot 7 + 4 \cdot 8)
+\end{bmatrix}
+```
+
+Let's remind ourselves what the original two matrices were:
+
+```math
+\begin{align}
+M_0 &= \begin{bmatrix} 1 & 2\\\ 3 & 4 \end{bmatrix} \\
+M_1 &= \begin{bmatrix} 5 & 6\\\ 7 & 8 \end{bmatrix}
+\end{align}
+```
+
+And there we go! We've derived matrix multiplication completely from scratch. In
+order to compute the composition of two linear functions we multiply their two
+associated matrices. How do we do so? We multiply the $i$th row of the left matrix
+point-wise by the $j$th column of the right matrix and sum those results
+together to get the $i, j$th element of the matrix associated with the
+composition of the two functions.
+
+*Exercise*:
+
+> Using again the following two matrices for $$
+>
+> ```math
+> M_0 = \begin{bmatrix} 0 & -1\\\ 1 & 0 \end{bmatrix}
+> ```
+>
+> and
+>
+> ```math
+> M_1 = \begin{bmatrix} -1 & 0\\\ 0 & -1 \end{bmatrix}
+> ```
+
+*Exercise*:
+
+> Matrix multiplication is known to be associative, but not commutative. That is
+> it is always true that given some product of three matrices $M_2(M_1M_0)$ this
+> is the same as $(M_2 M_1) M_0$, however given $M_1 M_2$ it is not true that
+> $M_2 M_1$ results in the same answer. Can you prove this without resorting to
+> calculating individual matrix rows and columns?
+
+<details>
+<summary>Hint</summary>
+Remember that matrix multiplication is function composition. Can you use
+properties about function composition to prove this?
+</details>
+
+<details>
+<summary>Solution</summary>
+Note that 
+</details>
+
+
+So far we've been drawing a distinction between
+
+
+
+
+A large part of what we are doing here is trying to think at a higher level of
+abstraction than purely blobs of floating point numbers, since that will be
+vital to understanding how language models work.
+
+We've so far explained how matrices are just notation for linear functions,
+how matrix multiplication is just an implementation of composition of functions,
+and how column vectors are just
+
+There are many other matrix manipulation techniques that we won't have time to
+cover, but having this basic knowledge that matrices are linear functions will
+provide a lot of guidance on.
+
+However, there is one ubuiqitous technique that we haven't covered yet and can
+be quite puzzling: what does matrix transposition correspond to?
+
+I say that it corresponds to the "transpose of a linear function," but that
+seems like I'm just pushing the buck. Well it turns out that function
+transposition is intimately related to the inner product and is "kind of an
+inverse." What do I mean?
+
+Well let's go over what the inverse of a function does: it lets you "move an $f$
+from one side of the equals sign to the other."
+
+```math
+f(x) = y \iff x = f^{-1}(y)
+```
+
+Let's just rewrite $=$ as a prefix function $\text{eq}$ that outputs a boolean
+which we can then perform a comparison on. This is simply a restatement of our
+previous equation, just in a format that will let us see the symmetry a little
+bit better when we get to the inner product.
+
+```math
+\text{eq}(f(x), y) = \text{eq}(x, f^{-1}(y))
+```
+
+A function transpose (denoted by $f^T$) does the exact same thing for inner products!
+
+```math
+\langle f(x), y \rangle = \langle x, f^T (y) \rangle
+```
+
+And of course, as they are so suggestively named, given a matrix $M$ associated
+with a function $f$, its transpose $M^T$ is exactly $f^T$.
 
 
 
@@ -306,7 +559,7 @@ Thought of as arrows, vectors in $R^n$ definitely seem to have a physical
 length. However, it's worth noticing that if I have two arrows $x$
 and $y$ and I tell you what their lengths are, that alone is not sufficient
 information to determine what the length of $x + y$, we need to know the angle
-between the two arrow.
+between the two arrows.
 
 Likewise if two arrows are graphically very similar, then we would expect their
 length and angle considered relative to some reference arrow (say an arrow that
