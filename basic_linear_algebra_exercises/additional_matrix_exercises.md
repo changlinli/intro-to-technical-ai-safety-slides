@@ -855,6 +855,30 @@ Indeed, the relationship beteween transposes and inner products extends far enou
 > and $w$ where the matrices are all calculated over the standard bases of
 > $R^n$ and $R$, show that $V^TW$ is the same thing as the dot product.
 
+<details>
+<summary>Solution</summary>
+If we let $V$ and $W$ be
+
+```math
+V = \begin{bmatrix} v_0 \\ v_1 \\ \vdots \\ v_n \end{bmatrix}
+```
+
+and
+
+```math
+W = \begin{bmatrix} w_0 \\ w_1 \\ \vdots \\ w_n \end{bmatrix}
+```
+
+then
+
+```math
+V^T = \begin{bmatrix} v_0 & v_1 & \ldots & v_n \end{bmatrix}
+```
+
+so $V^T W = v_0 w_0 + v_1 w_1 + \cdots + v_n w_n$, which is the exact same thing as calculating the dot product!
+
+</details>
+
 *Exercise*:
 
 > Given two linear functions $f$ and $g$ with associated matrices $M_f$ and $M_g$, show that $\langle f(v), g(w) \rangle = v^T M_f^T M_g^T w$ assuming that the matrices and inner product were constructed from the same bases.
