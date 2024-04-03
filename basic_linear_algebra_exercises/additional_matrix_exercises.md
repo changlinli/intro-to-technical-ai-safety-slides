@@ -904,4 +904,4 @@ V^T W = v_0 w_0 + v_1 w_1 + \cdots + v_n w_n
 
 *Exercise*:
 
-> Given two linear functions $f$ and $g$ with associated matrices $M_f$ and $M_g$, show that $\langle f(v), g(w) \rangle = v^T M_f^T M_g^T w$ assuming that the matrices and inner product were constructed from the same bases.
+> Given two linear functions $f$ and $g$ with associated matrices $M_f$ and $M_g$, show that $\langle f(v), g(w) \rangle = v^T M_f^T M_g w$ assuming that the matrices and inner product were constructed from the same bases.
