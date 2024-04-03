@@ -1,6 +1,7 @@
 ## Matrix Rank
 
-Let's start again with some exercises to review linear subspaces and matrices:
+We're going to talk about matrix rank here, because it's a concept that shows
+up quite a bit in ML.
 
 *Exercise*:
 
@@ -9,6 +10,12 @@ Let's start again with some exercises to review linear subspaces and matrices:
 >
 > Can you come up with a set of basis vectors for that subspace, i.e. a set of
 > vectors within that subspace ? How large is that set?
+
+<details>
+<summary>Solution</summary>
+This should be the same answer as from the previous exercises. The set of basis
+vectors will be of size 1. One candidate for that basis vector is $(1, 1)$.
+</details>
 
 *Exercise*:
 
@@ -22,6 +29,12 @@ Let's start again with some exercises to review linear subspaces and matrices:
 > As we can see from the 3 rows of the matrix, the codomain of this function has a
 > dimension of three. What is the dimension of the range of this function? That
 > is how many elements form a basis of its range?
+
+<details>
+<summary>Solution</summary>
+The dimension of its range is 2, that is one smaller than the dimension of its
+codomain.
+</details>
 
 In general it turns out that the dimension of the range of a function cannot
 exceed the dimension of its domain.
@@ -49,6 +62,12 @@ function may not be equal to its codomain.
 >
 > What is the range of this function? What is the dimension of its range?
 
+<details>
+<summary>Solution</summary>
+The range of this function is the set of all triplets whose components are all
+equal to each other. The dimension of this is $1$.
+</details>
+
 It turns out it is often useful to know what the dimension of the range is of
 the function that a matrix represents. It is useful enough that it has its own
 name, the rank of a matrix. A matrix is considered "low-rank" if its rank is
@@ -61,6 +80,11 @@ function is smaller than the codomain of the associated function.
 > this means that this corresponds to a linear function $f$ whose domain has
 > dimension $2$ and codomain has dimension $3$. Can you come up with values for
 > that matrix such that its rank is less than $2$ and no value is zero?
+
+<details>
+<summary>Solution</summary>
+Could fill it again with all ones!
+</details>
 
 ## Matrix Multiplication
 
@@ -173,6 +197,27 @@ M \times v &= (\sum _{i=0} ^n a_{0, i} v_i, \sum _{i=0} ^n a_{1, i} v_i, \ldots,
 > We assume that we are in $R^n$ and using the standard
 > basis vectors for our matrix.
 
+<details>
+<summary>Solution</summary>
+For the first matrix we have
+
+```math
+\begin{align}
+\begin{bmatrix} 2 & 1 \\ -4 & 0 \end{bmatrix} \times (2, 3) &= (2 \cdot 2 + 1 \cdot 3, -4 \cdot 2 + 0 \cdot 3) \\
+&= (7, -8)
+\end{align}
+```
+
+and for the second
+
+```math
+\begin{align}
+\begin{bmatrix} 2 & 1 & 8 \\ 1 & -4 & 0 \end{bmatrix} \times (1, 2, 3) &= (2 \cdot 1 + 1 \cdot 2 + 8 \cdot 3, 1 \cdot 1 - 4 \cdot 2 + 0 \cdot 3) \\
+&= (28, -7)
+\end{align}
+```
+</details>
+
 For any people who remember matrix multiplication from school, there's still one
 operation we haven't yet justified, which is the multiplication of matrices
 themselves, rather than just a matrix and a vector.
@@ -211,17 +256,20 @@ ahead and do that for an example.
 > \begin{bmatrix} -1 & 0\\\ 0 & -1 \end{bmatrix}
 > ```
 >
-> 1. Can you use $M_0$ and $M_1$ to describe in English what the functions $f_0$
->    and $f_1$ are?
-> 2. Calculate $f_1(f_0(v_0))$ where $v_0 = (3, 2)$ by the usual trick
+> 1. Calculate $f_1(f_0(v_0))$ where $v_0 = (3, 2)$ by the usual trick
 >    of thinking of matrices as lookup tables. You will need to do this twice,
 >    once first to calculate $f_0(v_0)$ and then once to take that result and
 >    pass it through $f_1$.
-> 3. Again calculate $f_1(f_0(v_0))$ where $v_0 = (3, 2)$, but this time using
+> 2. Again calculate $f_1(f_0(v_0))$ where $v_0 = (3, 2)$, but this time using
 >    the vector matrix multiplication and summation steps we described earlier.
 >    Again you'll need to do this twice, first multiplying $M_0$ and $v_0$ to
 >    get a new vector and then multiplying that vector by $M_1$. You should get
 >    the same answer as in step 2.
+
+<details>
+<summary>Solution</summary>
+In both cases you should end up with $(2, -3)$.
+</details>
 
 Usually it is a bit of a syntactic trick to use function composition vs just
 serially applying two functions one after another. Whether we define a new
@@ -335,6 +383,19 @@ symbol and directly write $M_1 M_0$.
 > matrix product first before applying it to $v$. You should find that you end
 > up with the same answer as before.
 
+<details>
+<summary>Solution</summary>
+
+The intermediate matrix is
+
+```math
+\begin{bmatrix} 0 & 1\\\ -1 & 0 \end{bmatrix}
+```
+
+which results in a final answer (again) of $(2, -3)$.
+
+</details>
+
 *Exercise*:
 
 > Matrix multiplication is known to be associative, but not commutative. That is
@@ -349,6 +410,12 @@ Remember that matrix multiplication is function composition. Can you use
 properties about function composition to prove this?
 </details>
 
+<details>
+<summary>Solution</summary>
+Function composition itself is associative but not commutative which directly
+implies the same about matrix multiplication.
+</details>
+
 Let's use the fact that matrix multiplication is simply the composition of linear functions to derive a few additional facts:
 
 *Exercise*:
@@ -356,12 +423,22 @@ Let's use the fact that matrix multiplication is simply the composition of linea
 > Is it ever possible for the product of two matrices to end up with a higher
 > rank than at least one of the two original matrices?
 
+<details>
+<summary>Solution</summary>
+No this is not posible. Again if we think of this as functions, it is impossible for a linear function to have a range that is of higher dimension than its domain. This means that the composition of linear functions can only ever decrease the dimension of the output range, never increase it.
+</details>
+
 *Exercise*:
 
 > Call the identity matrix $I$ the matrix that has $1$s along the diagonal and
 > zeroes everywhere else. We say that given a matrix $M$, its inverse $M^{-1}$
 > is the matrix such that $MM^{-1} = I$. Does every matrix have an inverse? Can
 > you prove your answer without doing any matrix computation?
+
+<details>
+<summary>Solution</summary>
+There are certain matrices without inverses. This is because there are certain functions that don't have inverses (e.g. think of the function that maps every vector to the same output vector).
+</details>
 
 Our last step is going to be to unify matrix-vector multiplication and matrix
 multiplication. If you compare multiplication of an $m \times n$ matrix by a
@@ -485,8 +562,15 @@ product was generated by the same basis.
 
 *Exercise*:
 
-> Prove that indeed $\langle b_i, b_j \rangle = 0$ assuming that the inner
+> Prove that indeed $\langle b_i, b_j \rangle = 0$ if $i \not= j$ $assuming that the inner
 > product was generated by the same basis.
+
+<details>
+<summary>Solution</summary>
+If the inner product is generated by the basis, then $\langle b_i, b_j \rangle$
+is the value such that $b_i = \cdots + \langle b_i, b_j \rangle b_j + \cdots$,
+but that must be 0 due to linear independence of a basis.
+</details>
 
 We also have an easy way of accessing the "length" of a vector now, by declaring that the square of the length of a vector is the inner product of a vector with itself, i.e. $\lVert v \rVert ^2 = \langle v, v \rangle$.
 
@@ -496,6 +580,14 @@ We also have an easy way of accessing the "length" of a vector now, by declaring
 > $\lVert v \rVert ^2 = \langle v, v \rangle$ means $\lVert b_i \rVert = 1$
 > just like we said earlier, assumning that the inner product is generated by
 > $B$.
+
+<details>
+<summary>Solution</summary>
+In the decomposition of a basis vector into a linear sum of all basis vectors,
+all coefficients will be 0 except for the coefficient of the original basis
+vector itself which will be $1$, which means that the inner product $\langle
+b_i, b_i \rangle = 1$, and the square root of $1$ is still $1$.
+</details>
 
 If you want to know why we take the square, its motivation comes from Pythogoras' Theorem! We'll come back to exploring that further once we have a full definition of the inner product.
 
@@ -532,6 +624,18 @@ which is exactly what we wanted!
 >
 > Generate a new inner product using the standard basis for $R^2$ instead and
 > calculate $\langle (3, 4), (2, 2) \rangle$ again.
+
+<details>
+<summary>Solution</summary>
+
+For the first inner product, we decompose $(3, 4) = 2b_0 + b_1$ and $(2, 2) =
+2b_0 + 0b_1$. This means that our final answer is $2 \cdot 2 + 1 \cdot 0 = 4$.
+
+For the second inner product, we decompose $(3, 4) = 3(1, 0) + 4(0, 1)$ and
+$(2, 2) = 2(1, 0) + 2(0, 1)$ which means our final answer is $3 \cdot 2 + 4
+\cdot 2 = 14$.
+
+</details>
 
 With this definition of an inner product in hand, let's turn back to how to motivate the definition of the length of a vector $\lVert v \rVert$ (also called its "norm") as $\lVert v \rVert ^2 = \langle v, v \rangle$ via Pythagoras' Theorem. In particular we will show that defining the norm of a vector this way lets us satisfy Pythagoras' Theorem!
 
@@ -587,6 +691,14 @@ inner product that is generated by the standard basis on $R^n$.
 > with the above statement, in particular that the inner product generated by
 > the standard basis on $R^n$ computes the same number.
 
+<details>
+<summary>Solution</summary>
+If we first decompose we'll end up with $v_0 (1, 0, \ldots) + \cdots +
+v_n(\ldots, 0, 1)$ and $w_0 (1, 0, \ldots) + \cdots + w_n(\ldots, 0, 1)$, which
+results in an inner product of $v_0 w_0 + \cdots + v_n w_n$, which indeed is
+the same thing as the usual definition for the dot product.
+</details>
+
 Much like how bases can be used to define matrices, a basis-dependent
 construct, to implement a basis-independent construct, namely linear functions,
 the same holds for inner products: even though we can construct them with
@@ -618,6 +730,16 @@ vector space and returns a real number such that
 
 > Show that our previous definition of inner product agrees with all of these laws.
 
+<details>
+<summary>Solution</summary>
+1. This follows by commutativity of scalar addition
+2. This follows by the distributive property of scalar multiplication over scalar addition
+3. This follows because the inner product of a vector with itself results in a
+   bunch of scalars squared and squared real numbers are never negative hence
+their sum is never negative and if the vector is not zero at least one element
+of the sum must be positive leaving the overall sum positive.
+</details>
+
 *Exercise*:
 
 > We've only required linearity for the first argument of an inner product, but
@@ -630,6 +752,13 @@ vector space and returns a real number such that
 Use symmetry.
 </details>
 
+<details>
+<summary>Solution</summary>
+By symmetry we can flip $\langle v, k_0 w_0 + k_1 w_1 \rangle = \langle k_0 w_0
++ k_1 w_1, v \rangle$ and apply linearity in the first argument and then flip
+back each of the constituent parts.
+</details>
+
 *Exercise*:
 
 > Let's say we have a vector $v$ in a vector space equipped with an inner
@@ -640,6 +769,13 @@ Use symmetry.
 > product. For the vector $(1, 1)$, which vectors of the same length create the
 > largest inner product with it? The smallest inner product? An inner product of
 > zero?
+
+<details>
+<summary>Solution</summary>
+The vector equal to $(1, 1)$ creates the largest dot product among vectors of
+the same length. $(-1, -1)$ creates the smallest dot product among vectors of
+the same length. Both $(-1, 1)$ and $(1, -1)$ result in dot products of zero.
+</details>
 
 This exercise demonstrates how inner products capture a notion of
 similarity. Generally speaking, the larger the inner product is between two
