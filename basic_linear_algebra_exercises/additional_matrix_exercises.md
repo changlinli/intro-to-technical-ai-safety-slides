@@ -170,9 +170,9 @@ or more generally for an $m \times n$ matrix and $n$-tuple vector:
 
 ```math
 \begin{align}
-M &= \begin{bmatrix} a_{0, 0} & \ldots & a{0, n - 1} \\ \vdots & & \vdots \\ a_{m - 1, 0} & \ldots & a_{m - 1, n - 1} \end{bmatrix} \\
+M &= \begin{bmatrix} a_{0, 0} & \ldots & a_{0, n - 1} \\ \vdots & & \vdots \\ a_{m - 1, 0} & \ldots & a_{m - 1, n - 1} \end{bmatrix} \\
 v &= (v_0, \ldots, v_{n-1}) \\
-M \times v &= (\sum _{i=0} ^n a_{0, i} v_i, \sum _{i=0} ^n a_{1, i} v_i, \ldots, \sum _{i=0} ^n a_{m - 1, i} v_i) \\
+M \times v &= (\sum _{i=0} ^{n - 1} a_{0, i} v_i, \sum _{i=0} ^{n - 1} a_{1, i} v_i, \ldots, \sum _{i=0} ^{n - 1} a_{m - 1, i} v_i) \\
 \end{align}
 ```
 
