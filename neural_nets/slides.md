@@ -1,6 +1,6 @@
 % Intro to Neural Nets
 
-# Neural Nets
+# (Vanilla) Neural Nets/Multi-Layer Preceptrons (MLPs)
 
 ![neural net diagram](neural_net.svg)
 
@@ -8,6 +8,12 @@
 + Small, simple individual structures
 + Pieced together to form complex structures
 + The fundamental part of almost any modern ML/AI structure
+
+# The Universal Approximation Theorem
+
++ Any function on $R^n -> R^m$ can be approximated to any desired degree of
+  precision by a sufficiently large neural network
++ Lots and lots of things can be expressed as $R^n -> R^m$ functions!
 
 # A single neuron (also called node)
 
@@ -38,13 +44,13 @@ Imagine inputs are 1 and 2 respectively.
 # Layers
 
 + Individual neurons (also called nodes) form different layers
-+ All neurons in one layer connect to every neuron in the next
++ All neurons in one layer connect to every neuron in the next (usually...)
 + Input layer (only layer without other neurons feeding in)
 + Output layer (only layer that doesn't feed into other neurons)
 + Every layer in the middle is a "hidden layer"
 + "Deep learning" refers to "deep neural nets," i.e. neural nets with more than
   one hidden layer. Nowadays almost every net is deep.
-+ Layers only connect to immediately previous and subsequent layers
++ Layers only connect to immediately previous and subsequent layers (usually...)
     * Can't "skip a layer"
     * Prevents exponential blow up of connections
 
@@ -149,6 +155,9 @@ Pause for questions
 + How many output nodes
 + How many layers
 + Only thing that is learned is the value of weights and biases
++ Things that are learned during training are called "parameters"
++ Things that are fixed when designing the network and do not change during
+  training are called "hyperparameters"
 
 # Lot of experimentation
 
@@ -158,9 +167,9 @@ Pause for questions
 
 # Backpropagation
 
-+ We've talked about how to calculate a network output once we know it's weights
++ We've talked about how to calculate a network output once we know its weights
   and biases
-+ But how do we actually get the weights and biases to be right
++ But how do we actually get the weights and biases to be right?
 + Again, learning is entirely about "getting the weights and biases right," since that's
   the only thing that changes so backpropagation is essentially synonymous with
   learning
@@ -247,7 +256,7 @@ Many candidates
     * Reduce chance of learning spurious relationships
     * Promote learning "useful" relationships
 
-# Bottom line
+# More notes on neural net architectures
 
 + Any complex stack of neural nets with gizmos and gadgets between them is in
   theory replicable using a single neural net with a particular configuration of
@@ -258,32 +267,19 @@ Many candidates
 + Can think of this as "freezing" large parts of a global neural net and not
   letting learning change those parts
 
-# Learning vs fine-tuninig
 
-+ Matter of degree
-+ During learning we'll have potentially large changes to the neural net
-    * Want it to be way different
-    * Really unique new examples can cause a neural net to "forget" previous
-      training
-+ During fine-tuning we want to limit the scope of our changes
-    * Don't want the net to forget everything it's already learned!
-    * Sometimes accomplished by freezing certain parts of the network and
-      exempting them from backpropagation
-    * Sometimes accomplished by decreasing size of backpropagation step
+# Alternative way of thinking about neural nets
 
-# GOFAI and neural nets: Sutter's bitter lesson
-
-+ GOFAI: Good Old-Fashioned AI
-    * Expert systems
-    * Symbolic reasoning systems
-    * Close relationship with Subject Matter Experts (SMEs)
-+ Maybe to solve problem of constraints use a human to provide them
-    * Feature engineering
-+ Bitter lesson (one version): (comparatively) simple architectures dominate aid from human expertise
-    * Feature engineering is basically dead (controversial!)
-        + We don't have human expert
-    * Symbolic reasoning systems (e.g. Cyc) are basically dead (controversial!)
-        + ~40 years of work completely outclassed by latest GPT models
-    * Increasingly rare to consult SMEs
-        + Don't consult translators for tips and tricks on translation to teach
-          GPT how to do translation
++ It can be easy to get bogged down in the weeds of individual neurons
++ Two equivalent observations:
+    * All operations with weights in an individual neuron are linear operations
+      (adding components together and scaling by constants)
+        - Only non-linear bits are adding a bias (makes it affine) and
+          non-linear activations
+    * The arithmetic operations associatd with neurons look a lot like matrix
+      multiplication
++ So that means a layer of $n$ neurons each taking $m$ inputs can be thought of
+  as
+    * A linear/affine (i.e. linear plus constants) function
+    * Plus a series of constants
+    * Plus a non-linear function

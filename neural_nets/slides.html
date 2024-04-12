@@ -13,8 +13,11 @@
     div.columns{display: flex; gap: min(4vw, 1.5em);}
     div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
     ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
       width: 0.8em;
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
@@ -22,6 +25,9 @@
   </style>
   <link rel="stylesheet" type="text/css" media="screen, projection, print"
     href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
   <script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
     charset="utf-8" type="text/javascript"></script>
 </head>
@@ -29,17 +35,29 @@
 <div class="slide titlepage">
   <h1 class="title">Intro to Neural Nets</h1>
 </div>
-<div id="neural-nets" class="slide section level1">
-<h1>Neural Nets</h1>
-<div class="figure">
-<img src="neural_net.svg" alt="" />
-<p class="caption">neural net diagram</p>
+<div id="vanilla-neural-netsmulti-layer-preceptrons-mlps"
+class="slide section level1">
+<h1>(Vanilla) Neural Nets/Multi-Layer Preceptrons (MLPs)</h1>
+<div class="float">
+<img src="neural_net.svg" alt="neural net diagram" />
+<div class="figcaption">neural net diagram</div>
 </div>
 <ul class="incremental">
 <li>Loosely inspired by neurons in the brain</li>
 <li>Small, simple individual structures</li>
 <li>Pieced together to form complex structures</li>
 <li>The fundamental part of almost any modern ML/AI structure</li>
+</ul>
+</div>
+<div id="the-universal-approximation-theorem"
+class="slide section level1">
+<h1>The Universal Approximation Theorem</h1>
+<ul class="incremental">
+<li>Any function on <span class="math inline">\(R^n -&gt; R^m\)</span>
+can be approximated to any desired degree of precision by a sufficiently
+large neural network</li>
+<li>Lots and lots of things can be expressed as <span
+class="math inline">\(R^n -&gt; R^m\)</span> functions!</li>
 </ul>
 </div>
 <div id="a-single-neuron-also-called-node" class="slide section level1">
@@ -82,13 +100,15 @@ non-linear function, keep the same if above zero, otherwise clamp to 0):
 <h1>Layers</h1>
 <ul class="incremental">
 <li>Individual neurons (also called nodes) form different layers</li>
-<li>All neurons in one layer connect to every neuron in the next</li>
+<li>All neurons in one layer connect to every neuron in the next
+(usually…)</li>
 <li>Input layer (only layer without other neurons feeding in)</li>
 <li>Output layer (only layer that doesn’t feed into other neurons)</li>
 <li>Every layer in the middle is a “hidden layer”</li>
 <li>“Deep learning” refers to “deep neural nets,” i.e. neural nets with
 more than one hidden layer. Nowadays almost every net is deep.</li>
 <li>Layers only connect to immediately previous and subsequent layers
+(usually…)
 <ul class="incremental">
 <li>Can’t “skip a layer”</li>
 <li>Prevents exponential blow up of connections</li>
@@ -98,9 +118,9 @@ more than one hidden layer. Nowadays almost every net is deep.</li>
 <div id="look-again-at-neural-net-structure"
 class="slide section level1">
 <h1>Look again at neural net structure</h1>
-<div class="figure">
-<img src="neural_net.svg" alt="" />
-<p class="caption">neural net diagram</p>
+<div class="float">
+<img src="neural_net.svg" alt="neural net diagram" />
+<div class="figcaption">neural net diagram</div>
 </div>
 </div>
 <div id="notes-on-structure-of-a-neural-net"
@@ -157,9 +177,9 @@ backpropagation)</li>
 </div>
 <div id="review-neural-net-diagram" class="slide section level1">
 <h1>Review neural net diagram</h1>
-<div class="figure">
-<img src="neural_net.svg" alt="" />
-<p class="caption">neural net diagram</p>
+<div class="float">
+<img src="neural_net.svg" alt="neural net diagram" />
+<div class="figcaption">neural net diagram</div>
 </div>
 <p>Pause for questions</p>
 </div>
@@ -249,6 +269,9 @@ class="slide section level1">
 <li>How many output nodes</li>
 <li>How many layers</li>
 <li>Only thing that is learned is the value of weights and biases</li>
+<li>Things that are learned during training are called “parameters”</li>
+<li>Things that are fixed when designing the network and do not change
+during training are called “hyperparameters”</li>
 </ul>
 </div>
 <div id="lot-of-experimentation" class="slide section level1">
@@ -265,8 +288,8 @@ class="slide section level1">
 <h1>Backpropagation</h1>
 <ul class="incremental">
 <li>We’ve talked about how to calculate a network output once we know
-it’s weights and biases</li>
-<li>But how do we actually get the weights and biases to be right</li>
+its weights and biases</li>
+<li>But how do we actually get the weights and biases to be right?</li>
 <li>Again, learning is entirely about “getting the weights and biases
 right,” since that’s the only thing that changes so backpropagation is
 essentially synonymous with learning</li>
@@ -402,8 +425,9 @@ default neural net</li>
 </ul></li>
 </ul>
 </div>
-<div id="bottom-line" class="slide section level1">
-<h1>Bottom line</h1>
+<div id="more-notes-on-neural-net-architectures"
+class="slide section level1">
+<h1>More notes on neural net architectures</h1>
 <ul class="incremental">
 <li>Any complex stack of neural nets with gizmos and gadgets between
 them is in theory replicable using a single neural net with a particular
@@ -416,58 +440,30 @@ gadgets</li>
 and not letting learning change those parts</li>
 </ul>
 </div>
-<div id="learning-vs-fine-tuninig" class="slide section level1">
-<h1>Learning vs fine-tuninig</h1>
-<ul class="incremental">
-<li>Matter of degree</li>
-<li>During learning we’ll have potentially large changes to the neural
-net
-<ul class="incremental">
-<li>Want it to be way different</li>
-<li>Really unique new examples can cause a neural net to “forget”
-previous training</li>
-</ul></li>
-<li>During fine-tuning we want to limit the scope of our changes
-<ul class="incremental">
-<li>Don’t want the net to forget everything it’s already learned!</li>
-<li>Sometimes accomplished by freezing certain parts of the network and
-exempting them from backpropagation</li>
-<li>Sometimes accomplished by decreasing size of backpropagation
-step</li>
-</ul></li>
-</ul>
-</div>
-<div id="gofai-and-neural-nets-sutters-bitter-lesson"
+<div id="alternative-way-of-thinking-about-neural-nets"
 class="slide section level1">
-<h1>GOFAI and neural nets: Sutter’s bitter lesson</h1>
+<h1>Alternative way of thinking about neural nets</h1>
 <ul class="incremental">
-<li>GOFAI: Good Old-Fashioned AI
+<li>It can be easy to get bogged down in the weeds of individual
+neurons</li>
+<li>Two equivalent observations:
 <ul class="incremental">
-<li>Expert systems</li>
-<li>Symbolic reasoning systems</li>
-<li>Close relationship with Subject Matter Experts (SMEs)</li>
+<li>All operations with weights in an individual neuron are linear
+operations (adding components together and scaling by constants)
+<ul class="incremental">
+<li>Only non-linear bits are adding a bias (makes it affine) and
+non-linear activations</li>
 </ul></li>
-<li>Maybe to solve problem of constraints use a human to provide them
-<ul class="incremental">
-<li>Feature engineering</li>
+<li>The arithmetic operations associatd with neurons look a lot like
+matrix multiplication</li>
 </ul></li>
-<li>Bitter lesson (one version): (comparatively) simple architectures
-dominate aid from human expertise
+<li>So that means a layer of <span class="math inline">\(n\)</span>
+neurons each taking <span class="math inline">\(m\)</span> inputs can be
+thought of as
 <ul class="incremental">
-<li>Feature engineering is basically dead (controversial!)
-<ul class="incremental">
-<li>We don’t have human expert</li>
-</ul></li>
-<li>Symbolic reasoning systems (e.g. Cyc) are basically dead
-(controversial!)
-<ul class="incremental">
-<li>~40 years of work completely outclassed by latest GPT models</li>
-</ul></li>
-<li>Increasingly rare to consult SMEs
-<ul class="incremental">
-<li>Don’t consult translators for tips and tricks on translation to
-teach GPT how to do translation</li>
-</ul></li>
+<li>A linear/affine (i.e. linear plus constants) function</li>
+<li>Plus a series of constants</li>
+<li>Plus a non-linear function</li>
 </ul></li>
 </ul>
 </div>
