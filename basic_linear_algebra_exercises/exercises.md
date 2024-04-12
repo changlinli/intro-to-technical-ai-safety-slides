@@ -175,6 +175,8 @@ For those who would like to read more about the general concept of scalars for a
 vector space, the term here is "field", that is any field can be used as
 scalars. See
 [https://en.wikipedia.org/wiki/Field_(mathematics)]("https://en.wikipedia.org/wiki/Field_(mathematics)").
+
+---
 </details>
 
 *Exercise*:
@@ -191,6 +193,8 @@ y)$ to be the zero vector, $(x - 1, y - 1)$ will always be less than it, so
 vector addition of $(x, y)$ and $(x - 1, y - 1)$ will result in $(x, y)$,
 which violates what a zero vector is for $(x - 1, y - 1)$ (adding a zero vector
 to $(x - 1, y - 1)$ should still return $(x - 1, y - 1)$ ).
+
+---
 </details>
 
 
@@ -212,6 +216,8 @@ replace the usual $+$ notation with a $\circ$. What operation would cause $1.0
 \circ v = v \circ 1.0 = v$? Does this operation satisfy all the other
 requirements for vector addition? If you use this operation, what does scalar
 multiplication become?
+
+---
 </details>
 
 <details>
@@ -238,6 +244,8 @@ To sketch the full proof:
 + Using $+ _c$ for scalar addition, then $(k_0 +_c k_1)x = x^{k_0 \times k_1} =
   x^{k_0} \times x^{k_1} = k_0x \circ k_1 x$, which shows that scalar addition
   distributes across scalar multiplication.
+
+---
 </details>
 
 *Exercise*:
@@ -288,6 +296,8 @@ Fibonacci sequences is closed. A similar amount of term rearrangement suffices t
 show that scalar multiplication of Fibonacci sequences is closed and that it
 fulfills the distribute properties necessary among vector addition, scalar
 multiplication, and scalar addition.
+
+---
 </details>
 
 Let's turn our attention now to how we can specify a vector space without
@@ -328,6 +338,8 @@ Finally though I've been using the term "scaled sum," the more common term for
 $k_0 v_0 + k_1 v_1 + \cdots$ is a linear combination of the vectors $v_0, v_1,
 \ldots$.
 </p>
+
+---
 </details>
 
 For example for $R^3$, the most commonly used basis is the set $\{(1, 0, 0),
@@ -365,6 +377,7 @@ sum of this set of vectors.
 + If we take $\{(1, 0, 0), (0, 1, 0), (1, 0, 1)\}$, we can write $(4, 3, -2) =
   6(1, 0, 0) + 3(0, 1, 0) + (-2)(1, 0, 1)$.
 
+---
 </details>
 
 As you may have noticed from that exercise, there is no single basis for a
@@ -385,6 +398,8 @@ understand facts about vector spaces even if you don't prove them.
 Prove that for a given vector space, if all its bases contain a finite number of
 vectors, all its bases must be of the same size. That is all its bases must
 have the same number of vectors.
+
+---
 </details>
 
 <details>
@@ -394,6 +409,8 @@ Just ignore this exercise if you don't have this familiarity.
 
 Prove that if a vector space has a basis, even if infinite, all its bases must
 be of the same size (i.e. cardinality).
+
+---
 </details>
 
 <details>
@@ -404,6 +421,8 @@ If you are not familiar with set theory axioms, don't worry about completing
 this.
 
 Prove that all vector spaces have a basis.
+
+---
 </details>
 
 Because all vector spaces have a basis and because all the bases of a vector
@@ -424,6 +443,8 @@ $R^n$ is exactly $n$.
 We already know that all bases of a vector space must have the same number of
 elements, so all that's needed is to find a basis of $R^n$ that has $n$
 vectors.
+
+---
 </details>
 
 <details>
@@ -432,6 +453,8 @@ There is a basis of $R^n$ that has $n$ vectors, namely the basis consisting of
 $(1, 0, 0, \ldots), (0, 1, 0, \ldots), \ldots$. Since every basis of a vector
 space has the same number of elements, we know that all bases of $R^n$ must have
 $n$ vectors.
+
+---
 </details>
 
 *Exercise*:
@@ -448,6 +471,8 @@ and $(0, 0, 1)$.
 
 One possible basis that has no zeroes in any of its triplets is $\{(1, 1, 1),
 (2, 1, 1), (1, 1, 2)\}$.
+
+---
 </details>
 
 Because every basis for a vector space has the same length, we can use this
@@ -500,6 +525,8 @@ The set of all vectors $(x, y)$ such that $x$ and $y$ are equal to each other
 is a valid linear subspace of $R^2$. Given $(a, a)$ and $(b, b)$, adding them
 together results in a tuple whose two components are still equal to each other,
 namely $(a + b, a + b)$, same for multiplying by a scalar.
+
+---
 </details>
 
 ## Linear Functions
@@ -578,6 +605,8 @@ We can thus write $z = k_0f(v_0) + k_1f(v_1)$. By using the distributive
 property of linear functions, but just reversing the direction of equality, we
 get that $z = f(k_0v_0 + k_1v_1)$, which implies that there is a vector which
 $f$ maps to $z$, that is $z$ is in fact in the range of $f$.
+
+---
 </details>
 
 If we restrict our attention to $R^n$, we can get a more geometric
@@ -606,6 +635,8 @@ $f(x) = x$ is linear, $f(x) = 2x$ is linear, $f(x) = 2x + 1$ is not linear (even
 though it's called "a linear function" in many primary/secondary educational
 materials, usually these functions are referred to as "affine functions"), $f(x)
 = x^2$ is not linear.
+
+---
 </details>
 
 *Exercise*:
@@ -619,6 +650,8 @@ materials, usually these functions are referred to as "affine functions"), $f(x)
 <details>
 <summary>Solution</summary>
 Both are linear.
+
+---
 </details>
 
 ## Matrices as notation
@@ -761,6 +794,7 @@ f((1.2, 3.1)) &= f(2 \cdot (0.6, 0) + 2 \cdot (0, 1.55)) \\
 \end{align}
 ```
 
+---
 </details>
 
 *Exercise*:
@@ -804,6 +838,7 @@ f((x, y)) = (x + 2y, x + 2y)
 The dimension of the range of our function is 1. Notice that a valid basis for
 our range is the single vector (1, 1).
 
+---
 </details>
 
 *Exercise*:
@@ -821,6 +856,7 @@ There's nothing wrong with using a non-standard basis, i.e. it's perfectly fine
 to define $f$ without using $(1, 0, 0)$, $(0, 1, 0)$, and $(0, 0, 1)$. But are
 we sure we have a basis here?
 
+---
 </details>
 
 <details>
@@ -854,7 +890,7 @@ first and third component of this sum, which must always be $1$. However, the
 difference between the first and third component of $(1, 1, 1)$ is $0$. Hence it
 is impossible for our linear sum to ever form $(1, 1, 1)$.
 
-
+---
 </details>
 
 Since it is sufficient to determine a linear function's behavior on any vector
@@ -893,6 +929,8 @@ Then our answer must be $8 \cdot (0, 1) + 9 \cdot (-1, 0) = (-9, 8)$.
 
 This means that the linear function represented by this table, i.e. rotation by
 90 degrees, maps the vector $(8, 9)$ to $(-9, 8)$.
+
+---
 </details>
 
 *Exercise*:
@@ -918,6 +956,7 @@ respectively. If the second table is not obvious to you, write out the
 decomposition of $(1, 1)$ as a linear combination of $(1, 0)$ and $(0, 1)$ and
 then apply $f$ to that linear combination. Do the same for $(1, 2)$.
 
+---
 </details>
 
 *Exercise*:
@@ -943,6 +982,8 @@ we lookup $(1, 1)$ to get $(-1, 1)$ and lookup $(1, 2)$ to get $(-2, 1)$.
 Then our answer must be $7 \cdot (-1, 1) + 1 \cdot (-2, 1) = (-9, 8)$.
 
 This is the same answer as before!
+
+---
 </details>
 
 *Exercise*:
@@ -957,6 +998,7 @@ This is the same answer as before!
 | ------ | ------ |
 | (-1, 0) | (0, -1)|
 
+---
 </details>
 
 Note that all this holds even for times where $f$ does not have the same domain
@@ -1094,6 +1136,7 @@ f((5, 5)) &= f(5 \cdot (1, 0) + 5 \cdot (0, 1)) \\
 \end{align}
 ```
 
+---
 </details>
 
 *Exercise*:
@@ -1125,6 +1168,7 @@ same.
 As an optional aside, can you show that my statement about $(1, 1)$ and $(1, 2)$
 is in fact true based on what I said about $(1, 0)$ and $(0, 1)$?
 
+---
 </details>
 
 <details>
@@ -1153,6 +1197,7 @@ The three matrices are respectively
 \end{bmatrix}
 ```
 
+---
 </details>
 
 *Exercise*:
@@ -1174,6 +1219,8 @@ In other words $(1, 0, 0) \mapsto (1, 1, 1)$ but is zero for all the other basis
 vectors. Written as an equation this means
 
 $f((x, y, z)) = (x, x, x)$
+
+---
 </details>
 
 Note that unlike the function itself (e.g. "rotates points by 90 degrees around
@@ -1248,5 +1295,7 @@ differentiation of a polynomial with degree less than or equal to four.
 
 Is differentiation in general a linear operator? Why or why not? Is it always
 possible to create a matrix for it? Why or why not?
+
+---
 </details>
 
