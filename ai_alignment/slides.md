@@ -4,12 +4,12 @@
 
 + Large umbrella
 + Roughly split into:
-  * AI Alignment
+  * Technical work (roughly associated with the term "AI alignment," although governance can play a role
     - Scalable Oversight
     - Interpretibility
     - Corrigibility
     - Agent Foundations
-  * AI Governance
+  * Social and 
     - AI Development Policy
     - AI Ethics
     - AI Safety Funding
@@ -39,21 +39,6 @@
   * Cruise self-driving car 
 + We don't seem to get a lot of chances
   * Potential self-reinforcing improvement cycles ("takeoff")
-
-# Why Is This a Problem Now?
-
-+ The lines separating us from sci-fi are starting to blur
-  * Novel challenges: analogies to 
-    - Corporations as AI 
-+ AI safety is socially sort of in the place where climate change was in the
-  1970s
-  * First Earth Day in 1970 was criticized extensively for distracting from
-    the Vietnam War and the Civil Rights Movement, viewed as a plot by
-    "well-heeled" professors and environmental organizations to increase their own
-    prestige
-  * The idea of the *entire Earth* irreversibly changing was viewed as
-    impossibly far-fetched sci-fi
-  * Resources accumulated by traditional fossil fuel companies has 
 
 # AI Governance
 
@@ -107,10 +92,13 @@ Pre-paradigmatic: no single answer. But we have some ideas:
 
 # AI Alignment Redux
 
+Some concepts that show up often:
+
 + Scalable Oversight
 + Mechanistic Interpretability
-+ Corrigibility
++ Evaluations
 + Agent Foundations
++ Inner vs Outer Alignment
 
 # Scalable Oversight
 
@@ -119,7 +107,11 @@ How do you supervise an AI that is smarter or faster than you?
 Fundamental bet: solution-verification is easier than solution-generation in a
 way we can leverage.
 
-+ Sandwich test
++ Can we empower hybrid human-AI systems?
+    * This does not seem to be a stable equilibrium (see chess engines
+      eventually out-competing human-computer hybrid systems), but maybe is an
+      important bridge
++ How do we effectively supervise AI systems in regimes that are too quick, too costly, or outright too complex for human evaluation?
 
 # Mechanistic Interpretability
 
@@ -130,18 +122,71 @@ different intelligent systems that have commonalities we can explain and
 understand.
 
 + Circuits work
+    * Golden Gate Claude!
 + Consistency checks on LLMs
 
-# Corrigibility
+# Evaluations
 
-If/when an AI makes a mistake, how do we ensure that the mistake it makes does
-not wipe out our ability to correct the AI in the future?
+What kind of evaluations make sense for new AI systems?
+
++ Old evaluations are rapidly becoming obsolete (AI progress is sometimes hidden by the fact that a test tops out at 100% so going from 98% to 99% might be a huge leap in capabilities but looks unimpressive)
++ How can we use new advancements in AI safety to design better evaluations?
++ How do we reduce chances of gaming the system?
++ What kind of evaluations should we use for regulations?
 
 # Agent Foundations
 
-How exactly do we formalize safety? Can we come up with alternative architectures that are fundamentally safer?
++ What does it mean for something to be an agent?
++ Can we get a good formal mathematical foundation for what it means for something to be aligned?
 
 # Inner vs Outer Alignment
 
 + Outer alignment/mis-specification: your specification was subtly wrong
 + Inner alignment/goal misgeneralization: the AI doesn't do what you specified
+
+# Why is this important now?
+
++ *There is still a lot of uncertainty, but there is enough worry that superhuman AI might be coming soon*
++ Time until we get broadly superhuman AI might be very short (3 - 5 years)
+    * The top AI labs seem to be broadly in agreement on this
+        - John Schulman (co-founder of OpenAI) estimates his job is obsoleted in a median of 5 years
+        - Anthropic's CISO thinks that ASL-3 (low-level autonomous capability) happens
+        - Anthropic's Chief of Staff to the CEO has publicly talked about this "I am 25. These next three years might be "
+    * Top AI researchers generally seem to agree that we're nowhere close to
+      exhausting "low-hanging fruit" and expect next-gen models, e.g. GPT-5, to
+      be radically better than current-gen models
+    * Some of our 
++ Even "longer timelines" no longer look that large
+    * The overwhelming majority of AI researchers expect AGI to be developed within the lifetimes of today's working professionals
++ We're dealing with exponential growth curves
+    * With exponential curves, any response usually seems either too early or too late, more or less impossible to tune it "just right"
++ Remember: The AI of today is the worst AI will ever be
++ Things might still fizzle out! But it seems very unwise to rely on that
+
+# Increasing awareness of short timelines in AI safety-adjacent fields
+
++ From Anthropic's Chief of Staff to the CEO published an article about [this](https://www.palladiummag.com/2024/05/17/my-last-five-years-of-work/):
+  > These next three years might be the last few years that I work. I am not ill, nor am I becoming a stay-at-home mom, nor have I been so financially fortunate to be on the brink of voluntary retirement. I stand at the edge of a technological development that seems likely, should it arrive, to end employment as I know it.
++ From Anton Korinek (professor of econ at University of Virginia working on economics of AI):
+  > Scenario I (traditional, business as usual), Scenario II ()
+
+# The future could get very wild very soon
+
++ Lines separating us from sci-fi start looking very blurry
++ It's noticeable that worlds like Futurama are kicked around as what happens if things
+
+# What to do?
+
++ Concern is good. Panic is not.
++ Educate yourself about AI
+    * Good to know even just as a technologist
++ Learn more about AI safety 
++ Think about what kind of futures you want, what kind of futures you don't
+  want, and what kind of futures you think are most likely to happen
+
+# Big takeaways
+
++ *Big* things could be happening
++ They are unlikely to go well by default
++ There's a lot of fertile ground for work to be done
++ The only way out is through
