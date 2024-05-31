@@ -115,7 +115,8 @@ training a vanilla neural net that does image recognition on handwritten digits?
 # Adam
 
 + Do both!
-+ Keep track of (time-decayed and scaled) average and add to gradient
++ Keep track of (time-decayed and scaled) average and use that instead of just
+  the current gradient
 + Penalize by (time-decayed and scaled) standard deviation away from 0 of gradient
 + Add "weight decay" term (not true weight decay as we'll see later with AdamW)
 + See papers for more (they include bias correction terms)
