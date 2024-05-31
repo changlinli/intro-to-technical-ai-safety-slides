@@ -116,6 +116,7 @@ training a vanilla neural net that does image recognition on handwritten digits?
 + Keep track of (time-decayed and scaled) average and add to gradient
 + Penalize by (time-decayed and scaled) standard deviation away from 0 of gradient
 + Add "weight decay" term (not true weight decay as we'll see later with AdamW)
++ See papers for more (they include bias correction terms)
 
 # Regularization
 
@@ -148,7 +149,7 @@ training a vanilla neural net that does image recognition on handwritten digits?
   weight decay is preferable to L2 regularization
 + In practice this means changing where the weight decay term ($\lambda \theta_t$) goes
   (in the below $g$ is the gradient)
-    * Adam (roughly): $\theta_{t+1} = \theta_t - \frac{\text{TimeDecayedMean}(g) + \lambda \theta_t}{\text{UncenteredTimeDecayedStdDev}(g)}$
+    * Adam (roughly): $\theta_{t+1} = \theta_t - \frac{\text{TimeDecayedMean}(g + \lambda \theta_t)}{\text{UncenteredTimeDecayedStdDev}(g)}$
     * AdamW (roughly): $\theta_{t+1} = \theta_t - (\frac{\text{TimeDecayedMean}(g)}{\text{UncenteredTimeDecayedStdDev}(g)} + \lambda \theta_t)$
 
 # Why does all this help?
