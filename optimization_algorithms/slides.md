@@ -17,7 +17,7 @@ training a vanilla neural net that does image recognition on handwritten digits?
   and 9?
     * No. The minimum of that function are all images that output 0. It's not
       clear how that gives us a well-trained neural net.
-+ Is it the function that takes an image and outputs an $R^10$ vector
++ Is it the function that takes an image and outputs an $R^{10}$ vector
   with one component for each possible digit?
     * No. It's not clear what it even means to take the minimum of a vector in
       $R^n$. Which is smaller, $(-10, -7)$ or $(-8, -9)$? Generally you need
@@ -50,7 +50,7 @@ training a vanilla neural net that does image recognition on handwritten digits?
 + A big chunk of machine learning involves taking the same thing and just
   changing what we consider to be constants and what we consider to be variables
     * At inference time, we think of our image recognition network as a function
-      from images to $R^10$ (i.e. the images are variables) and hold our weights as constant
+      from images to $R^{10}$ (i.e. the images are variables) and hold our weights as constant
     * At training time, we fix our training set of images to be constant and
       think of our network as a function from network weights to loss
 + Quite a few machine learning techniques boil down "reframe what you consider
