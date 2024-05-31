@@ -97,7 +97,9 @@ training a vanilla neural net that does image recognition on handwritten digits?
 + Keep track of the average gradient you have seen so far
     * Time-decayed (exponential decay) average
     * Up to some scaling constant
-+ Add that average to your current gradient
++ Add that average to your current gradient (equivalently consider your current
+  gradient a new term in the average and use the new average gradient as your
+  update)
 
 # RMSProp
 
