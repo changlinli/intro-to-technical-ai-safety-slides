@@ -147,7 +147,7 @@ training a vanilla neural net that does image recognition on handwritten digits?
 + AdamW paper shows that the two are different and offers some arguments why
   weight decay is preferable to L2 regularization
 + In practice this means changing where the weight decay term ($\lambda \theta_t$) goes
-  parameter
+  (in the below $g$ is the gradient)
     * Adam (roughly): $\theta_{t+1} = \theta_t - \frac{\text{TimeDecayedMean}(g) + \lambda \theta_t}{\text{UncenteredTimeDecayedStdDev}(g)}$
     * AdamW (roughly): $\theta_{t+1} = \theta_t - (\frac{\text{TimeDecayedMean}(g)}{\text{UncenteredTimeDecayedStdDev}(g)} + \lambda \theta_t)$
 
