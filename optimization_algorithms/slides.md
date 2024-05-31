@@ -102,7 +102,7 @@ training a vanilla neural net that does image recognition on handwritten digits?
 # RMSProp
 
 + Keep track of the standard deviation (away from 0) of the gradient you have seen so far
-    * Note away from 0 (i.e. uncentered standard deviation)
+    * Note away from 0 not away from the mean (i.e. uncentered standard deviation)
     * Also time-decayed (exponential decay)
     * Also up to some scaling constant
 + Penalize by that standard deviation
