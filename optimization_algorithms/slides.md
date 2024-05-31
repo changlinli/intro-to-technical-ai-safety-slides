@@ -130,8 +130,10 @@ training a vanilla neural net that does image recognition on handwritten digits?
 # L2 regularization vs weight decay
 
 + L2 regularization is the same thing as weight decay for SGD
-    * Update amount for L2 regularization: $- \nabla (f(\theta_t) + \lambda \sum \theta_t ^2) = - \nabla f(\theta_t) - 2 \lambda \sum \theta_t$
-    * Update amount for weight decay: $- \nabla f(\theta_t) - \lambda \sum \theta_t$
+    * Update amount for L2 regularization: $- \nabla (f(\theta_t) + \lambda \sum \theta_t ^2) = - \nabla f(\theta_t) - 2 \lambda \theta_t$
+        - Note that $\sum$ goes away because of partial derivatives for gradient
+          being taken relative to each parameter
+    * Update amount for weight decay: $- \nabla f(\theta_t) - \lambda \theta_t$
     * Just rescale $\lambda$ and the two are the same
 + L2 regularization is not the same thing as weight decay when you introduce
   momentum!
@@ -144,8 +146,10 @@ training a vanilla neural net that does image recognition on handwritten digits?
       incorrectly call it weight decay
 + AdamW paper shows that the two are different and offers some arguments why
   weight decay is preferable to L2 regularization
-+ In practice this means changing where you multiply by your weight decay
++ In practice this means changing where the weight decay term ($\lambda \theta_t$) goes
   parameter
+    * Adam (roughly): $\theta_{t+1} = \theta_t - \frac{\text{time_decayed_mean}(g) + \lambda \theta_t}{\text{uncentered_std_dev}(g)}$
+    * AdamW (roughly): $\theta_{t+1} = \theta_t - (\frac{\text{time_decayed_mean}(g)}{\text{uncentered_std_dev}(g)} + \lambda \theta_t)$
 
 # Why does all this help?
 
