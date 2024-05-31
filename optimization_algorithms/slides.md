@@ -130,7 +130,7 @@ training a vanilla neural net that does image recognition on handwritten digits?
 # L2 regularization vs weight decay
 
 + L2 regularization is the same thing as weight decay for SGD
-    * Update amount for L2 regularization: $- \nabla (f(\theta_t) + \lambda \sum \theta_t ^2) = - \nabla f(\theta_t) - 2 * \lambda \sum \theta_t$
+    * Update amount for L2 regularization: $- \nabla (f(\theta_t) + \lambda \sum \theta_t ^2) = - \nabla f(\theta_t) - 2 \lambda \sum \theta_t$
     * Update amount for weight decay: $- \nabla f(\theta_t) - \lambda \sum \theta_t$
     * Just rescale $\lambda$ and the two are the same
 + L2 regularization is not the same thing as weight decay when you introduce
