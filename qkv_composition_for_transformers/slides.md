@@ -91,7 +91,7 @@
 + Use "copy previous token" attention head
 + Combine wih "copy if equal" attention head
     * QK: `f((x_query, i_query, y_query), (x_key, i_key, y_key)) = x_query == y_key`
-    * OV: `f((x, i, y)) = y`
+    * OV: `f((x, i, y)) = x`
     * Let this layer overwrite instead of concatenating
 + Start with `[("a", 0), ("b", 1), ("c", 2), ("a", 3)]`
 + Then get `[("a", 0, null), ("b", 1, "a"), ("c", 2, "b"), ("a", 3, "c")]`
