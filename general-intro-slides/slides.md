@@ -40,8 +40,10 @@
     * By today's standards a terrible AI
 + Since then, we have had roughly *three* more generations of LLMs each of which
   blows the previous out of the water
-    * GPT-3.5, GPT-4, Claude 3.5, (GPT-5 is currently training and will likely
-      finish its training in another few weeks; likely more months)
+    * GPT-4, GPT-4o (this was mostly a speed improvement over a perf
+      improvement), Claude 3.5, (GPT-5 is currently training and will likely
+      finish its training in another few weeks; likely several more months until
+      it's ready for prime time)
 
 # Demos
 
