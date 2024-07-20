@@ -40,10 +40,10 @@
 + 1:45 p.m. - 2:15 p.m.: Lecture on analyzing the transformer architecture mathematically
 + 2:15 p.m. - 5 p.m.: Pair programming sessions with other participants to analyze an LLM
 
-# Situational Awareness
+# The Current State of AI
 
 There is a big gap between what AI researchers at top labs believe and what the
-general public believes.
+general public believes, i.e. a big gap in "situational awareness"
 
 > By 2025/26, these machines will outpace college graduates. By the end of the
 > decade, they will be smarter than you or I [sic]...
@@ -68,9 +68,10 @@ general public believes.
 
 + There is a big gap between what AI researchers at top labs believe and what
   the general public believes
-+ Only several hundred people is bad, this technology will affect everyone
++ Only several hundred people having "situational awareness" is bad, this
+  technology will affect everyone
 + People deserve to know about and form opinions about crazy things that might
-  be happening before it smashes into them
+  be happening before those things smash into them
 
 # Progress in AI has been extremely rapid
 
@@ -113,17 +114,9 @@ general public believes.
     * Salary of only a few researchers at top AI labs
 + AI experts are worried because *nobody* really understands how these AI
   systems work
-    * Turing Award winner [Yoshua Bengio](https://yoshuabengio.org/2024/07/09/reasoning-through-arguments-against-taking-ai-safety-seriously/): 
-      > ...while we are racing towards AGI or even ASI, nobody currently knows
-      > how such an AGI or ASI could be made to behave morally, or at least
-      > behave as intended by its developers and not turn against humans.. As of
-      > now, however, we are racing towards a world with entities that are
-      > smarter than humans and pursue their own goals – without a reliable
-      > method for humans to ensure those goals are compatible with human goals.
-    * Median response to this question was 10% from this [survey](https://blog.aiimpacts.org/p/2023-ai-survey-of-2778-six-things):
-      > What probability do you put on human inability to control future advanced AI
-      > systems causing human extinction or similarly permanent and severe
-      > disempowerment of the human species?
+    * Turing Award winner [Yoshua Bengio](https://yoshuabengio.org/2024/07/09/reasoning-through-arguments-against-taking-ai-safety-seriously/): "...while we are racing towards AGI or even ASI, nobody currently knows how such an AGI or ASI could be made to behave morally, or at least behave as intended by its developers and not turn against humans.. As of now, however, we are racing towards a world with entities that are smarter than humans and pursue their own goals – without a reliable method for humans to ensure those goals are compatible with human goals."
++ And AI experts are worried about things going very wrong:
+    * Median response to this question was 10% from this [survey](https://blog.aiimpacts.org/p/2023-ai-survey-of-2778-six-things): "What probability do you put on human inability to control future advanced AI systems causing human extinction or similarly permanent and severe disempowerment of the human species?"
 
 # The pace of improvement is increasing
 
@@ -132,9 +125,10 @@ general public believes.
 
 # Don't fall into the trap of "status quo" thinking
 
+Don't be like these people!
+
 > I'm part of an "AI Futures" group at an intergov org whose purpose is to
-> consider the long-term implications of the tech. 2/3 of the group flat-out
-> refuses to consider any improvements in AI in the future. They imagine AI in
+> consider the long-term implications of the tech.... [2/3 of them] imagine AI in
 > 2040 as having today's capabilities and no more. [@danfaggella]
 
 [https://x.com/danfaggella/status/1812171380449763430](https://x.com/danfaggella/status/1812171380449763430)
@@ -143,6 +137,10 @@ general public believes.
 
 + Broadly the field that encompasses making sure that a lot of the above goes
   well!
++ This includes:
+    * Worsening of current societal problems
+    * Mass unemployment/economic disruption
+    * Mass catastrophe/loss of life scenarios/destruction of the human race
 
 # If you're interested in this what can you do?
 
