@@ -4,42 +4,6 @@
 + AI "Situational Awareness"
 + In light of that, what is AI safety
 
-# General overview of today
-
-+ We'll have three tracks with breaks in-between
-+ Lot of pair programming for technical tracks
-+ Lot of discussion groups for non-technical track
-
-# Non-technical track (exploring AI safety and governance)
-
-+ 11:00 - 11:15 a.m.: Kick off talk and mingling
-+ 11:15 a.m. - 12:15 p.m.: Fundamentals of AI and AI safety
-+ 12:15 p.m. - 1 p.m.: Break (lunch not included; lunch spots nearby) + mingling (potential tech help for people who want to do the technical tracks)
-+ 1 p.m. - 5 p.m.: Guided reading and discussion group on AI safety topics
-    * Selected readings for discussion and critique of 4 topics, each approximately will have an hour of time including breaks scheduled at the end
-        - Company safety statements from frontier AI labs
-        - Deeper dive into current state of AI and regulation
-        - Examining public requests for comment from government agencies
-	    - Talking about how you can get involved
-
-# Technical track (building an LLM from scratch)
-
-+ 11:00 - 11:15 a.m.: Kick off talk and mingling
-+ 11:15 a.m. - 12:15 p.m.: Fundamentals of AI and AI safety
-+ 12:15 p.m. - 1 p.m.: Break (lunch not included; lunch spots nearby) + mingling (potential tech help for people who want to do the technical tracks)
-+ 1 p.m. - 1:30 p.m.: Lecture on GPT-2 and the transformer architecture
-+ 1:30 p.m. - 5 p.m.: Pair programming sessions with other participants to build GPT-2
-
-# Technical track (analyzing an LLM from scratch)
-
-+ 11:00 - 11:15 a.m.: Kick off talk and mingling
-+ 11:15 a.m. - 12:15 p.m. (12:00 p.m.): Fundamentals (led by Mackenzie)
-+ 12:15 p.m. - 1 p.m.: Break (lunch not included; lunch spots nearby) + mingling (potential tech help for people who want to do the technical tracks)
-+ 1 p.m. - 1:30 p.m.: Lecture on GPT-2 and the transformer architecture (good refresher before we dive into analysis)
-+ 1:30 p.m. - 1:45 p.m.: Break
-+ 1:45 p.m. - 2:15 p.m.: Lecture on analyzing the transformer architecture mathematically
-+ 2:15 p.m. - 5 p.m.: Pair programming sessions with other participants to analyze an LLM
-
 # The Current State of AI
 
 There is a big gap between what AI researchers at top labs believe and what the
