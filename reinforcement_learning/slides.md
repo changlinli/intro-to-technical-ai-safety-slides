@@ -80,11 +80,11 @@ RL deals with creating a state machine, so we need:
 + Policy: the state machine strategy that is learned. That is the choice of what
   actions given a certain state the machine should do. Usually denoted by the
   $\pi$ symbol.
-+ Reward function ($R(s, a)$): the immediate feedback given to the agent after
++ Reward function $R(s, a)$: the immediate feedback given to the agent after
   performing an action. Is some positive or negative number.
 + $Q(s, a)$: the maximum reward we can accumulate from state $s$ after taking
   action $a$. *We usually don't know this function.*
-+ Value function ($V(s)$): a variation of $Q$ where $V(s)$ is the highest value
++ Value function $V(s)$: a variation of $Q$ where $V(s)$ is the highest value
   of $Q(s, a)$ across all $a$ for that $s$.
     * Sometimes used to refer to the entire class of functions that score
       long-term implications of actions. E.g. $V$ and $Q$ are both "value
