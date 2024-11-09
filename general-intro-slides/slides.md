@@ -2,7 +2,6 @@
 
 + Briefly go over today's schedule
 + AI "Situational Awareness"
-+ In light of that, what is AI safety
 
 # The Current State of AI
 
