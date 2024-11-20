@@ -39,7 +39,7 @@ general public believes, i.e. a big gap in "situational awareness"
 
 # Progress in AI has been extremely rapid
 
-+ 19 months ago ChatGPT was released
++ 24 months ago ChatGPT was released
     * Hacky product
     * Still fastest product launch ever
     * By today's standards a terrible AI
