@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Transformers Review</title>
+  <style type="text/css">
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+  <script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Transformers Review</h1>
+</div>
+<div id="transformers-overview" class="slide section level1">
+<h1>Transformers Overview</h1>
+<ul class="incremental">
+<li>“Attention is all you need” (2017)</li>
+<li>The go-to architecture for most machine learning problems,
+especially language models</li>
+</ul>
+</div>
+<div id="brief-recap-of-neural-nets" class="slide section level1">
+<h1>Brief recap of neural nets</h1>
+<div class="float">
+<img src="./neural_net.svg" alt="“Neural net visualization”" />
+<div class="figcaption">“Neural net visualization”</div>
+</div>
+</div>
+<div id="brief-recap-of-neural-nets-more" class="slide section level1">
+<h1>Brief recap of neural nets (more)</h1>
+<ul class="incremental">
+<li>Individually simple neurons connected via layers</li>
+<li>Weights and biases are changed in training
+<ul class="incremental">
+<li>Number of neurons and layer structures do not change in
+training</li>
+</ul></li>
+<li>Theoretically universal
+<ul class="incremental">
+<li>In practice often learns spurious relationships without more
+safeguards</li>
+<li>Architectures provide these safeguards and are therefore
+<strong>subtractive</strong> not <strong>additive</strong></li>
+</ul></li>
+<li>Calculating with weights and biases can be rewritten as matrix
+multiplication and addition
+<ul class="incremental">
+<li>Every layer-to-layer connection of weights can be interpreted as a
+matrix of size n x m
+<ul class="incremental">
+<li>n is the size of the previous layer and m is the size of the next
+layer</li>
+<li>Entries in matrices are connection weights between two neurons</li>
+<li>Passing the outputs of one layer as the inputs to the next is
+multiplication of those inputs by the matrix</li>
+</ul></li>
+<li>Every set of biases of a layer of neurons can be interpreted as a
+matrix (with a single column)
+<ul class="incremental">
+<li>Each neuron in the layer has one bias entry in the matrix</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="transformers-architecture" class="slide section level1">
+<h1>Transformers Architecture</h1>
+<div class="columns">
+<div class="column">
+<p><img src="./transformer_arch.webp" height="800" /></p>
+</div><div class="column">
+<blockquote>
+<p><strong>1. Encoder + decoder</strong></p>
+</blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li>Attention</li>
+<li>Multi-Head Attention</li>
+<li>Positional Encoding</li>
+<li>Transformer Blocks</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="encoder-decoder" class="slide section level1">
+<h1>1. Encoder + decoder</h1>
+<ul class="incremental">
+<li>Have one neural net (or set of nets) that outputs some abstract
+representation of text</li>
+<li>Have another neural net (or set of nets) decode that abstract
+representation back to natural language</li>
+<li>Not new with transformers (e.g. seq2seq 2014)</li>
+</ul>
+</div>
+<div class="slide section level1">
+
+<div class="columns">
+<div class="column">
+<p><img src="./transformer_arch.webp" height="800" /></p>
+</div><div class="column">
+<ol style="list-style-type: decimal">
+<li>Encoder + decoder</li>
+</ol>
+<blockquote>
+<p><strong>2. Attention</strong></p>
+</blockquote>
+<ol start="3" style="list-style-type: decimal">
+<li>Multi-Head Attention</li>
+<li>Positional Encoding</li>
+<li>Transformer Blocks</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="attention" class="slide section level1">
+<h1>2. Attention</h1>
+<ul class="incremental">
+<li>Inspired by the idea of human attention</li>
+<li>Allows the model to “attend to” different parts of the input
+sequence at a given time</li>
+<li>NLP Professor Raymond Mooney: <em>“You can’t cram the meaning of a
+whole %&amp;!$# sentence into a single $&amp;!#* vector!”</em>
+<ul class="incremental">
+<li><a href="https://www.cs.utexas.edu/~mooney/cramming.html">…you can
+use your language model of informal English to fill in the masked
+portions</a></li>
+</ul></li>
+<li>Instead, consider attention as a series of queries, keys, and values
+(<span class="math inline">\(W_k\)</span>, <span
+class="math inline">\(W_q\)</span>, <span
+class="math inline">\(W_v\)</span>)</li>
+<li>Two ways to explore:
+<ol class="incremental" style="list-style-type: lower-alpha">
+<li><a
+href="https://people.cs.umass.edu/~miyyer/cs685_f21/slides/04-attention.pdf">Visual,
+via Mohit Iyyer, University of Massachusetts Amherst 2021</a></li>
+<li>Analogy from Changlin</li>
+</ol></li>
+</ul>
+</div>
+<div id="a.-attention-visualized-iyyer-2021"
+class="slide section level1">
+<h1>2a. Attention visualized (Iyyer 2021)</h1>
+<p><img src="iyyer_slide18.png" height="800" /></p>
+</div>
+<div id="a.-attention-visualized-iyyer-2021-1"
+class="slide section level1">
+<h1>2a. Attention visualized (Iyyer 2021)</h1>
+<p><img src="iyyer_slide19.png" height="800" /></p>
+</div>
+<div id="a.-attention-visualized-iyyer-2021-2"
+class="slide section level1">
+<h1>2a. Attention visualized (Iyyer 2021)</h1>
+<p><img src="iyyer_slide20.png" height="800" /></p>
+</div>
+<div id="a.-attention-visualized-iyyer-2021-3"
+class="slide section level1">
+<h1>2a. Attention visualized (Iyyer 2021)</h1>
+<p><img src="iyyer_slide21.png" height="800" /></p>
+</div>
+<div id="a.-attention-visualized-iyyer-2021-4"
+class="slide section level1">
+<h1>2a. Attention visualized (Iyyer 2021)</h1>
+<p><img src="iyyer_slide22.png" height="800" /></p>
+</div>
+<div id="a.-attention-visualized-iyyer-2021-5"
+class="slide section level1">
+<h1>2a. Attention visualized (Iyyer 2021)</h1>
+<p><img src="iyyer_slide23.png" height="800" /></p>
+</div>
+<div id="b.-attention-as-a-db-query" class="slide section level1">
+<h1>2b. Attention as a DB query</h1>
+<ul class="incremental">
+<li>I have a database with keys and values. Keys are chosen to play
+nicer with queries, values are what I actually return in the data.</li>
+<li><code>[("Alice", "some data about Alice"), ("Bob", "some data about Bob")]</code></li>
+<li>Query “Get me data about keys/names that start with ‘A’”</li>
+<li>Match query against key</li>
+</ul>
+</div>
+<div id="b.-attention-as-a-db-query-1" class="slide section level1">
+<h1>2b. Attention as a DB query</h1>
+<div class="columns">
+<div class="column">
+<ul class="incremental">
+<li><strong>Abstract steps of DB query</strong></li>
+<li>Split data into keys and values</li>
+<li>Generate a query</li>
+<li>Compare queries with keys</li>
+<li>Use comparison to select which values to return</li>
+</ul>
+</div><div class="column">
+<ul class="incremental">
+<li><strong>What about a “fuzzy” DB query?</strong></li>
+<li>Split data into keys and values</li>
+<li>Generate a query</li>
+<li>Instead of binary comparison, yes/no, do a fuzzy match score between
+0 and 1</li>
+<li>Multiply each value by the fuzzy match and combine them all together
+to return a “fuzzy” match</li>
+<li>This degenerates to a normal DB query if we just constrain the
+fuzziness to either 0 or 1</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="b.-attention-equivalents-in-attention"
+class="slide section level1">
+<h1>2b. Attention: Equivalents in attention</h1>
+<ul class="incremental">
+<li>Generate a key and value vector from a given word</li>
+<li>Generate a query vector from the word</li>
+<li>Dot product the query vector against the key vector to generate
+weights</li>
+<li>Multiply each value vector by the weights</li>
+</ul>
+</div>
+<div id="b.-attention-generating-the-key-value-and-query-vectors"
+class="slide section level1">
+<h1>2b. Attention: Generating the key, value, and query vectors</h1>
+<ul class="incremental">
+<li>We have matrices for each key, value, and query
+<ul class="incremental">
+<li><span class="math inline">\(W_k\)</span>, <span
+class="math inline">\(W_v\)</span>, and <span
+class="math inline">\(W_q\)</span></li>
+</ul></li>
+<li>These matrix values are learned during training</li>
+</ul>
+</div>
+<div id="b.-attention-working-through-a-specific-example"
+class="slide section level1">
+<h1>2b. Attention: Working through a specific example</h1>
+<ul class="incremental">
+<li>“The car was driving too quickly through the field. <em>It</em>
+crashed into a tree.”</li>
+<li>Look at a single given word “it”, which has some vector form after
+embedding</li>
+<li>Multiply <em>every word</em>’s embedding by <span
+class="math inline">\(W_k\)</span> to generate key vectors for all of
+them</li>
+<li>Multiply <em>every word</em>’s embedding by <span
+class="math inline">\(W_v\)</span> to generate value vectors for all of
+them</li>
+<li>Multiply “it” embedding by <span class="math inline">\(W_q\)</span>
+to generate a single query vector</li>
+<li>Dot product query vector against every key vector to get weights
+against every value</li>
+<li>Multiply every value by weight and add them altogether to the final
+attention result</li>
+<li><div class="float">
+<img src="attention_example.png" alt="Attention weight visualization" />
+<div class="figcaption">Attention weight visualization</div>
+</div></li>
+</ul>
+</div>
+<div class="slide section level1">
+
+<div class="columns">
+<div class="column">
+<p><img src="./transformer_arch.webp" height="800" /></p>
+</div><div class="column">
+<ol style="list-style-type: decimal">
+<li>Encoder + decoder</li>
+<li>Attention</li>
+</ol>
+<blockquote>
+<p><strong>3. Multi-Head Attention</strong></p>
+</blockquote>
+<ol start="4" style="list-style-type: decimal">
+<li>Positional Encoding</li>
+<li>Transformer Blocks</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="multi-head-attention" class="slide section level1">
+<h1>3. Multi-Head Attention</h1>
+<ul class="incremental">
+<li>Empirical tuning (like so much of ML!)</li>
+<li>The entirety of the reasoning in the original paper: “We found it
+beneficial” <a href="https://arxiv.org/pdf/1706.03762.pdf">the original
+paper</a></li>
+</ul>
+</div>
+<div id="attention-is-relatively-unexpressive-vaswani-2024"
+class="slide section level1">
+<h1>3. Attention is relatively unexpressive (Vaswani 2024)</h1>
+<ul class="incremental">
+<li><img src="attention.png" /></li>
+<li><img src="cnn.png" /></li>
+</ul>
+</div>
+<div id="multi-head-attention-increases-expressivity-vaswani-2024"
+class="slide section level1">
+<h1>3. Multi-Head Attention increases expressivity (Vaswani 2024)</h1>
+<p><img src="multihead_attention.png" /></p>
+</div>
+<div id="section" class="slide section level1">
+<h1></h1>
+<div class="columns">
+<div class="column">
+<p><img src="./transformer_arch.webp" height="800" /></p>
+</div><div class="column">
+<ol style="list-style-type: decimal">
+<li>Encoder + decoder</li>
+<li>Attention</li>
+<li>Multi-Head Attention</li>
+</ol>
+<blockquote>
+<p><strong>4. Positional Encoding</strong></p>
+</blockquote>
+<ol start="5" style="list-style-type: decimal">
+<li>Transformer Blocks</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="positional-encoding" class="slide section level1">
+<h1>4. Positional Encoding</h1>
+<ul class="incremental">
+<li>Attention is position invariant, as is almost everything in a
+transformer block</li>
+<li>It is therefore common to explicitly encode position
+information</li>
+<li>This is called a <em>positional encoding</em>, where after embedding
+a token as a vector of floats, there is another operation that modifies
+the vector based on what the index of the token is in the input</li>
+</ul>
+</div>
+<div id="section-1" class="slide section level1">
+<h1></h1>
+<div class="columns">
+<div class="column">
+<p><img src="./transformer_arch.webp" height="800" /></p>
+</div><div class="column">
+<ol style="list-style-type: decimal">
+<li>Encoder + decoder</li>
+<li>Attention</li>
+<li>Multi-Head Attention</li>
+<li>Positional Encoding</li>
+</ol>
+<blockquote>
+<p><strong>5. Transformer Blocks</strong></p>
+</blockquote>
+</div>
+</div>
+</div>
+<div id="transformer-blocks" class="slide section level1">
+<h1>5. Transformer blocks</h1>
+<ul class="incremental">
+<li><p>A transformer model consists of all of the components we’ve
+discussed, but some of them are repeated in structures called
+“blocks”</p></li>
+<li><p>Remember MLP is just a vanilla neural net.</p></li>
+</ul>
+<pre><code>----------------------------
+|      Output              |
+|        ^                 |
+|        |                 |
+|   Normalization &lt;-----|  |
+|        ^              |  |
+|        |              |  |
+|       MLP             |  |
+|        ^              |  |
+|        | -------------|  |
+|        |                 |
+|   Normalization &lt;-----|  |
+|        ^              |  |
+|        |              |  |
+| Multi-Head Attention  |  |
+|        ^              |  |
+|        |              |  |
+|      Input -----------|  |
+|                          |
+----------------------------</code></pre>
+</div>
+<div id="stacking-attention-on-top-of-attention"
+class="slide section level1">
+<h1>5. Stacking attention on top of attention</h1>
+<ul class="incremental">
+<li>Keep stacking attention matrices on top of rounds of merging
+multiple attention streams</li>
+<li>Query, key, value intuition kind of falls apart
+<ul class="incremental">
+<li>What is attention “<em>really</em>”?</li>
+<li>At the end of the day a particular set of guardrails on neural nets
+that seems to make models good at language</li>
+<li>Again no reason in theory why a sufficiently large single neural net
+couldn’t subsume the idea of attention
+<ul class="incremental">
+<li>It just doesn’t happen in practice</li>
+<li>Too many spurious relationships</li>
+<li>The guardrails provided by attention cut down on spurious
+relationships (i.e. subtractive, not additive new capabilities)</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="putting-it-all-back-together" class="slide section level1">
+<h1>Putting It All Back Together</h1>
+<ol class="incremental" style="list-style-type: decimal">
+<li>Start with an input text sequence consisting of <code>n</code>
+tokens</li>
+<li>Convert that to <code>n</code> vectors of size <code>d_model</code>
+using some pretrained embedding (will use <code>n</code> x
+<code>d_model</code> as short-hand for this)</li>
+<li>Add positional encoding: output is new set of <code>n</code> x
+<code>d_model</code> vectors</li>
+<li>Pass into (multi-head) attention mechanism: output is new set of
+<code>n</code> x <code>d_model</code> vectors</li>
+<li>Normalize the sum of input into attention and its output from the
+previous step: output is new set of <code>n</code> x
+<code>d_model</code> vectors</li>
+<li>Pass vectors into MLP: output is new set of <code>n</code> x
+<code>d_model</code> vectors</li>
+<li>Normalize the sum of input into MLP and its output from the previous
+step: output is new set of <code>n</code> x <code>d_model</code>
+vectors</li>
+<li>Repeat steps 4-7 for as many transformer blocks as the model has:
+output is new set of <code>n</code> x <code>d_model</code> vectors</li>
+<li>Pass into final linear layer: output is new set of <code>n</code> x
+<code>d_vocabulary</code> vectors (<code>d_vocabulary</code> is the
+number of possible distinct tokens)</li>
+<li>Choose the last vector: output is <code>1</code> x
+<code>d_vocabulary</code> vector</li>
+<li>Choose index of vector with highest scalar value: output is
+<code>1</code> scalar</li>
+<li>Lookup that index using vocabulary dictionary back to a text token:
+output is a single new token</li>
+</ol>
+</div>
+</body>
+</html>
