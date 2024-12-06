@@ -27,9 +27,10 @@ Given four one-hot encoded values, i.e. `[1, 0, 0, 0]`, `[0, 1, 0, 0]`, `[0, 0,
 trigram."
 
 In particular, given an input sequence of consisting of `n` one-hot encoded
-vectors where `n` is greater than or equal to 2, if the first and last vector are
-equal to each other, then the attention head should output `[0, 0, 0, 1]`.
-Otherwise, the attention head should output the zero vector.
+vectors where `n` is greater than or equal to 2, if there is exactly one vector in the
+sequence equal to the  last vector (and not the last vector itself), then the
+attention head should output `[0, 0, 0, 1]`. If there are no vectors equal to
+the last vector, the attention head should output the zero vector.
 
 So for example, given the following sequence
 
@@ -46,7 +47,8 @@ sequence, we should get as outputs
 > [whatever_you_want, [0, 0, 0, 0], [0, 0, 0, 0], [1, 0, 0, 0]]
 
 where the output of the attention head when you have only a single vector can be
-whatever you'd like it to be.
+whatever you'd like it to be. Likewise, if there is more than vector that is
+equal to the last vector, you can output whatever you'd like.
 
 You can set the internal dimensions of your attention head matrices to whatever
 you want, subject only to the restriction that the attention head should take in
