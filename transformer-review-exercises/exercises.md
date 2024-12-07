@@ -44,7 +44,7 @@ we should get back (when calculating the output of the attention head at index
 or if we were to run the attention head (with a causal mask) over the entire
 sequence, we should get as outputs
 
-> [whatever_you_want, [0, 0, 0, 0], [0, 0, 0, 0], [1, 0, 0, 0]]
+> [whatever_you_want, [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 1]]
 
 where the output of the attention head when you have only a single vector can be
 whatever you'd like it to be. Likewise, if there is more than vector that is
