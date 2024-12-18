@@ -14,7 +14,7 @@ Let's first review some questions for
 
 *Exercise*: 
 
-> Why does a decoder-only transformer require causal masking during
+> Why does a decoder-only, one layer transformer require causal masking during
 > training, but not during inference?
 
 # Main coding exercise
