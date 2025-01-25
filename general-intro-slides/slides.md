@@ -26,6 +26,26 @@ general public believes, i.e. a big gap in "situational awareness"
 >
 > *Leopold Aschenbrenner, Former OpenAI researcher, June 2024*
 
+# What do AI Labs Think
+
+> I don't know exactly when it'll come, I don't know if it'll be 2027. I think
+> it's plausible it could be longer than that. I don't think it will be a whole
+> bunch longer than that when AI systems are better than humans at almost
+> everything. Better than almost all humans at almost everything. And then
+> eventually better than all humans at everything, even robotics.
+>
+> *Dario Amodei, CEO of Anthropic, Jan 2025*
+
+# What do AI Labs Think
+
+> We are now confident we know how to build AGI as we have traditionally
+> understood it. We believe that, in 2025, we may see the first AI agents “join
+> the workforce” and materially change the output of companies.... We are
+> beginning to turn our aim beyond that, to superintelligence in the true sense
+> of the word.
+>
+> *Sam Altman, CEO of OpenAI, Jan 2025*
+
 
 # Thoughts on Situational Awareness
 
@@ -34,7 +54,7 @@ general public believes, i.e. a big gap in "situational awareness"
 + Only several hundred people having "situational awareness" is bad, this
   technology will affect everyone
 + People deserve to know about and form opinions about crazy things that might
-  be happening before those things smash into them
+  be happening **before** those things smash into them
 
 # Progress in AI has been extremely rapid
 
@@ -56,6 +76,49 @@ general public believes, i.e. a big gap in "situational awareness"
 + ![failure of theory of mind example](./theory_of_mind_failure_chatgpt_3.jpg)
 + Which is heavier, 10 kg of iron or 10 kg of cotton?
 + ![iron or cotton failure](./iron_or_cotton.jpg)
+
+# Multi-Modal Demos
+
++ Our models are strongly multi-modal
++ For example we have robust video generation
+    * This happened over the course of about 18 months
+
+# Video generation in 2023
+
+<video width="1280" height="720" controls>
+  <source src="./will_smith_eating_spaghetti.mp4" type="video/webm">
+</video>
+
+# Video generation in 2024
+
+<video width="1280" height="720" controls>
+  <source src="./google_veo_2_video_0.webm" type="video/webm">
+</video>
+
+# Video generation in 2024
+
+<video width="1280" height="720" controls>
+  <source src="./google_veo_2_video_1.webm" type="video/webm">
+</video>
+
+# Video generation in 2024
+
+<video width="1280" height="720" controls>
+  <source src="./google_veo_2_video_2.webm" type="video/webm">
+</video>
+
+# Video generation in 2024
+
+<video width="1280" height="720" controls>
+  <source src="./google_veo_2_video_3.webm" type="video/webm">
+</video>
+
+# Video generation in 2024
+
+<video width="1280" height="720" controls>
+  <source src="./google_veo_2_video_4.webm" type="video/webm">
+</video>
+
 
 # Broadly Superhuman AI is coming soon
 

@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>slides</title>
+  <style type="text/css">
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div id="goals-of-this-intro-talk" class="slide section level1">
+<h1>Goals of this intro talk</h1>
+<ul class="incremental">
+<li>Briefly go over today’s schedule</li>
+<li>AI “Situational Awareness”</li>
+</ul>
+</div>
+<div id="the-current-state-of-ai" class="slide section level1">
+<h1>The Current State of AI</h1>
+<p>There is a big gap between what AI researchers at top labs believe
+and what the general public believes, i.e. a big gap in “situational
+awareness”</p>
+<blockquote>
+<p>By 2025/26, these machines will outpace college graduates. By the end
+of the decade, they will be smarter than you or I [sic]…</p>
+<p>Everyone is now talking about AI, but few have the faintest glimmer
+of what is about to hit them. Nvidia analysts still think 2024 might be
+close to the peak. Mainstream pundits are stuck on the willful blindness
+of “it’s just predicitng the next word”</p>
+<p>Before long, the world will wake up. But right now, there are perhaps
+a few hundred people, most of them in San Francisco and AI labs, that
+have <em>situational awareness</em>…. [they] correctly predict[ed] the
+AI advances of the past few years. Whether these people are also right
+about the next few years remains to be seen. But these are very smart
+people – the smartest people I have ever met – and they are the ones
+building the technology…. If they are seeing the future even close to
+correctly, we are in for a wild ride.</p>
+<p><em>Leopold Aschenbrenner, Former OpenAI researcher, June
+2024</em></p>
+</blockquote>
+</div>
+<div id="what-do-ai-labs-think" class="slide section level1">
+<h1>What do AI Labs Think</h1>
+<blockquote>
+<p>I don’t know exactly when it’ll come, I don’t know if it’ll be 2027.
+I think it’s plausible it could be longer than that. I don’t think it
+will be a whole bunch longer than that when AI systems are better than
+humans at almost everything. Better than almost all humans at almost
+everything. And then eventually better than all humans at everything,
+even robotics.</p>
+<p><em>Dario Amodei, CEO of Anthropic, Jan 2025</em></p>
+</blockquote>
+</div>
+<div id="what-do-ai-labs-think-1" class="slide section level1">
+<h1>What do AI Labs Think</h1>
+<blockquote>
+<p>We are now confident we know how to build AGI as we have
+traditionally understood it. We believe that, in 2025, we may see the
+first AI agents “join the workforce” and materially change the output of
+companies…. We are beginning to turn our aim beyond that, to
+superintelligence in the true sense of the word.</p>
+<p><em>Sam Altman, CEO of OpenAI, Jan 2025</em></p>
+</blockquote>
+</div>
+<div id="thoughts-on-situational-awareness"
+class="slide section level1">
+<h1>Thoughts on Situational Awareness</h1>
+<ul class="incremental">
+<li>There is a big gap between what AI researchers at top labs believe
+and what the general public believes</li>
+<li>Only several hundred people having “situational awareness” is bad,
+this technology will affect everyone</li>
+<li>People deserve to know about and form opinions about crazy things
+that might be happening <strong>before</strong> those things smash into
+them</li>
+</ul>
+</div>
+<div id="progress-in-ai-has-been-extremely-rapid"
+class="slide section level1">
+<h1>Progress in AI has been extremely rapid</h1>
+<ul class="incremental">
+<li>24 months ago ChatGPT was released
+<ul class="incremental">
+<li>Hacky product</li>
+<li>Still fastest product launch ever</li>
+<li>By today’s standards a terrible AI</li>
+</ul></li>
+<li>Since then, we have had roughly <em>three</em> more generations of
+LLMs each of which blows the previous out of the water
+<ul class="incremental">
+<li>GPT-4, GPT-4o (this was mostly a speed improvement over a perf
+improvement), Claude 3.5, (GPT-5 is currently training and will likely
+finish its training in another few weeks; likely several more months
+until it’s ready for prime time)</li>
+</ul></li>
+</ul>
+</div>
+<div id="demos" class="slide section level1">
+<h1>Demos</h1>
+<ul class="incremental">
+<li>The easy failures of ChatGPT have long since been corrected</li>
+<li>You are reading a book. You have a bookmark on page 120. A friend
+picks up the book and moves the bookmark to page 145. When you return to
+the book, what page do you expect to find the bookmark on?</li>
+<li><div class="float">
+<img src="./theory_of_mind_failure_chatgpt_3.jpg"
+alt="failure of theory of mind example" />
+<div class="figcaption">failure of theory of mind example</div>
+</div></li>
+<li>Which is heavier, 10 kg of iron or 10 kg of cotton?</li>
+<li><div class="float">
+<img src="./iron_or_cotton.jpg" alt="iron or cotton failure" />
+<div class="figcaption">iron or cotton failure</div>
+</div></li>
+</ul>
+</div>
+<div id="multi-modal-demos" class="slide section level1">
+<h1>Multi-Modal Demos</h1>
+<ul class="incremental">
+<li>Our models are strongly multi-modal</li>
+<li>For example we have robust video generation
+<ul class="incremental">
+<li>This happened over the course of about 18 months</li>
+</ul></li>
+</ul>
+</div>
+<div id="video-generation-in-2023" class="slide section level1">
+<h1>Video generation in 2023</h1>
+<video width="1280" height="720" controls>
+<source src="./will_smith_eating_spaghetti.mp4" type="video/webm">
+</video>
+</div>
+<div id="video-generation-in-2024" class="slide section level1">
+<h1>Video generation in 2024</h1>
+<video width="1280" height="720" controls>
+<source src="./google_veo_2_video_0.webm" type="video/webm">
+</video>
+</div>
+<div id="video-generation-in-2024-1" class="slide section level1">
+<h1>Video generation in 2024</h1>
+<video width="1280" height="720" controls>
+<source src="./google_veo_2_video_1.webm" type="video/webm">
+</video>
+</div>
+<div id="video-generation-in-2024-2" class="slide section level1">
+<h1>Video generation in 2024</h1>
+<video width="1280" height="720" controls>
+<source src="./google_veo_2_video_2.webm" type="video/webm">
+</video>
+</div>
+<div id="video-generation-in-2024-3" class="slide section level1">
+<h1>Video generation in 2024</h1>
+<video width="1280" height="720" controls>
+<source src="./google_veo_2_video_3.webm" type="video/webm">
+</video>
+</div>
+<div id="video-generation-in-2024-4" class="slide section level1">
+<h1>Video generation in 2024</h1>
+<video width="1280" height="720" controls>
+<source src="./google_veo_2_video_4.webm" type="video/webm">
+</video>
+</div>
+<div id="broadly-superhuman-ai-is-coming-soon"
+class="slide section level1">
+<h1>Broadly Superhuman AI is coming soon</h1>
+<blockquote>
+<p>These next three years might be the last few years that I work. I am
+not ill, nor am I becoming a stay-at-home mom, nor have I been so
+financially fortunate to be on the brink of voluntary retirement. I
+stand at the edge of a technological development that seems likely,
+should it arrive, to end employment as I know it.</p>
+<p><em>Avital Balwit, Chief of Staff to the CEO of Anthropic</em></p>
+</blockquote>
+<p><a
+href="https://www.palladiummag.com/2024/05/17/my-last-five-years-of-work/">https://www.palladiummag.com/2024/05/17/my-last-five-years-of-work/</a></p>
+</div>
+<div id="were-not-on-track-for-it-to-go-well"
+class="slide section level1">
+<h1>We’re not on track for it to go well</h1>
+<ul class="incremental">
+<li>Enormous misbalance in resources allocated to safety vs
+capabilities</li>
+<li>U.S. AISI expected to be funded according to Schumer et al. up to 10
+million dollars
+<ul class="incremental">
+<li>Salary of only a few researchers at top AI labs</li>
+</ul></li>
+<li>AI experts are worried because <em>nobody</em> really understands
+how these AI systems work
+<ul class="incremental">
+<li>Turing Award winner <a
+href="https://yoshuabengio.org/2024/07/09/reasoning-through-arguments-against-taking-ai-safety-seriously/">Yoshua
+Bengio</a>: “…while we are racing towards AGI or even ASI, nobody
+currently knows how such an AGI or ASI could be made to behave morally,
+or at least behave as intended by its developers and not turn against
+humans.. As of now, however, we are racing towards a world with entities
+that are smarter than humans and pursue their own goals – without a
+reliable method for humans to ensure those goals are compatible with
+human goals.”</li>
+</ul></li>
+<li>And AI experts are worried about things going very wrong:
+<ul class="incremental">
+<li>Median response to this question was 10% from this <a
+href="https://blog.aiimpacts.org/p/2023-ai-survey-of-2778-six-things">survey</a>:
+“What probability do you put on human inability to control future
+advanced AI systems causing human extinction or similarly permanent and
+severe disempowerment of the human species?”</li>
+</ul></li>
+</ul>
+</div>
+<div id="the-pace-of-improvement-is-increasing"
+class="slide section level1">
+<h1>The pace of improvement is increasing</h1>
+<ul class="incremental">
+<li>Remember that now is the worst AI will ever be</li>
+<li>Pace of AI improvement is quickening, not slowing</li>
+</ul>
+</div>
+<div id="dont-fall-into-the-trap-of-status-quo-thinking"
+class="slide section level1">
+<h1>Don’t fall into the trap of “status quo” thinking</h1>
+<p>Don’t be like these people!</p>
+<blockquote>
+<p>I’m part of an “AI Futures” group at an intergov org whose purpose is
+to consider the long-term implications of the tech…. [2/3 of them]
+imagine AI in 2040 as having today’s capabilities and no more. <span
+class="citation">[@danfaggella]</span></p>
+</blockquote>
+<p><a
+href="https://x.com/danfaggella/status/1812171380449763430">https://x.com/danfaggella/status/1812171380449763430</a></p>
+</div>
+<div id="so-what-is-ai-safety" class="slide section level1">
+<h1>So what is “AI Safety?”</h1>
+<ul class="incremental">
+<li>Broadly the field that encompasses making sure that a lot of the
+above goes well!</li>
+<li>This includes:
+<ul class="incremental">
+<li>Worsening of current societal problems</li>
+<li>Mass unemployment/economic disruption</li>
+<li>Mass catastrophe/loss of life scenarios/destruction of the human
+race</li>
+</ul></li>
+</ul>
+</div>
+<div id="if-youre-interested-in-this-what-can-you-do"
+class="slide section level1">
+<h1>If you’re interested in this what can you do?</h1>
+<ul class="incremental">
+<li>Need people to know about this and talk about it and get involved in
+making sure that the right governance controls are in place!
+<ul class="incremental">
+<li>We’ll also be going over that today</li>
+</ul></li>
+<li>If you have a technical background, jump into technical research!
+<ul class="incremental">
+<li>We’ll be going over some of that today!</li>
+</ul></li>
+</ul>
+</div>
+</body>
+</html>
