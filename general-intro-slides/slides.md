@@ -46,6 +46,16 @@ general public believes, i.e. a big gap in "situational awareness"
 >
 > *Sam Altman, CEO of OpenAI, Jan 2025*
 
+# Not just the labs
+
+> The next few years will determine whether artificial intelligence leads to
+> catastrophe... America must quickly perfect a technology that many believe
+> will be smarter and more capable than humans.
+>
+> *Jake Sullivan, outgoing White House National Security Advisor, Jan 2025*
+
+From [here](https://www.axios.com/2025/01/18/biden-sullivan-ai-race-trump-china)
+
 
 # Thoughts on Situational Awareness
 
@@ -131,6 +141,16 @@ general public believes, i.e. a big gap in "situational awareness"
 > *Avital Balwit, Chief of Staff to the CEO of Anthropic*
 
 [https://www.palladiummag.com/2024/05/17/my-last-five-years-of-work/](https://www.palladiummag.com/2024/05/17/my-last-five-years-of-work/)
+
+# Already seeing startling progress in certain fields
+
+> 2025 is, after all, being hailed as the year that PhD-level AI agents will
+> flourish. I can personally report that, in the field of history, we’re already
+> there.
+>
+> *Benjamin Breen, Associate Professor of History, UC Santa Cruz*
+
+From [here](https://resobscura.substack.com/p/the-leading-ai-models-are-now-very)
 
 # We're not on track for it to go well
 
