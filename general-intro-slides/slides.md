@@ -28,23 +28,13 @@ general public believes, i.e. a big gap in "situational awareness"
 
 # What do AI Labs Think
 
-> I don't know exactly when it'll come, I don't know if it'll be 2027. I think
-> it's plausible it could be longer than that. I don't think it will be a whole
-> bunch longer than that when AI systems are better than humans at almost
-> everything. Better than almost all humans at almost everything. And then
-> eventually better than all humans at everything, even robotics.
+> These next three years might be the last few years that I work. I am not ill,
+> nor am I becoming a stay-at-home mom, nor have I been so financially fortunate
+> to be on the brink of voluntary retirement. I stand at the edge of a
+> technological development that seems likely, should it arrive, to end
+> employment as I know it. 
 >
-> *Dario Amodei, CEO of Anthropic, Jan 2025*
-
-# What do AI Labs Think
-
-> We are now confident we know how to build AGI as we have traditionally
-> understood it. We believe that, in 2025, we may see the first AI agents “join
-> the workforce” and materially change the output of companies.... We are
-> beginning to turn our aim beyond that, to superintelligence in the true sense
-> of the word.
->
-> *Sam Altman, CEO of OpenAI, Jan 2025*
+> *Avital Balwit, Chief of Staff to the CEO of Anthropic*
 
 # Not just the labs
 
@@ -55,6 +45,8 @@ general public believes, i.e. a big gap in "situational awareness"
 > *Jake Sullivan, outgoing White House National Security Advisor, Jan 2025*
 
 From [here](https://www.axios.com/2025/01/18/biden-sullivan-ai-race-trump-china)
+
+[https://www.palladiummag.com/2024/05/17/my-last-five-years-of-work/](https://www.palladiummag.com/2024/05/17/my-last-five-years-of-work/)
 
 
 # Thoughts on Situational Awareness
@@ -68,16 +60,13 @@ From [here](https://www.axios.com/2025/01/18/biden-sullivan-ai-race-trump-china)
 
 # Progress in AI has been extremely rapid
 
-+ 24 months ago ChatGPT was released
++ 25 months ago ChatGPT was released
     * Hacky product
     * Still fastest product launch ever
     * By today's standards a terrible AI
 + Since then, we have had roughly *three* more generations of LLMs each of which
   blows the previous out of the water
-    * GPT-4, GPT-4o (this was mostly a speed improvement over a perf
-      improvement), Claude 3.5, (GPT-5 is currently training and will likely
-      finish its training in another few weeks; likely several more months until
-      it's ready for prime time)
+    * GPT-4, Claude 3.5, o-series
 
 # Demos
 
@@ -123,35 +112,6 @@ From [here](https://www.axios.com/2025/01/18/biden-sullivan-ai-race-trump-china)
   <source src="./google_veo_2_video_3.webm" type="video/webm">
 </video>
 
-# Video generation in 2024
-
-<video width="1280" height="720" controls>
-  <source src="./google_veo_2_video_4.webm" type="video/webm">
-</video>
-
-
-# Broadly Superhuman AI is coming soon
-
-> These next three years might be the last few years that I work. I am not ill,
-> nor am I becoming a stay-at-home mom, nor have I been so financially fortunate
-> to be on the brink of voluntary retirement. I stand at the edge of a
-> technological development that seems likely, should it arrive, to end
-> employment as I know it. 
->
-> *Avital Balwit, Chief of Staff to the CEO of Anthropic*
-
-[https://www.palladiummag.com/2024/05/17/my-last-five-years-of-work/](https://www.palladiummag.com/2024/05/17/my-last-five-years-of-work/)
-
-# Already seeing startling progress in certain fields
-
-> 2025 is, after all, being hailed as the year that PhD-level AI agents will
-> flourish. I can personally report that, in the field of history, we’re already
-> there.
->
-> *Benjamin Breen, Associate Professor of History, UC Santa Cruz*
-
-From [here](https://resobscura.substack.com/p/the-leading-ai-models-are-now-very)
-
 # We're not on track for it to go well
 
 + Enormous misbalance in resources allocated to safety vs capabilities
@@ -162,7 +122,7 @@ From [here](https://resobscura.substack.com/p/the-leading-ai-models-are-now-very
   systems work
     * Turing Award winner [Yoshua Bengio](https://yoshuabengio.org/2024/07/09/reasoning-through-arguments-against-taking-ai-safety-seriously/): "...while we are racing towards AGI or even ASI, nobody currently knows how such an AGI or ASI could be made to behave morally, or at least behave as intended by its developers and not turn against humans.. As of now, however, we are racing towards a world with entities that are smarter than humans and pursue their own goals – without a reliable method for humans to ensure those goals are compatible with human goals."
 + And AI experts are worried about things going very wrong:
-    * Median response to this question was 10% from this [survey](https://blog.aiimpacts.org/p/2023-ai-survey-of-2778-six-things): "What probability do you put on human inability to control future advanced AI systems causing human extinction or similarly permanent and severe disempowerment of the human species?"
+    * Median response to this question was 10% from this [survey](https://blog.aiimpacts.org/p/2023-ai-survey-of-2778-six-things): "What probability do you put on human inability to control future advanced AI systems **causing human extinction or similarly permanent and severe disempowerment of the human species?**"
 
 # The pace of improvement is increasing
 
