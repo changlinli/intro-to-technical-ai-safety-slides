@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>slides</title>
+  <style type="text/css">
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div id="deepseek-r1" class="slide section level1">
+<h1>DeepSeek r1</h1>
+</div>
+<div id="what-is-it" class="slide section level1">
+<h1>What is it?</h1>
+<ul class="incremental">
+<li>A new “reasoning” AI from the Chinese company DeepSeek</li>
+<li>Takes world by storm, kind of for hype reasons
+<ul class="incremental">
+<li>It’s not terribly surprising for industry people</li>
+<li>Sort of similar to how ChatGPT wasn’t surprising for anyone who
+played with GPT-3</li>
+</ul></li>
+</ul>
+</div>
+<div id="why-is-it-significant" class="slide section level1">
+<h1>Why is it significant?</h1>
+<ul class="incremental">
+<li>Open source
+<ul class="incremental">
+<li>Although with some important details still hidden</li>
+<li>Exact RL training regimen</li>
+<li>Training set data</li>
+</ul></li>
+<li>Apparently done for cheap (but not crazy cheap)
+<ul class="incremental">
+<li>$5.6 million dollars for training DeepSeek v3</li>
+<li><em>NOT</em> for company</li>
+<li><em>NOT</em> for all model training</li>
+<li>So cheap, but not as crazy cheap as some people are hyping it
+up</li>
+</ul></li>
+<li>Dealing with memory bandwidth constraints
+<ul class="incremental">
+<li>H800s vs H100s</li>
+</ul></li>
+</ul>
+</div>
+<div id="reasoning-ai" class="slide section level1">
+<h1>“Reasoning” AI</h1>
+<ul class="incremental">
+<li>All LLMs seem to do better with chain of thought</li>
+<li>Can we optimize chain of thought?</li>
+<li>Leads to reasoning AIs</li>
+</ul>
+</div>
+<div id="how-llms-are-trained" class="slide section level1">
+<h1>How LLMs are trained</h1>
+<ul class="incremental">
+<li>Pre-training</li>
+<li>(Supervised Fine-Tuning) SFT</li>
+<li>RL (this is where “reasoning” AI stuff mainly comes in)</li>
+</ul>
+</div>
+<div id="finetuning-vs-training" class="slide section level1">
+<h1>Finetuning vs Training</h1>
+<ul class="incremental">
+<li>Not really fundamentally different</li>
+<li>Finetuning is just “training-lite”
+<ul class="incremental">
+<li>Freeze parts of the network B* Limit magnitude of parameter
+updates</li>
+</ul></li>
+</ul>
+</div>
+<div id="role-of-rl-vs-just-sft" class="slide section level1">
+<h1>Role of RL vs just SFT</h1>
+<ul class="incremental">
+<li>RL empirically seems to work better</li>
+<li>We don’t <em>really</em> understand why RL works better, but we have
+hand-wavy theories
+<ul class="incremental">
+<li>Most compelling one to me is that RL allows for negative
+reinforcement</li>
+</ul></li>
+</ul>
+</div>
+<div id="exact-innovations" class="slide section level1">
+<h1>Exact innovations</h1>
+<ul class="incremental">
+<li>Reuses MoE architecture that is all the rage these days
+<ul class="incremental">
+<li>Mixture of Experts is not what you think it is</li>
+</ul></li>
+<li>New RL algorithm: GRPO vs PPO</li>
+<li>“Mult-head Latent Attention” (from DeepSeek v2 and v3)</li>
+<li>R1 zero vs R1 (R1 zero skips SFT)</li>
+</ul>
+</div>
+<div id="interesting-things-that-happened" class="slide section level1">
+<h1>Interesting things that happened</h1>
+<ul class="incremental">
+<li>R1 Zero results in pretty crazy, hard to interpret reasoning
+“traces”
+<ul class="incremental">
+<li>This is bad for safety</li>
+</ul></li>
+<li>But R1 Zero still working is pretty wild</li>
+</ul>
+</div>
+<div id="what-does-this-mean-for-aiai-safety"
+class="slide section level1">
+<h1>What does this mean for AI/AI safety</h1>
+<ul class="incremental">
+<li>Pretraining data running out seems to not really be an issue</li>
+<li>Timelines might be short</li>
+</ul>
+</div>
+</body>
+</html>
