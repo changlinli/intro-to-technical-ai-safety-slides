@@ -39,7 +39,7 @@
 + Not really fundamentally different
 + Finetuning is just "training-lite"
     * Freeze parts of the network
-    B* Limit magnitude of parameter updates
+    * Limit magnitude of parameter updates
 
 # Role of RL vs just SFT
 
