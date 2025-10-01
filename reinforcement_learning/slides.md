@@ -142,11 +142,11 @@ Let's take chess as an example.
 # Using Bellman's Equation to Generate Training Examples
 
 + Bellman's Equation gives us a loss function
-+ Use your agent (usually a neural net) to calculate $Q(s, a)$
-+ Then use it to calculate $max_{i} Q(s_{a}, a_i)$
-+ We know $R(s, a)$
-+ Difference between $Q(s, a)$ and $R(s, a) + max_{i} Q(s_{a}, a_i)$ is our loss
-  function
+    * Use your agent (usually a neural net) to calculate $Q(s, a)$
+    * Then use it to calculate $max_{i} Q(s_{a}, a_i)$
+    * We know $R(s, a)$
+    * Difference between $Q(s, a)$ and $R(s, a) + max_{i} Q(s_{a}, a_i)$ is our loss
+      function
 + We therefore end up with a bunch of training examples analogous to image
   classification
     * Image classification: actual answer and correct answer, loss is diff

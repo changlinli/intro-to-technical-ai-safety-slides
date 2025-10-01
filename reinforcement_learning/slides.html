@@ -172,14 +172,14 @@ variable <span class="math inline">\(a\)</span>)
 choice of what actions given a certain state the machine should do.
 Usually denoted by the <span class="math inline">\(\pi\)</span>
 symbol.</li>
-<li>Reward function (<span class="math inline">\(R(s, a)\)</span>): the
+<li>Reward function <span class="math inline">\(R(s, a)\)</span>: the
 immediate feedback given to the agent after performing an action. Is
 some positive or negative number.</li>
 <li><span class="math inline">\(Q(s, a)\)</span>: the maximum reward we
 can accumulate from state <span class="math inline">\(s\)</span> after
 taking action <span class="math inline">\(a\)</span>. <em>We usually
 don’t know this function.</em></li>
-<li>Value function (<span class="math inline">\(V(s)\)</span>): a
+<li>Value function <span class="math inline">\(V(s)\)</span>: a
 variation of <span class="math inline">\(Q\)</span> where <span
 class="math inline">\(V(s)\)</span> is the highest value of <span
 class="math inline">\(Q(s, a)\)</span> across all <span
@@ -289,7 +289,8 @@ a_i)\)</span></li>
 class="slide section level1">
 <h1>Using Bellman’s Equation to Generate Training Examples</h1>
 <ul class="incremental">
-<li>Bellman’s Equation gives us a loss function</li>
+<li>Bellman’s Equation gives us a loss function
+<ul class="incremental">
 <li>Use your agent (usually a neural net) to calculate <span
 class="math inline">\(Q(s, a)\)</span></li>
 <li>Then use it to calculate <span class="math inline">\(max_{i}
@@ -298,6 +299,7 @@ Q(s_{a}, a_i)\)</span></li>
 <li>Difference between <span class="math inline">\(Q(s, a)\)</span> and
 <span class="math inline">\(R(s, a) + max_{i} Q(s_{a}, a_i)\)</span> is
 our loss function</li>
+</ul></li>
 <li>We therefore end up with a bunch of training examples analogous to
 image classification
 <ul class="incremental">
