@@ -198,6 +198,29 @@ Let's take chess as an example.
 # The learned $Q$ or your learned policy can disagree strongly with the specified $R$
 
 + Just like image classification, $Q$ might be completely spurious
++ E.g. imagine a chess engine trained via RL with an underlying neural network
+  with a single forward pass
+    * Return (i.e. Q) is a deep tree, so must be calculated by looking a
+      variable number of moves "ahead"
+    * Single forward pass implies computation happens in constant time
+    * Therefore whatever strategy the neural net learns, it can't actually be
+      looking a variable number of moves ahead!
+    * Instead the neural net learns a set of "intuitions/vibes" that correlate
+      well with the actual high-return move that happens by looking e.g. 10
+      moves ahead, or at least correlates well in training
+    * But this reveals a fundamental difference between the reward function (a
+      deeply iterative/recursive function) and the learned function (a constant
+      time function), and this fundamental difference can hide pathological
+      behavior!
+    * This fundamental difference is not simply a difference between constant
+      time and variable time computation, just most obvious there
+         - More generally this is because we usually do not have a way of truly
+           learning the optimal strategy, but only a strategy that has some
+           correlation to the optimal strategy *in training*
+         - E.g. "detecting that you are in training and only cooperating with
+           your user then, but betraying your user in production" correlates very
+           well to the strategy of "always cooperating with your user" when you
+           are in training!
 
 # We have two optimizers
 

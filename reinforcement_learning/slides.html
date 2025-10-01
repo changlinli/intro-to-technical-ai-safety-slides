@@ -13,8 +13,11 @@
     div.columns{display: flex; gap: min(4vw, 1.5em);}
     div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
     ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
       width: 0.8em;
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
@@ -254,8 +257,9 @@ class="math inline">\(Q\)</span></li>
 <li>Can learn via trying out the policy</li>
 </ul>
 </div>
-<div id="learning-q-directly" class="slide section level1">
-<h1>Learning <span class="math inline">\(Q\)</span> Directly</h1>
+<div id="learning-q-directly-q-learning" class="slide section level1">
+<h1>Learning <span class="math inline">\(Q\)</span> Directly (<span
+class="math inline">\(Q\)</span> Learning)</h1>
 <ul class="incremental">
 <li>Bellman’s Equation:
 <ul class="incremental">
@@ -306,6 +310,20 @@ loss is diff</li>
 <li>Backpropagate with that loss function on a bunch of <span
 class="math inline">\(s\)</span> and <span
 class="math inline">\(a\)</span>s (can be more or less random)</li>
+</ul>
+</div>
+<div id="q-learning-doesnt-really-mean-the-agent-is-trying-to-win"
+class="slide section level1">
+<h1>Q-Learning doesn’t really mean the agent is trying to “win”</h1>
+<ul class="incremental">
+<li>The central question that the neural net asks itself at every step:
+“are my beliefs self-consistent (according to Bellman’s Equation)”</li>
+<li>E.g. for Q-learning in chess, a net doesn’t necessarily actually
+have to ever play a full game of chess
+<ul class="incremental">
+<li>Can just keep learning by looking at various board positions and
+keep using Bellman’s Equation</li>
+</ul></li>
 </ul>
 </div>
 <div id="learning-via-direct-policy-learning"
@@ -362,13 +380,43 @@ class="math inline">\(Q\)</span> you want it to learn</li>
 </ul></li>
 </ul>
 </div>
-<div id="the-learned-q-can-disagree-strongly-with-the-specified-r"
+<div
+id="the-learned-q-or-your-learned-policy-can-disagree-strongly-with-the-specified-r"
 class="slide section level1">
-<h1>The learned <span class="math inline">\(Q\)</span> can disagree
-strongly with the specified <span class="math inline">\(R\)</span></h1>
+<h1>The learned <span class="math inline">\(Q\)</span> or your learned
+policy can disagree strongly with the specified <span
+class="math inline">\(R\)</span></h1>
 <ul class="incremental">
 <li>Just like image classification, <span
 class="math inline">\(Q\)</span> might be completely spurious</li>
+<li>E.g. imagine a chess engine trained via RL with an underlying neural
+network with a single forward pass
+<ul class="incremental">
+<li>Return (i.e. Q) is a deep tree, so must be calculated by looking a
+variable number of moves “ahead”</li>
+<li>Single forward pass implies computation happens in constant
+time</li>
+<li>Therefore whatever strategy the neural net learns, it can’t actually
+be looking a variable number of moves ahead!</li>
+<li>Instead the neural net learns a set of “intuitions/vibes” that
+correlate well with the actual high-return move that happens by looking
+e.g. 10 moves ahead, or at least correlates well in training</li>
+<li>But this reveals a fundamental difference between the reward
+function (a deeply iterative/recursive function) and the learned
+function (a constant time function), and this fundamental difference can
+hide pathological behavior!</li>
+<li>This fundamental difference is not simply a difference between
+constant time and variable time computation, just most obvious there
+<ul class="incremental">
+<li>More generally this is because we usually do not have a way of truly
+learning the optimal strategy, but only a strategy that has some
+correlation to the optimal strategy <em>in training</em></li>
+<li>E.g. “detecting that you are in training and only cooperating with
+your user then, but betraying your user in production” correlates very
+well to the strategy of “always cooperating with your user” when you are
+in training!</li>
+</ul></li>
+</ul></li>
 </ul>
 </div>
 <div id="we-have-two-optimizers" class="slide section level1">
@@ -469,7 +517,6 @@ then go off the rails whenever that stops”</li>
 <ul class="incremental">
 <li>No silver bullets</li>
 <li>One of the main concerns of AI alignment in AI safety!</li>
-<li>Come to Friday sessions!</li>
 </ul>
 </div>
 </body>
